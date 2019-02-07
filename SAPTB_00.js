@@ -19,11 +19,8 @@ console.log(" " + log04)
 var log05 = execSync('node SAPTB_05.js')
 console.log(" " + log05)
 
-/*
 var log06 = execSync('node SAPTB_06.js')
 console.log(" " + log06)
-*/
-
 
 var log07 = execSync('node SAPTB_07.js')
 console.log(" " + log07)

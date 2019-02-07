@@ -15,37 +15,14 @@ stringAutorizacao = ""
 opcoesHeader      = ""
 //FIXME ALL ABOVE
 
-//DEBUGN
-loadsTokenAuth( acessaTrubudgetAtribuiPermissoesWorkflowItem )
-return
-/*
-main(1)
-
-function main(step) {
-    if (step == 1) {
-        loadsTokenAuth(main)
-        return
-    }
-
-    if (step == 2) {
-        acessaTrubudgetAtribuiPermissoesProjeto(main)
-        return
-    }
-    if (step == 3) {
-        acessaTrubudgetAtribuiPermissoesSubProjeto(main)
-        return
-    }
-    if (step == 4) {
-        acessaTrubudgetAtribuiPermissoesWorkflowItem()
-        return
-    }
-}
-*/
+loadsTokenAuth( acessaTrubudgetAtribuiPermissoesProjeto,
+                acessaTrubudgetAtribuiPermissoesSubProjeto,
+                acessaTrubudgetAtribuiPermissoesWorkflowItem )
 
 saptb_config.fimLibVar(__filename)
 process.exitCode = 0
 
-function loadsTokenAuth(callback) {
+function loadsTokenAuth(function1, function2, function3) {
     var tokenAuth       = fs.readFileSync(arqToken, 'utf8'); //Leitura do Arquivo produzido em script anterior
     stringAutorizacao   = "Bearer " + tokenAuth
     opcoesHeader        = { "content-type": "application/json", "accept": "application/json", "Authorization": stringAutorizacao };
@@ -53,11 +30,13 @@ function loadsTokenAuth(callback) {
     if ( DEBUG == true )
         console.log(stringAutorizacao)
 
-    callback(2)
+    function1()
+    function2()
+    function3()
 }
 
 
-function acessaTrubudgetAtribuiPermissoesProjeto(callback) {
+function acessaTrubudgetAtribuiPermissoesProjeto() {
 
     var urltb      = urlbasetb + '/project.intent.grantPermission'
     var actionList = [ "project.viewDetails" , "project.viewSummary"]
@@ -89,21 +68,16 @@ function acessaTrubudgetAtribuiPermissoesProjeto(callback) {
                     console.log ("status = " + response.statusCode )
                 if (!error && response.statusCode == 200) {
                     console.log(body.data)
-                    callback(3)
                 }
                 else {
-                    console.log( "Could not access: " + urltb )
-                    console.log( "response.statusCode: " + response.statusCode )
-                    console.log( "body: "             + body )
-                    console.log( "error: "            + error )
-                    process.exitCode = 1
+                    terminateScript(urltb, response, body, error)
                 }
             }
         )
     } )
 }
 
-function acessaTrubudgetAtribuiPermissoesSubProjeto(callback) {
+function acessaTrubudgetAtribuiPermissoesSubProjeto() {
 
     var urltb      = urlbasetb + '/subproject.intent.grantPermission'
     var actionList = [ "subproject.viewDetails" , "subproject.viewSummary" ]
@@ -136,25 +110,18 @@ function acessaTrubudgetAtribuiPermissoesSubProjeto(callback) {
                     console.log ("status = " + response.statusCode )
                 if (!error && response.statusCode == 200) {
                     console.log(body.data)
-                    callback(4)
                 }
                 else {
-                    console.log( "Could not access: " + urltb )
-                    console.log( "response.statusCode: " + response.statusCode )
-                    console.log( "body: "             + body )
-                    console.log( "error: "            + error )
-                    process.exitCode = 1
+                    terminateScript(urltb, response, body, error)
                 }
             }
         )
     } )
 }
 
-function acessaTrubudgetAtribuiPermissoesWorkflowItem(x) {
+function acessaTrubudgetAtribuiPermissoesWorkflowItem() {
     var urltb      = urlbasetb + '/workflowitem.intent.grantPermission'
-    var urltb      = urlbasetb + '/subproject.intent.grantPermission' //DEBUGN
-    var actionList = [ "workflowitem.update" ] //, "workflowitem.close" , "workflowitem.view" ] //DEBUGN
-
+    var actionList = [ "workflowitem.update" , "workflowitem.close" , "workflowitem.view" ]
 
 
     actionList.forEach( function(actionElement) {
@@ -188,11 +155,7 @@ function acessaTrubudgetAtribuiPermissoesWorkflowItem(x) {
                     console.log(body.data)
                 }
                 else {
-                    console.log( "Could not access: " + urltb )
-                    console.log( "response.statusCode: " + response.statusCode )
-                    console.log( "body: "             + body )
-                    console.log( "error: "            + error )
-                    process.exitCode = 1
+                    terminateScript(urltb, response, body, error)
                 }
             }
         )

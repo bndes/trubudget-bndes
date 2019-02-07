@@ -39,35 +39,35 @@ function readItensToSendEmail() {
             console.log(tbJSONitems[i].data.documents)
         }
     }
-	
+
 	//filter types to send email
 	function equalToType2 (item) {
 		return item.data["datatype-INFO"]==2;
 	}
 	tbJSONitems = tbJSONitems.filter(equalToType2);
 	console.log(tbJSONitems);
-	
+
     return tbJSONitems
 }
 
 function findEmailsInGroup(groupId) {
 
-  
+
 	function equalToGroupId (item) {
 		return item.groupId==groupId;
-	}	
+	}
 	var group = userGroups.filter(equalToGroupId)[0];
 	if (!group) {
         console.log( "Could not find a this use group: " + group )
         process.exitCode = 1
 		process.exit();
 		//TODO FIXME: terminar a execucao - precisa rever todo o codigo para isso.
-	}	
-	
+	}
+
 	userEmails = JSON.stringify(group.users)
 					 .replace ("[", "")
 					 .replace ("]", "");
-		
+
 	//TODO FIXME: verificar se sao mesmo emails?
 
 	return userEmails;
@@ -86,7 +86,7 @@ function notifyUsers() {
     for (var i = 0; i < tbJSONitems.length; i++) {
         //console.log( tbJSONitems[i])
         var approversGroup = tbJSONitems[i].data["approvers-group"]
-        var notifiedGroup  = tbJSONitems[i].data["notified-group"]		
+        var notifiedGroup  = tbJSONitems[i].data["notified-group"]
 
         var emailTo        = findEmailsInGroup(approversGroup)
         var emailCc       = findEmailsInGroup(notifiedGroup)
@@ -99,15 +99,15 @@ function notifyUsers() {
 
 		if (DEBUG) {
 			console.log("approversGroup = " + approversGroup);
-			console.log("notifiedGroup = " + notifiedGroup);			
-			console.log("emailTo= " + emailTo);		
+			console.log("notifiedGroup = " + notifiedGroup);
+			console.log("emailTo= " + emailTo);
 			console.log("emailCc= " + emailCc);
 			console.log("Amount = " + strAmount);
 		}
-		
+
 		var amount = parseFloat(strAmount);
 		amount = amount.toFixed(2);
-		
+
         var templateDoEMailTXT  = "Prezado cliente,\n\n" +
 								"Esta é uma notificação automática do sistema TruBudget.\r\n" +
 								"Um novo item de workflow foi gerado a partir de uma liberação de crédito realizada pelo BNDES.\n\n" +
@@ -119,25 +119,25 @@ function notifyUsers() {
 								"Valor: <currency> <amount>\n" +
 								"Data do depósito: <payment-date>\n" +
 								"Fim da mensagem";
-								
+
 		templateDoEMailTXT = templateDoEMailTXT.replace(/<approvers-group>/g, approversGroup);
 		templateDoEMailTXT = templateDoEMailTXT.replace(/<project-name>/g, projectName);
 		templateDoEMailTXT = templateDoEMailTXT.replace(/<subproject-name>/g, subprojectName);
 		templateDoEMailTXT = templateDoEMailTXT.replace(/<currency>/g, currency);
 		templateDoEMailTXT = templateDoEMailTXT.replace(/<amount>/g, amount);
 		templateDoEMailTXT = templateDoEMailTXT.replace(/<payment-date>/g, paymentDate);
-				
-								
+
+
 								/*
         var templateDoEMailHTML = '<p>Foi incluído novo comentário na ideia <strong>' + ideia.title + '</strong>.</p><p>Quem comentou: ' + nomeQuemComentou + '</p><p>Comentário: ' + textoComentario + "</p><p>Acesse a ideia através do link: " + config.negocio.url_compartilhamento_ideia + ideia._id + "</p>" // html body
 */
 //TODO: setar o HTML
         var mailOptions = {
-            from: emailFrom,
-            to: emailTo,
-            cc: emailCc,
+            from   : emailFrom,
+            to     : emailTo,
+            cc     : emailCc,
             subject: emailTitle,
-            text: templateDoEMailTXT
+            text   : templateDoEMailTXT
 		};
 
         mailTransporter.sendMail(mailOptions, (err, info) =>

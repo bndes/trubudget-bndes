@@ -111,7 +111,7 @@ function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymen
                             "datatype-INFO": "1",
                             "projectId": projectID,
                             "subprojectId": subProjectID,
-                            "subprojectName": subProjectName,														
+                            "subprojectName": subProjectName,
                             "status": "open",
                             "displayName": "Desembolso registrado em " + datahora,
                             "description": "Criado automaticamente (" + datahoraseg + ")",
@@ -125,8 +125,8 @@ function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymen
                               }
                             ] ,
                             "project-number"  : projetoOpe,
-                            "approvers-group" : jsonCamposAdicionais["approvers-group"],
-                            "notified-group"  : jsonCamposAdicionais["notified-group"],
+                            "approvers-group" : jsonCamposAdicionais["approvers-groupid"],
+                            "notified-group"  : jsonCamposAdicionais["notified-groupid"],
 							"payment-date"   : paymentDate
                           }
                         }
@@ -150,7 +150,7 @@ function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymen
                             "amount": valor,
                             "projectId": projectID,
                             "subprojectId": subProjectID,
-                            "subprojectName": subProjectName,							
+                            "subprojectName": subProjectName,
                             "status": "open",
                             "displayName": "Recebimento do desembolso ",
                             "description": "Atestamos o recebimento de R$ " + valor + " em " + dataUser + " (" + datahoraseg + ")",
@@ -164,8 +164,8 @@ function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymen
                               }
                             ] ,
                             "project-number" : projetoOpe,
-                            "approvers-group" : jsonCamposAdicionais["approvers-group"],
-                            "notified-group" : jsonCamposAdicionais["notified-group"],
+                            "approvers-group" : jsonCamposAdicionais["approvers-groupid"],
+                            "notified-group" : jsonCamposAdicionais["notified-groupid"],
 							"payment-date"   : paymentDate
                           }
                         }
