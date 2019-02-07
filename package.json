@@ -1,0 +1,14 @@
+{
+  "name": "sap-tb-connector",
+  "version": "0.0.0",
+  "license": "GPL3",
+  "scripts": {
+    "start": "node SAPTB_00.js"
+  },
+  "private": true,
+  "dependencies": {
+    "moment": "^2.24.0",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {}
+}
