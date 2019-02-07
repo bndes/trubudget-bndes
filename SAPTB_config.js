@@ -25,13 +25,21 @@ module.exports = {
     urlTbPass       = config.url_tb_pass
 
     mailHost        = "mail.bndes.net"
-    mailPort        = "25"	
+    mailPort        = "25"
 
     console.log(" ")
     console.log(" ")
     console.log(" ")
     console.log("Script is starting at " + moment().format("DD/MM/YYYY - HH:mm") + ": " + nomeScript )
     console.log("---------------------------------------------------------------------------------")
+  },
+
+  logWithError: function (urltb, response, body, error) {
+    console.log( "Could not access: " + urltb )
+    console.log( "response.statusCode: " + response.statusCode )
+    console.log( "body: "             + body )
+    console.log( "error: "            + error )
+    process.exitCode = 1
   },
 
   fimLibVar: function (nomeScript) {

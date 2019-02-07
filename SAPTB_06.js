@@ -67,10 +67,10 @@ function acessaTrubudgetAtribuiPermissoesProjeto() {
                 if ( DEBUG == true )
                     console.log ("status = " + response.statusCode )
                 if (!error && response.statusCode == 200) {
-                    console.log(body.data)
+                    console.log( "Success on project permission grant ... " + body.data)
                 }
                 else {
-                    terminateScript(urltb, response, body, error)
+                    saptb_config.logWithError(urltb, response, body, error)
                 }
             }
         )
@@ -109,10 +109,10 @@ function acessaTrubudgetAtribuiPermissoesSubProjeto() {
                 if ( DEBUG == true )
                     console.log ("status = " + response.statusCode )
                 if (!error && response.statusCode == 200) {
-                    console.log(body.data)
+                    console.log( "Success on subproject permission grant ... " + body.data)
                 }
                 else {
-                    terminateScript(urltb, response, body, error)
+                    saptb_config.logWithError(urltb, response, body, error)
                 }
             }
         )
@@ -152,10 +152,10 @@ function acessaTrubudgetAtribuiPermissoesWorkflowItem() {
                 if ( DEBUG == true )
                     console.log ("status = " + response.statusCode )
                 if (!error && response.statusCode == 200) {
-                    console.log(body.data)
+                    console.log( "Success on workflow permission grant ... " + body.data)
                 }
                 else {
-                    terminateScript(urltb, response, body, error)
+                    saptb_config.logWithError(urltb, response, body, error)
                 }
             }
         )
@@ -164,13 +164,7 @@ function acessaTrubudgetAtribuiPermissoesWorkflowItem() {
 
 
 
-function terminateScript(urltb, response, body, error) {
-    console.log( "Could not access: " + urltb )
-    console.log( "response.statusCode: " + response.statusCode )
-    console.log( "body: "             + body )
-    console.log( "error: "            + error )
-    process.exitCode = 1
-}
+
 
 //TODO: Este script deverá setar as permissões do 2o workflow item
 

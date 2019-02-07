@@ -125,8 +125,8 @@ function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymen
                               }
                             ] ,
                             "project-number"  : projetoOpe,
-                            "approvers-group" : jsonCamposAdicionais["approvers-groupid"],
-                            "notified-group"  : jsonCamposAdicionais["notified-groupid"],
+                            "approvers-groupid" : jsonCamposAdicionais["approvers-groupid"],
+                            "notified-groupid"  : jsonCamposAdicionais["notified-groupid"],
 							"payment-date"   : paymentDate
                           }
                         }
@@ -147,7 +147,6 @@ function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymen
                           "apiVersion": "1.0",
                           "data": {
                             "datatype-INFO": "2",
-                            "amount": valor,
                             "projectId": projectID,
                             "subprojectId": subProjectID,
                             "subprojectName": subProjectName,
@@ -164,8 +163,8 @@ function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymen
                               }
                             ] ,
                             "project-number" : projetoOpe,
-                            "approvers-group" : jsonCamposAdicionais["approvers-groupid"],
-                            "notified-group" : jsonCamposAdicionais["notified-groupid"],
+                            "approvers-groupid" : jsonCamposAdicionais["approvers-groupid"],
+                            "notified-groupid" : jsonCamposAdicionais["notified-groupid"],
 							"payment-date"   : paymentDate
                           }
                         }

@@ -28,7 +28,7 @@ function leCadaDadoTBparaGravarWorkflowItem() {
     for (var i = 0; i < linhas.length; i++) {
         tbJSONitems[i] = JSON.parse(linhas[i])
         //tbJSONitems[i].data.documents = [{"id": "classroom-contract","base64": "dGVzdCBiYXNlNjRTdHJpbmc="}]
-        if (DEBUG == true) {
+        if (DEBUG == true || true) {
             console.log(tbJSONitems[i])
             console.log(tbJSONitems[i].data.documents)
         }
@@ -77,10 +77,7 @@ function acessaTrubudgetParaGravarWorkflowItem() {
                     self.itemsSaved++;
                 }
                 else {
-                    console.log("Could not access: " + urltb )
-                    //console.log(error)
-                    //console.log(response)
-                    process.exitCode = 0
+                    saptb_config.logWithError(urltb, response, body, error)
                 }
             }
         )
@@ -124,8 +121,7 @@ function acessaTrubudgetListaWorkflowItems(stringAutorizacao, opcoesHeader, proj
                 */
             }
             else {
-                console.log("Could not access: " + urltb )
-                process.exitCode = 1
+                saptb_config.logWithError(urltb, response, body, error)
             }
         }
     )

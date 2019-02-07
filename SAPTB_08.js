@@ -85,8 +85,8 @@ function notifyUsers() {
 
     for (var i = 0; i < tbJSONitems.length; i++) {
         //console.log( tbJSONitems[i])
-        var approversGroup = tbJSONitems[i].data["approvers-group"]
-        var notifiedGroup  = tbJSONitems[i].data["notified-group"]
+        var approversGroup = tbJSONitems[i].data["approvers-groupid"]
+        var notifiedGroup  = tbJSONitems[i].data["notified-groupid"]
 
         var emailTo        = findEmailsInGroup(approversGroup)
         var emailCc       = findEmailsInGroup(notifiedGroup)
@@ -120,7 +120,7 @@ function notifyUsers() {
 								"Data do depósito: <payment-date>\n" +
 								"Fim da mensagem";
 
-		templateDoEMailTXT = templateDoEMailTXT.replace(/<approvers-group>/g, approversGroup);
+		templateDoEMailTXT = templateDoEMailTXT.replace(/<approvers-groupid>/g, approversGroup);
 		templateDoEMailTXT = templateDoEMailTXT.replace(/<project-name>/g, projectName);
 		templateDoEMailTXT = templateDoEMailTXT.replace(/<subproject-name>/g, subprojectName);
 		templateDoEMailTXT = templateDoEMailTXT.replace(/<currency>/g, currency);
