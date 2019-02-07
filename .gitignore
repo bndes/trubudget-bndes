@@ -1,3 +1,9 @@
-# Ignore json
-*.json
-*.txt
+# Temp files
+*arq*.txt
+*arq*.json
+
+# Config
+config.json
+
+# NPM Dependencies
+node_modules
