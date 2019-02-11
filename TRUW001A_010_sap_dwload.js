@@ -2,7 +2,7 @@
 /* SCRIPT 01 - ACESSA O SAP E FAZ DOWNLOAD DAS LIBERACOES DE ACORDO COM O FILTRO PREDEFINIDO          */
 /******************************************************************************************************/
 
-var saptb_config = require('./SAPTB_config.js');
+var saptb_config = require('./TRUW001A_config.js');
 
 saptb_config.inicioLibVar(__filename)
 
@@ -46,11 +46,11 @@ function acessasSAP() {
 	fs.writeFile(nomeDoArquivo, "", function(err, result) { //Cria arquivo novo (apaga se existir)
 		if(err) console.log('error', err);
 	});
-	
+
 	fs.writeFile(copiaDoArquivo, "", function(err, result) { //Cria arquivo novo (apaga se existir)
 		if(err) console.log('error', err);
-	});	
-	
+	});
+
 
     //DEBUG TODO FIXME !!!!
     if ( "mockado" == "mockado" && false ) {

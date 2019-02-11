@@ -23,9 +23,8 @@ module.exports = {
     urlSapPass      = config.url_sap_pass
     urlTbUser       = config.url_tb_user
     urlTbPass       = config.url_tb_pass
-
-    mailHost        = "mail.bndes.net"
-    mailPort        = "25"
+    mailHost        = config.mailHost
+    mailPort        = config.mailPort
 
     console.log(" ")
     console.log(" ")

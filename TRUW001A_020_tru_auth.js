@@ -3,7 +3,7 @@
 /*             EM ARQUIVO NO DISCO. O NOME DO PROJETO DESEJADO ESTA CONFIGURADO NO CONFIG.JSON        */
 /******************************************************************************************************/
 
-var saptb_config = require('./SAPTB_config.js');
+var saptb_config = require('./TRUW001A_config.js');
 
 saptb_config.inicioLibVar(__filename)
 
@@ -45,9 +45,9 @@ function acessaTrubudgetAutenticacao() {
 
                 fs.writeFile( arqToken, tokenAuth, function(err, result) { //Cria arquivo novo (apaga se existir)
 					if(err) console.log('error', err);
-				});				
-				
-				
+				});
+
+
                 console.log("Trubudget Authentication Token is now ready")
 
             }

@@ -4,30 +4,32 @@
 
 const execSync = require('child_process').execSync
 
-var log01 = execSync('node SAPTB_01.js')
+var log01 = execSync('node TRUW001A_010_sap_dwload.js')
 console.log(" " + log01)
 
-var log02 = execSync('node SAPTB_02.js')
+var log02 = execSync('node TRUW001A_020_tru_auth.js')
 console.log(" " + log02)
 
-var log03 = execSync('node SAPTB_03.js')
+var log03 = execSync('node TRUW001A_030_tru_prjlist.js')
 console.log(" " + log03)
 
-var log04 = execSync('node SAPTB_04.js')
+var log04 = execSync('node TRUW001A_040_tru_mkitem.js')
 console.log(" " + log04)
 
-var log05 = execSync('node SAPTB_05.js')
+var log05 = execSync('node TRUW001A_050_tru_upload.js')
 console.log(" " + log05)
 
-var log06 = execSync('node SAPTB_06.js')
+var log06 = execSync('node TRUW001A_060_tru_grant.js')
 console.log(" " + log06)
 
-var log07 = execSync('node SAPTB_07.js')
+var log07 = execSync('node TRUW001A_070_tru_closeitem.js')
 console.log(" " + log07)
 
-var log08 = execSync('node SAPTB_08.js')
+var log08 = execSync('node TRUW001A_080_tru_grplist.js')
 console.log(" " + log08)
 
+var log09 = execSync('node TRUW001A_090_tru_mail.js')
+console.log(" " + log09)
 
 setTimeout(function() {
     console.log('ALL DONE!');

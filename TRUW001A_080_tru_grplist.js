@@ -2,15 +2,13 @@
 /* SCRIPT 07 - ACESSA O TRUBUDGET PARA SALVAR GRUPOS DE USUARIOS EM ARQUIVO                           */
 /******************************************************************************************************/
 
-var saptb_config = require('./SAPTB_config.js');
+var saptb_config = require('./TRUW001A_config.js');
 
 saptb_config.inicioLibVar(__filename)
 
 saveUserGroupsInFile();
 
 saptb_config.fimLibVar(__filename)
-
-
 
 
 function saveUserGroupsInFile(){
@@ -32,19 +30,19 @@ function saveUserGroupsInFile(){
         function (error, response, body) {
             if ( DEBUG == true )
                 console.log ("status = " + response.statusCode )
-            
+
 			if (!error && response.statusCode == 200) {
 				var userGroups = body.data.groups
-				
+
                 fs.writeFile( arqUsers, JSON.stringify(userGroups), function(err, result) { //Cria arquivo novo (apaga se existir)
 					if(err) console.log('error', err);
-				});				
-				
-				
+				});
+
+
                 console.log("User groups are saved")
-				
-				
-				
+
+
+
             }
             else {
                 console.log( "Could not access: " + urltb )

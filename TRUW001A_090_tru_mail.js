@@ -1,8 +1,8 @@
 /******************************************************************************************************/
-/* SCRIPT 07 - ENVIA NOTIFICACOES PARA AS PARTES INTERESSADAS                                         */
+/* SCRIPT 08 - ENVIA NOTIFICACOES PARA AS PARTES INTERESSADAS                                         */
 /******************************************************************************************************/
 
-var saptb_config = require('./SAPTB_config.js');
+var saptb_config = require('./TRUW001A_config.js');
 var nodemailer = require('nodemailer');
 
 saptb_config.inicioLibVar(__filename)

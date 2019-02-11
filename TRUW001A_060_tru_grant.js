@@ -1,8 +1,8 @@
 /******************************************************************************************************/
-/* SCRIPT 06 - ACESSA O TRUBUDGET PARA ATRIBUIR AS PERMISSOES DOS WORKFLOWITEMS RECEM-CRIADOS.        */
+/* SCRIPT 06 - ACESSA O TRUBUDGET PARA ATRIBUIR PERMISSOES E TRATAR WORKFLOWITEMS RECEM-CRIADOS.      */
 /******************************************************************************************************/
 
-var saptb_config = require('./SAPTB_config.js');
+var saptb_config = require('./TRUW001A_config.js');
 
 saptb_config.inicioLibVar(__filename)
 
@@ -10,7 +10,7 @@ saptb_config.inicioLibVar(__filename)
 identity       = "josej@bndes.gov.br"
 projectId      = "f7757856f422392a33fc8ba118c63d91"
 subprojectId   = "d773999ba22f5b594e5a3952165a6a01",
-workflowitemId = "9dfa87e2ab72578322b48b57e0279027"
+workflowitemId = "b25cbfe3a180697b2daf18bb333e40d7"
 stringAutorizacao = ""
 opcoesHeader      = ""
 //FIXME ALL ABOVE
@@ -161,58 +161,3 @@ function acessaTrubudgetAtribuiPermissoesWorkflowItem() {
         )
     } )
 }
-
-
-
-
-
-//TODO: Este script deverá setar as permissões do 2o workflow item
-
-/*
-function acessaTrubudgetListaWorkflowItems(chaveDoProjeto) {
-
-    var urltb               = urlbasetb + '/workflowitem.list?projectId=' + projectID + '&subprojectId=' + subprojectId
-    var tokenAuth           = fs.readFileSync(arqToken, 'utf8'); //Leitura do Arquivo produzido em script anterior
-    var stringAutorizacao   = "Bearer " + tokenAuth
-    var opcoesHeader        = { "content-type": "application/json", "accept": "application/json", "Authorization": stringAutorizacao };
-
-    if ( DEBUG == true )
-        console.log(stringAutorizacao)
-
-    request(
-        {
-            url : urltb,
-            method:'GET',
-            headers: opcoesHeader,
-            json: true
-        },
-        function (error, response, body) {
-            if ( DEBUG == true )
-                console.log ("status = " + response.statusCode )
-            if (!error && response.statusCode == 200) {
-                console.log(body.data)
-                /*
-                var objeto = body.data.items
-                for (i in objeto) {
-                    for (j in objeto[i].log) {
-                        if ( objeto[i].log[j].data.project != undefined ) {
-                            if ( DEBUG == true )
-                                console.log(objeto[i].log[j].data.project)
-
-                            if ( objeto[i].log[j].data.project.displayName === chaveDoProjeto ) {
-                                fs.writeFile( arqProjectID, objeto[i].log[j].data.project.id);
-                                console.log("ProjectID of " + tbNomeProjeto + " was selected.")
-                            }
-                        }
-                    }
-                }
-                * /
-            }
-            else {
-                console.log("Could not access: " + urltb )
-                process.exitCode = 1
-            }
-        }
-    )
-}
-*/

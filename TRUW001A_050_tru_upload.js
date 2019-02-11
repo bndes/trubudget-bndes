@@ -2,7 +2,7 @@
 /* SCRIPT 05 - ACESSA O TRUBUDGET E GRAVAR TODOS OS WORKFLOWS ITEMS MONTADOS NO PASSO ANTERIOR.       */
 /******************************************************************************************************/
 
-var saptb_config = require('./SAPTB_config.js');
+var saptb_config = require('./TRUW001A_config.js');
 
 saptb_config.inicioLibVar(__filename)
 

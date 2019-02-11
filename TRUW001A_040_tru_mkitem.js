@@ -2,7 +2,7 @@
 /* SCRIPT 04 - ACESSA O TRUBUDGET E LISTA TODOS OS SUBPROJETOS DO PROJETO DESEJADO E MONTA A LISTA DE */
 /*             WORKFLOW ITEMS A SEREM GRAVADOS NUM PROXIMO PASSO.                                     */
 /******************************************************************************************************/
-var saptb_config = require('./SAPTB_config.js');
+var saptb_config = require('./TRUW001A_config.js');
 
 saptb_config.inicioLibVar(__filename)
 

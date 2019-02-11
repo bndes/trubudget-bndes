@@ -2,7 +2,7 @@
 /* SCRIPT 03 - ACESSA O TRUBUDGET E LISTA TODOS OS PROJETOS EXISTENTES. O PROJETO DESEJADO EH GRAVADO */
 /*             EM ARQUIVO NO DISCO.                                                                   */
 /******************************************************************************************************/
-var saptb_config = require('./SAPTB_config.js');
+var saptb_config = require('./TRUW001A_config.js');
 
 saptb_config.inicioLibVar(__filename)
 
@@ -40,7 +40,7 @@ function acessaTrubudgetListaProjetos(chaveDoProjeto) {
                             if ( DEBUG == true )
                                 console.log(objeto[i].log[j].data.project)
                             if ( objeto[i].log[j].data.project.displayName === chaveDoProjeto ) {
-                                fs.writeFile( arqProjectID, objeto[i].log[j].data.project.id, function(err, result) { 
+                                fs.writeFile( arqProjectID, objeto[i].log[j].data.project.id, function(err, result) {
 									if(err) console.log('error', err);
 								});
                                 console.log("ProjectID of " + tbNomeProjeto + " was selected.")
