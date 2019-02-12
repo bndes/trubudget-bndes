@@ -7,9 +7,12 @@ module.exports = {
     moment    = require('moment');
     path      = require('path');
     fs        = require('fs');
+    var log4js= require('log4js');
+    logger    = log4js.getLogger();
+    
     config          = require('./config.json');
+    logger.level    = config.logLevel; //trace, debug, info, warn, error, fatal
     CRLF            = "\r\n"
-    DEBUG           = config.DEBUG
     MOCK            = config.MOCK
     intervaloDias   = config.intervaloDias
     urlbasetb       = config.urlbasetb
@@ -17,7 +20,7 @@ module.exports = {
     arqProjectID    = config.arqProjectID
     arqSAP          = config.arqSAP
     arqTBitem       = config.arqTBitem
-	arqUsers        = config.arqUsers
+	  arqUsers        = config.arqUsers
     tbNomeProjeto   = config.tb_nome_projeto
     urlbasesap      = config.urlbasesap
 
@@ -30,15 +33,12 @@ module.exports = {
     mailHost        = config.mailHost
     mailPort        = config.mailPort
 
-    console.log(" ")
-    console.log(" ")
-    console.log(" ")
-    console.log("Script is starting at " + moment().format("DD/MM/YYYY - HH:mm") + ": " + nomeScript )
-    console.log("---------------------------------------------------------------------------------")
+    logger.info("Starting " + nomeScript )
+    logger.info("---------------------------------------------------------------------------------")
   },
 
   eraseAllFilesFromPreviousRun: function () {
-    console.log( "Erase all files from previous run ... ")
+    logger.info( "Erase all files from previous run ... ")
     this.eraseFile( config.arqToken     )
     this.eraseFile( config.arqProjectID )
     this.eraseFile( config.arqSAP       )
@@ -49,19 +49,19 @@ module.exports = {
   eraseFile: function (fileName) {
         fs.exists(fileName, function(exists) {
             if(exists) {
-                console.log('File ' + fileName + '. Deleting now ...')
+                logger.info('File ' + fileName + '. Deleting now ...')
                 fs.unlink(fileName)
             } else {
-                console.log('File ' + fileName + ' not found, so not deleting.')
+                logger.info('File ' + fileName + ' not found, so not deleting.')
             }
         })
   },
 
   logWithError: function (urltb, response, body, error) {
-    console.log( "Could not access: " + urltb )
-    console.log( "response.statusCode: " + response.statusCode )
-    console.log( "body: "             + body )
-    console.log( "error: "            + error )
+    logger.error( "Could not access: " + urltb )
+    logger.error( "response.statusCode: " + response.statusCode )
+    logger.error( "body: "             + body )
+    logger.error( "error: "            + error )
     process.exitCode = 1
   }
 

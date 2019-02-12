@@ -1,7 +1,7 @@
 {
     "tb_nome_projeto" : "Amazon Fund TB2",
-    "DEBUG"           : false,
-    "MOCK"            : false,
+    "MOCK"            : true,
+    "logLevel"        : "DEBUG", 
     "intervaloDias"   : "30",
     "urlbasetb"       : "https://trubudget.bndes.gov.br/test/api",
     "urlbasesap"      : "api-sap-d.bndes.net/sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV",

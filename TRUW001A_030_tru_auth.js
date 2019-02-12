@@ -3,13 +3,11 @@
 /*             EM ARQUIVO NO DISCO. O NOME DO PROJETO DESEJADO ESTA CONFIGURADO NO CONFIG.JSON        */
 /******************************************************************************************************/
 
-var saptb_config = require('./TRUW001A_config.js');
+var saptb_config = require('./TRUW001A_000_config.js');
 
 saptb_config.inicioLibVar(__filename)
 
 acessaTrubudgetAutenticacao()
-
-
 
 process.exitCode = 0
 
@@ -20,10 +18,7 @@ function acessaTrubudgetAutenticacao() {
 
     entradaJSON = JSON.parse(entradaJSON)
 
-    if (DEBUG == true)
-        console.log(entradaJSON)
-
-
+    logger.debug(entradaJSON)
 
     var requestTb = {   url : urltb,
                         method:'POST',
@@ -32,29 +27,27 @@ function acessaTrubudgetAutenticacao() {
                         json: true
                     }
 
-    if (DEBUG == true)
-        console.log(requestTb)
+    logger.debug(requestTb)
 
     request(
         requestTb
         ,
         function (error, response) {
-            //console.log ("status = " + response.statusCode )
             if (!error && response.statusCode == 200) {
                 tokenAuth = response.body.data.user.token
 
                 fs.writeFile( arqToken, tokenAuth, function(err, result) { //Cria arquivo novo (apaga se existir)
-					if(err) console.log('error', err);
+					if(err) logger.error('error', err);
 				});
 
 
-                console.log("Trubudget Authentication Token is now ready")
+                logger.info("Trubudget Authentication Token is now ready")
 
             }
             else {
-                console.log("Could not access: " + urltb )
-                console.log("Status code: " + response.statusCode)
-                console.log(error)
+                logger.error("Could not access: " + urltb )
+                logger.error("Status code: " + response.statusCode)
+                logger.error(error)
                 process.exitCode = 1
             }
         }

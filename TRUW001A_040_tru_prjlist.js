@@ -2,13 +2,11 @@
 /* SCRIPT 03 - ACESSA O TRUBUDGET E LISTA TODOS OS PROJETOS EXISTENTES. O PROJETO DESEJADO EH GRAVADO */
 /*             EM ARQUIVO NO DISCO.                                                                   */
 /******************************************************************************************************/
-var saptb_config = require('./TRUW001A_config.js');
+var saptb_config = require('./TRUW001A_000_config.js');
 
 saptb_config.inicioLibVar(__filename)
 
 acessaTrubudgetListaProjetos( tbNomeProjeto )
-
-
 
 process.exitCode = 0
 
@@ -19,8 +17,7 @@ function acessaTrubudgetListaProjetos(chaveDoProjeto) {
     var stringAutorizacao   = "Bearer " + tokenAuth
     var opcoesHeader        = { "content-type": "application/json", "accept": "application/json", "Authorization": stringAutorizacao };
 
-    if ( DEBUG == true )
-        console.log(stringAutorizacao)
+    logger.debug(stringAutorizacao)
 
     request(
         {
@@ -30,27 +27,25 @@ function acessaTrubudgetListaProjetos(chaveDoProjeto) {
             json: true
         },
         function (error, response, body) {
-            if ( DEBUG == true )
-                console.log ("status = " + response.statusCode )
+            logger.debug ("status = " + response.statusCode )
             if (!error && response.statusCode == 200) {
                 var objeto = body.data.items
                 for (i in objeto) {
                     for (j in objeto[i].log) {
                         if ( objeto[i].log[j].data.project != undefined ) {
-                            if ( DEBUG == true )
-                                console.log(objeto[i].log[j].data.project)
+                            logger.debug(objeto[i].log[j].data.project)
                             if ( objeto[i].log[j].data.project.displayName === chaveDoProjeto ) {
                                 fs.writeFile( arqProjectID, objeto[i].log[j].data.project.id, function(err, result) {
-									if(err) console.log('error', err);
+									if(err) logger.error('error', err);
 								});
-                                console.log("ProjectID of " + tbNomeProjeto + " was selected.")
+                                logger.info("ProjectID of " + tbNomeProjeto + " was selected.")
                             }
                         }
                     }
                 }
             }
             else {
-                console.log("Could not access: " + urltb )
+                logger.error("Could not access: " + urltb )
                 process.exitCode = 1
             }
         }

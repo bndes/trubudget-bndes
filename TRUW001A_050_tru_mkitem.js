@@ -2,19 +2,17 @@
 /* SCRIPT 04 - ACESSA O TRUBUDGET E LISTA TODOS OS SUBPROJETOS DO PROJETO DESEJADO E MONTA A LISTA DE */
 /*             WORKFLOW ITEMS A SEREM GRAVADOS NUM PROXIMO PASSO.                                     */
 /******************************************************************************************************/
-var saptb_config = require('./TRUW001A_config.js');
+var saptb_config = require('./TRUW001A_000_config.js');
 
 saptb_config.inicioLibVar(__filename)
 
 leCadaDadoSAPparaGravarRespectivaLiberacao()
 
-
-
 process.exitCode = 0
 
 function leCadaDadoSAPparaGravarRespectivaLiberacao() {
     var linhas = fs.readFileSync(arqSAP, 'utf8', function(err, result) {
-		if(err) console.log('error', err);
+		if(err) logger.error('error', err);
 	}).split( CRLF )
       .filter(Boolean)
 
@@ -22,15 +20,13 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao() {
 
     for (var i = 0; i < linhas.length; i++) {
         objetoSAP[i] = JSON.parse(linhas[i])
-        if (DEBUG == true)
-            console.log(objetoSAP[i])
+        logger.debug(objetoSAP[i])
         if ( objetoSAP[i].contrato != undefined ) {
             var projetoOPE = objetoSAP[i].contrato.substr(0,7)
 
             acessaTrubudgetListaDeSubProjetos( projetoOPE, objetoSAP[i].referencia, objetoSAP[i].valor, objetoSAP[i].dataPagamento )
 
-            if (DEBUG == true)
-                console.log ("projetoOPE: " + projetoOPE)
+            logger.debug ("projetoOPE: " + projetoOPE)
         }
     }
 }
@@ -38,11 +34,11 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao() {
 function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymentDate) {
 
     var tokenAuth           = fs.readFileSync(arqToken, 'utf8', function(err, result) {
-		if(err) console.log('error', err);
+		if(err) logger.error('error', err);
 	}); //Leitura do Arquivo produzido em script anterior
 
     var projectID           = fs.readFileSync(arqProjectID, 'utf8', function(err, result) {
-		if(err) console.log('error', err);
+		if(err) logger.error('error', err);
 	}); //Leitura do Arquivo produzido em script anterior
 
     var urltb               = urlbasetb + '/subproject.list?projectId=' + projectID
@@ -52,12 +48,11 @@ function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymen
     var datahoraseg         = moment().format("YYYYMMDDHHmmss")
     var dataUser            = moment().format("DD/MM/YYYY")
 
-    if ( DEBUG == true )
-        console.log(stringAutorizacao)
+    logger.debug(stringAutorizacao)
 
     //Cria arquivo novo
     fs.writeFile( arqTBitem, "", function(err, result) {
-		if(err) console.log('error', err);
+		if(err) logger.error('error', err);
 	});
 
     request(
@@ -68,42 +63,37 @@ function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymen
             json: true
         },
         function (error, response, body) {
-            if ( DEBUG == true )
-                console.log ("status = " + response.statusCode )
+            logger.debug ("status = " + response.statusCode )
             if (!error && response.statusCode == 200) {
                 var objeto = body.data.items
                 for (i in objeto) {
-                    if ( DEBUG == true ) {
-                        //console.log(objeto[i].data.displayName)
-                        console.log(objeto[i].data.description)
-                    }
+                    logger.debug(objeto[i].data.description)
+                    
                     //var nomeDoSubProjeto = objeto[i].data.displayName
                     var chaveIntegracao = objeto[i].data.description
                     var jsonCamposAdicionais
                     try {
                         jsonCamposAdicionais = JSON.parse(objeto[i].data.description)
                     } catch (error) {
-                        console.log("The Sub-project comment is not a JSON object (" + projetoOpe + ")");
-                        console.log(error)
+                        logger.error("The Sub-project comment is not a JSON object (" + projetoOpe + ")");
+                        logger.error(error)
                         process.exitCode = 1
                         return
                     }
 
                     if ( chaveIntegracao != undefined && chaveIntegracao.includes( projetoOpe ) ) {
-						console.log(objeto[i])
+						logger.debug(objeto[i])
 						subProjectID = objeto[i].data.id
 						subProjectName = objeto[i].data.displayName
-						console.log("subprojeto=" + objeto[i].data.displayName)
+						logger.debug("subprojeto=" + objeto[i].data.displayName)
 
-                        if ( DEBUG == true ) {
-                            console.log( "Saving             " )
-                            console.log( "-------------------" )
-                            console.log( "Projeto ID       : " + projectID )
-                            console.log( "SubProjeto ID    : " + subProjectID )
-                            console.log( "Projeto OPE      : " + projetoOpe )
-                            console.log( "Referencia       : " + referencia )
-                            console.log( "Valor            : " + valor )
-                        }
+                        logger.debug( "Saving             " )
+                        logger.debug( "-------------------" )
+                        logger.debug( "Projeto ID       : " + projectID )
+                        logger.debug( "SubProjeto ID    : " + subProjectID )
+                        logger.debug( "Projeto OPE      : " + projetoOpe )
+                        logger.debug( "Referencia       : " + referencia )
+                        logger.debug( "Valor            : " + valor )
 
                         var entradaJSONOne  =     {
                           "apiVersion": "1.0",
@@ -130,17 +120,16 @@ function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymen
 							"payment-date"   : paymentDate
                           }
                         }
-                        if ( DEBUG == true ) {
-                            console.log("entradaJSONOne")
-                            console.log(entradaJSONOne)
-                        }
+                        logger.debug("entradaJSONOne")
+                        logger.debug(entradaJSONOne)
+
                         var linhaDeDado =  JSON.stringify(entradaJSONOne) + CRLF
                         fs.appendFile( arqTBitem, linhaDeDado, function(err, result) {
                             if(err) {
                                 process.exitCode = 1
-                                return console.log(err);
+                                return logger.error(err);
                             }
-                            console.log("Data" + i + " - Part ONE - is now ready to be submitted to Trubudget");
+                            logger.info("Data" + i + " - Part ONE - is now ready to be submitted to Trubudget");
                         });
 
                         var entradaJSONTwo  =     {
@@ -168,17 +157,16 @@ function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymen
 							"payment-date"   : paymentDate
                           }
                         }
-                        if ( DEBUG == true ) {
-                            console.log("entradaJSONTwo")
-                            console.log(entradaJSONTwo)
-                        }
+                        logger.debug("entradaJSONTwo")
+                        logger.debug(entradaJSONTwo)
+
                         var linhaDeDado =  JSON.stringify(entradaJSONTwo) + CRLF
                         fs.appendFile( arqTBitem, linhaDeDado, function(err, result) {
                             if(err) {
                                 process.exitCode = 1
-                                return console.log(err);
+                                return logger.error(err);
                             }
-                            console.log("Data" + i + " - Part TWO - is now ready to be submitted to Trubudget");
+                            logger.info("Data" + i + " - Part TWO - is now ready to be submitted to Trubudget");
                         });
 
                         //acessaTrubudgetParaGravarWorkflowItem(projectID, subProjectID, referencia, valor)
@@ -186,7 +174,7 @@ function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymen
                 }
             }
             else {
-                console.log("Could not access: " + urltb )
+                logger.error("Could not access: " + urltb )
                 process.exitCode = 1
             }
         }

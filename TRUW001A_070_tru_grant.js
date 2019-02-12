@@ -2,7 +2,7 @@
 /* SCRIPT 06 - ACESSA O TRUBUDGET PARA ATRIBUIR PERMISSOES E TRATAR WORKFLOWITEMS RECEM-CRIADOS.      */
 /******************************************************************************************************/
 
-var saptb_config = require('./TRUW001A_config.js');
+var saptb_config = require('./TRUW001A_000_config.js');
 
 saptb_config.inicioLibVar(__filename)
 
@@ -27,8 +27,7 @@ function loadsTokenAuth(function1, function2, function3) {
     stringAutorizacao   = "Bearer " + tokenAuth
     opcoesHeader        = { "content-type": "application/json", "accept": "application/json", "Authorization": stringAutorizacao };
 
-    if ( DEBUG == true )
-        console.log(stringAutorizacao)
+    logger.debug(stringAutorizacao)
 
     function1()
     function2()
@@ -52,8 +51,7 @@ function acessaTrubudgetAtribuiPermissoesProjeto() {
                                }
                             }
 
-    if ( DEBUG == true )
-        console.log(entradaJSON)
+        logger.debug(entradaJSON)
 
         request(
             {
@@ -64,10 +62,9 @@ function acessaTrubudgetAtribuiPermissoesProjeto() {
                 json: true
             },
             function (error, response, body) {
-                if ( DEBUG == true )
-                    console.log ("status = " + response.statusCode )
+                logger.debug ("status = " + response.statusCode )
                 if (!error && response.statusCode == 200) {
-                    console.log( "Success on project permission grant ... " + body.data)
+                    logger.info( "Success on project permission grant ... " + body.data)
                 }
                 else {
                     saptb_config.logWithError(urltb, response, body, error)
@@ -94,8 +91,7 @@ function acessaTrubudgetAtribuiPermissoesSubProjeto() {
                                }
                             }
 
-    if ( DEBUG == true )
-        console.log(entradaJSON)
+        logger.debug(entradaJSON)
 
         request(
             {
@@ -106,10 +102,9 @@ function acessaTrubudgetAtribuiPermissoesSubProjeto() {
                 json: true
             },
             function (error, response, body) {
-                if ( DEBUG == true )
-                    console.log ("status = " + response.statusCode )
+                logger.debug ("status = " + response.statusCode )
                 if (!error && response.statusCode == 200) {
-                    console.log( "Success on subproject permission grant ... " + body.data)
+                    logger.info( "Success on subproject permission grant ... " + body.data)
                 }
                 else {
                     saptb_config.logWithError(urltb, response, body, error)
@@ -137,8 +132,7 @@ function acessaTrubudgetAtribuiPermissoesWorkflowItem() {
                                }
                             }
 
-    if ( DEBUG == true )
-        console.log(entradaJSON)
+        logger.debug(entradaJSON)
 
         request(
             {
@@ -149,10 +143,9 @@ function acessaTrubudgetAtribuiPermissoesWorkflowItem() {
                 json: true
             },
             function (error, response, body) {
-                if ( DEBUG == true )
-                    console.log ("status = " + response.statusCode )
+                logger.debug ("status = " + response.statusCode )
                 if (!error && response.statusCode == 200) {
-                    console.log( "Success on workflow permission grant ... " + body.data)
+                    logger.info( "Success on workflow permission grant ... " + body.data)
                 }
                 else {
                     saptb_config.logWithError(urltb, response, body, error)

@@ -2,7 +2,7 @@
 /* SCRIPT 06 - ACESSA O TRUBUDGET PARA ATRIBUIR PERMISSOES E TRATAR WORKFLOWITEMS RECEM-CRIADOS.      */
 /******************************************************************************************************/
 
-var saptb_config = require('./TRUW001A_config.js');
+var saptb_config = require('./TRUW001A_000_config.js');
 
 saptb_config.inicioLibVar(__filename)
 
@@ -25,8 +25,7 @@ function loadsTokenAuth( functionToCall ) {
     stringAutorizacao   = "Bearer " + tokenAuth
     opcoesHeader        = { "content-type": "application/json", "accept": "application/json", "Authorization": stringAutorizacao };
 
-    if ( DEBUG == true )
-        console.log(stringAutorizacao)
+    logger.debug(stringAutorizacao)
 
     functionToCall()
 }
@@ -43,8 +42,7 @@ function acessaTrubudgetFechaPrimeiroWorkflowItem() {
                            }
                         }
 
-    if ( DEBUG == true )
-        console.log(entradaJSON)
+    logger.debug(entradaJSON)
 
     request(
         {
@@ -55,10 +53,9 @@ function acessaTrubudgetFechaPrimeiroWorkflowItem() {
             json: true
         },
         function (error, response, body) {
-            if ( DEBUG == true )
-                console.log ("status = " + response.statusCode )
+            logger.debug ("status = " + response.statusCode )
             if (!error && response.statusCode == 200) {
-                console.log( "Success on closing the workflowitem ... " + body.data)
+                logger.info( "Success on closing the workflowitem ... " + body.data)
             }
             else {
                 saptb_config.logWithError(urltb, response, body, error)

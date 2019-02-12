@@ -2,7 +2,7 @@
 /* SCRIPT 05 - ACESSA O TRUBUDGET E GRAVAR TODOS OS WORKFLOWS ITEMS MONTADOS NO PASSO ANTERIOR.       */
 /******************************************************************************************************/
 
-var saptb_config = require('./TRUW001A_config.js');
+var saptb_config = require('./TRUW001A_000_config.js');
 
 saptb_config.inicioLibVar(__filename)
 
@@ -13,8 +13,6 @@ opcoesHeader        = ""
 
 tbJSONitems = leCadaDadoTBparaGravarWorkflowItem()
 acessaTrubudgetParaGravarWorkflowItem(  )
-
-
 
 process.exitCode = 0
 
@@ -27,11 +25,8 @@ function leCadaDadoTBparaGravarWorkflowItem() {
 
     for (var i = 0; i < linhas.length; i++) {
         tbJSONitems[i] = JSON.parse(linhas[i])
-        //tbJSONitems[i].data.documents = [{"id": "classroom-contract","base64": "dGVzdCBiYXNlNjRTdHJpbmc="}]
-        if (DEBUG == true || true) {
-            console.log(tbJSONitems[i])
-            console.log(tbJSONitems[i].data.documents)
-        }
+        logger.debug(tbJSONitems[i])
+        logger.debug(tbJSONitems[i].data.documents)
     }
 
     return tbJSONitems
@@ -54,23 +49,19 @@ function acessaTrubudgetParaGravarWorkflowItem() {
                 headers: opcoesHeader,
                 json: true
             },
-            function (error, response, body) {
-                if (DEBUG == true)
-                    console.log ("status = " + response.statusCode )
+            function (error, response, body) {    
+                logger.debug ("status = " + response.statusCode )
                 if (!error && ( response.statusCode == 200 || response.statusCode == 201 ) ) {
-                    console.log("WorkflowItem was saved Trubudget!" )
-                    if (DEBUG == true) {
-                        console.log(self.itemsSaved)
-                        console.log(self.tbJSONitems[self.itemsSaved])
-                    }
+                    logger.info("WorkflowItem was saved Trubudget!" )
+                    logger.debug(self.itemsSaved)
+                    logger.debug(self.tbJSONitems[self.itemsSaved])
+
                     projectId    = self.tbJSONitems[self.itemsSaved].data.projectId
                     subprojectId = self.tbJSONitems[self.itemsSaved].data.subprojectId
                     //description  = self.tbJSONitems[self.itemsSaved].data.description
 
-                    if (DEBUG == true ) {
-                        console.log(projectId)
-                        console.log(subprojectId)
-                    }
+                    logger.debug(projectId)
+                    logger.debug(subprojectId)
 
                     //acessaTrubudgetListaWorkflowItems(stringAutorizacao, opcoesHeader, projectId, subprojectId)
 
@@ -88,8 +79,7 @@ function acessaTrubudgetListaWorkflowItems(stringAutorizacao, opcoesHeader, proj
 
     var urltb               = urlbasetb + '/workflowitem.list?projectId=' + projectID + '&subprojectId=' + subprojectId
 
-    if ( DEBUG == true )
-        console.log(stringAutorizacao)
+    logger.debug(stringAutorizacao)
 
     request(
         {
@@ -99,26 +89,9 @@ function acessaTrubudgetListaWorkflowItems(stringAutorizacao, opcoesHeader, proj
             json: true
         },
         function (error, response, body) {
-            if ( DEBUG == true )
-                console.log ("status = " + response.statusCode )
+            logger.debug ("status = " + response.statusCode )
             if (!error && response.statusCode == 200) {
-                console.log(body.data.workflowitems)
-                /*
-                var objeto = body.data.items
-                for (i in objeto) {
-                    for (j in objeto[i].log) {
-                        if ( objeto[i].log[j].data.project != undefined ) {
-                            if ( DEBUG == true )
-                                console.log(objeto[i].log[j].data.project)
-
-                            if ( objeto[i].log[j].data.project.displayName === chaveDoProjeto ) {
-                                fs.writeFile( arqProjectID, objeto[i].log[j].data.project.id);
-                                console.log("ProjectID of " + tbNomeProjeto + " was selected.")
-                            }
-                        }
-                    }
-                }
-                */
+                logger.debug(body.data.workflowitems)
             }
             else {
                 saptb_config.logWithError(urltb, response, body, error)

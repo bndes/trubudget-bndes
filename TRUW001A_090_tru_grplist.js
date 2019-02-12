@@ -2,7 +2,7 @@
 /* SCRIPT 07 - ACESSA O TRUBUDGET PARA SALVAR GRUPOS DE USUARIOS EM ARQUIVO                           */
 /******************************************************************************************************/
 
-var saptb_config = require('./TRUW001A_config.js');
+var saptb_config = require('./TRUW001A_000_config.js');
 
 saptb_config.inicioLibVar(__filename)
 
@@ -17,8 +17,7 @@ function saveUserGroupsInFile(){
     var opcoesHeader        = { "content-type": "application/json", "accept": "application/json", "Authorization": stringAutorizacao };
     var urltb               = urlbasetb + '/group.list'
 
-    if ( DEBUG == true )
-        console.log(stringAutorizacao)
+    logger.debug(stringAutorizacao)
 
     request(
         {
@@ -28,27 +27,22 @@ function saveUserGroupsInFile(){
             json: true
         },
         function (error, response, body) {
-            if ( DEBUG == true )
-                console.log ("status = " + response.statusCode )
+            logger.debug ("status = " + response.statusCode )
 
 			if (!error && response.statusCode == 200) {
 				var userGroups = body.data.groups
 
                 fs.writeFile( arqUsers, JSON.stringify(userGroups), function(err, result) { //Cria arquivo novo (apaga se existir)
-					if(err) console.log('error', err);
+					if(err) logger.error('error', err);
 				});
 
-
-                console.log("User groups are saved")
-
-
-
+                logger.info("User groups are saved")
             }
             else {
-                console.log( "Could not access: " + urltb )
-                console.log( "response.statusCode: " + response.statusCode )
-                console.log( "body: "             + body )
-                console.log( "error: "            + error )
+                logger.error( "Could not access: " + urltb )
+                logger.error( "response.statusCode: " + response.statusCode )
+                logger.error( "body: "             + body )
+                logger.error( "error: "            + error )
                 process.exitCode = 1
             }
         }

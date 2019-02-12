@@ -2,7 +2,7 @@
 /* SCRIPT 08 - ENVIA NOTIFICACOES PARA AS PARTES INTERESSADAS                                         */
 /******************************************************************************************************/
 
-var saptb_config = require('./TRUW001A_config.js');
+var saptb_config = require('./TRUW001A_000_config.js');
 var nodemailer = require('nodemailer');
 
 saptb_config.inicioLibVar(__filename)
@@ -35,8 +35,8 @@ function readItensToSendEmail() {
     for (var i = 0; i < linhas.length; i++) {
         tbJSONitems[i] = JSON.parse(linhas[i])
         if (DEBUG == true) {
-            console.log(tbJSONitems[i])
-            console.log(tbJSONitems[i].data.documents)
+            logger.debug(tbJSONitems[i])
+            logger.debug(tbJSONitems[i].data.documents)
         }
     }
 
@@ -45,7 +45,7 @@ function readItensToSendEmail() {
 		return item.data["datatype-INFO"]==2;
 	}
 	tbJSONitems = tbJSONitems.filter(equalToType2);
-	console.log(tbJSONitems);
+	logger.info(tbJSONitems);
 
     return tbJSONitems
 }
@@ -58,7 +58,7 @@ function findEmailsInGroup(groupId) {
 	}
 	var group = userGroups.filter(equalToGroupId)[0];
 	if (!group) {
-        console.log( "Could not find a this use group: " + group )
+        logger.error( "Could not find a this use group: " + group )
         process.exitCode = 1
 		process.exit();
 		//TODO FIXME: terminar a execucao - precisa rever todo o codigo para isso.
@@ -84,7 +84,6 @@ function notifyUsers() {
     });
 
     for (var i = 0; i < tbJSONitems.length; i++) {
-        //console.log( tbJSONitems[i])
         var approversGroup = tbJSONitems[i].data["approvers-groupid"]
         var notifiedGroup  = tbJSONitems[i].data["notified-groupid"]
 
@@ -98,12 +97,12 @@ function notifyUsers() {
         var strAmount      = tbJSONitems[i].data["amount-INFO"]
 
 		if (DEBUG) {
-			console.log("approversGroup = " + approversGroup);
-			console.log("notifiedGroup = " + notifiedGroup);
-			console.log("emailTo= " + emailTo);
-			console.log("emailCc= " + emailCc);
-			console.log("Amount = " + strAmount);
-		}
+			logger.debug("approversGroup = " + approversGroup);
+			logger.debug("notifiedGroup = " + notifiedGroup);
+			logger.debug("emailTo= " + emailTo);
+			logger.debug("emailCc= " + emailCc);
+			logger.debug("Amount = " + strAmount);
+		} 
 
 		var amount = parseFloat(strAmount);
 		amount = amount.toFixed(2);
@@ -111,7 +110,7 @@ function notifyUsers() {
         var templateDoEMailTXT  = "Prezado cliente,\n\n" +
 								"Esta é uma notificação automática do sistema TruBudget.\r\n" +
 								"Um novo item de workflow foi gerado a partir de uma liberação de crédito realizada pelo BNDES.\n\n" +
-								"AÇÃO NECESSÁRIA: Acesse o site https://trubudget.bndes.gov.br com suas credenciais e confirme o recebimento deste desembolso na conta bancária do projeto.\n"+
+								"AÇÃO NECESSÝRIA: Acesse o site https://trubudget.bndes.gov.br com suas credenciais e confirme o recebimento deste desembolso na conta bancária do projeto.\n"+
 								"Sua ação é fundamental para aprimorar a transparência na utilização destes recursos.\n\n" +
 								"A liberação de crédito se refere aos dados abaixo:\n" +
 								"Programa: <project-name>\n" +
@@ -144,15 +143,13 @@ function notifyUsers() {
         {
             if (err)
             {
-				console.log("Erro ao enviar emails");
-				console.log(err);
-                //salvarErro('enviarEmails', err, "Erro ao enviar e-mail");
+				logger.error("Erro ao enviar emails");
+				logger.error(err);
             }
             else
             {
-				console.log("Sucesso ao enviar emails");
-				console.log(info);
-				//salvarInfo('enviarEmails', '-', ideia._id, `Message ${info.messageId} sent: ${info.response}`);
+				logger.info("Sucesso ao enviar emails");
+				logger.debug(info);
             }
         });
     }
