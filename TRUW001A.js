@@ -5,7 +5,7 @@
 const execSync = require('child_process').execSync
 
 var argParam = process.argv[2];
-var step = 1;
+var step = 0;
 
 if (argParam) {
     step = parseInt(argParam);  
