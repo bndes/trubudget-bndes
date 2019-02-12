@@ -19,10 +19,13 @@ module.exports = {
 	arqUsers        = config.arqUsers
     tbNomeProjeto   = config.tb_nome_projeto
     urlbasesap      = config.urlbasesap
-    urlSapUser      = config.url_sap_user
-    urlSapPass      = config.url_sap_pass
-    urlTbUser       = config.url_tb_user
-    urlTbPass       = config.url_tb_pass
+
+    urlSapUser      = process.env.TRUW001A_SAP_USER
+    urlSapPass      = process.env.TRUW001A_SAP_PASS
+    urlTbUser       = process.env.TRUW001A_TRU_USER
+    urlTbPass       = process.env.TRUW001A_TRU_PASS
+
+
     mailHost        = config.mailHost
     mailPort        = config.mailPort
 
