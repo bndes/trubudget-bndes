@@ -9,7 +9,7 @@ saptb_config.inicioLibVar(__filename)
 
 acessaTrubudgetAutenticacao()
 
-saptb_config.fimLibVar(__filename)
+
 
 process.exitCode = 0
 

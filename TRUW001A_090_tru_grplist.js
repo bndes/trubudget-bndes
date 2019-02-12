@@ -8,7 +8,7 @@ saptb_config.inicioLibVar(__filename)
 
 saveUserGroupsInFile();
 
-saptb_config.fimLibVar(__filename)
+
 
 
 function saveUserGroupsInFile(){

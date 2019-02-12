@@ -19,7 +19,7 @@ loadsTokenAuth( acessaTrubudgetAtribuiPermissoesProjeto,
                 acessaTrubudgetAtribuiPermissoesSubProjeto,
                 acessaTrubudgetAtribuiPermissoesWorkflowItem )
 
-saptb_config.fimLibVar(__filename)
+
 process.exitCode = 0
 
 function loadsTokenAuth(function1, function2, function3) {

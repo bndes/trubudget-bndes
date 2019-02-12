@@ -17,7 +17,7 @@ opcoesHeader      = ""
 
 loadsTokenAuth( acessaTrubudgetFechaPrimeiroWorkflowItem )
 
-saptb_config.fimLibVar(__filename)
+
 process.exitCode = 0
 
 function loadsTokenAuth( functionToCall ) {

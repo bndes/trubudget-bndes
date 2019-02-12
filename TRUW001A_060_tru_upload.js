@@ -14,7 +14,7 @@ opcoesHeader        = ""
 tbJSONitems = leCadaDadoTBparaGravarWorkflowItem()
 acessaTrubudgetParaGravarWorkflowItem(  )
 
-saptb_config.fimLibVar(__filename)
+
 
 process.exitCode = 0
 

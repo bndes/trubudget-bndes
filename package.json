@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "license": "GPL3",
   "scripts": {
-    "start": "node SAPTB_00.js"
+    "start": "node TRUW001A.js"
   },
   "private": true,
   "dependencies": {
-    "gulp-util": "^3.0.8",
+    "log4js": "^4.0.2",
     "moment": "^2.24.0",
     "nodemailer": "^5.1.1",
     "request": "^2.88.0"

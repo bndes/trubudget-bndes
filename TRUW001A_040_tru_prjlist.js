@@ -8,7 +8,7 @@ saptb_config.inicioLibVar(__filename)
 
 acessaTrubudgetListaProjetos( tbNomeProjeto )
 
-saptb_config.fimLibVar(__filename)
+
 
 process.exitCode = 0
 

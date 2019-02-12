@@ -7,7 +7,6 @@ module.exports = {
     moment    = require('moment');
     path      = require('path');
     fs        = require('fs');
-    gutil     = require('gulp-util')
     config          = require('./config.json');
     CRLF            = "\r\n"
     DEBUG           = config.DEBUG
@@ -46,10 +45,10 @@ module.exports = {
   eraseFile: function (fileName) {
         fs.exists(fileName, function(exists) {
             if(exists) {
-                console.log(gutil.colors.green('File ' + fileName + '. Deleting now ...'));
-                fs.unlink(fileName);
+                console.log('File ' + fileName + '. Deleting now ...')
+                fs.unlink(fileName)
             } else {
-                console.log(gutil.colors.red('File ' + fileName + 'not found, so not deleting.'));
+                console.log('File ' + fileName + ' not found, so not deleting.')
             }
         })
   },
@@ -60,8 +59,6 @@ module.exports = {
     console.log( "body: "             + body )
     console.log( "error: "            + error )
     process.exitCode = 1
-  },
-
-  fimLibVar: function (nomeScript) {
   }
+
 };

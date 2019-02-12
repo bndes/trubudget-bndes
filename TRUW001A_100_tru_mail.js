@@ -12,7 +12,7 @@ var userGroups = readUserGroups();
 var tbJSONitems = readItensToSendEmail()
 notifyUsers( tbJSONitems )
 
-saptb_config.fimLibVar(__filename)
+
 
 process.exitCode = 0
 
