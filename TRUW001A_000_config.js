@@ -42,7 +42,6 @@ module.exports = {
   },
 
 
-
   changeValueInExecutionData: function changeValueInExecutionData(tag, value) {
 
     var data = fs.readFileSync(fsExecutionData, 'utf8');
@@ -59,10 +58,6 @@ module.exports = {
   eraseFile: function (fileName) {
         fs.exists(fileName, function(exists) {
             if(exists) {
-<<<<<<< HEAD:TRUW001A_000_config.js
-                logger.info('File ' + fileName + '. Deleting now ...')
-                fs.unlink(fileName)
-=======
                 logger.info('File ' + fileName + '. Deleting now ...')
                 fs.unlink(fileName, function(err) {
                   if(err) {
@@ -71,7 +66,6 @@ module.exports = {
                       process.exit();                      
                   }
                 })
->>>>>>> 88e58ae4299a82e807137cdcd667e94719bacb82:TRUW001A_config.js
             } else {
                 logger.info('File ' + fileName + ' not found, so not deleting.')
             }
