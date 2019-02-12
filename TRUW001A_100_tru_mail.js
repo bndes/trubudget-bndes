@@ -12,8 +12,6 @@ var userGroups = readUserGroups();
 var tbJSONitems = readItensToSendEmail()
 notifyUsers( tbJSONitems )
 
-
-
 process.exitCode = 0
 
 
@@ -34,10 +32,8 @@ function readItensToSendEmail() {
 
     for (var i = 0; i < linhas.length; i++) {
         tbJSONitems[i] = JSON.parse(linhas[i])
-        if (DEBUG == true) {
-            logger.debug(tbJSONitems[i])
-            logger.debug(tbJSONitems[i].data.documents)
-        }
+		logger.debug(tbJSONitems[i])
+		logger.debug(tbJSONitems[i].data.documents)        
     }
 
 	//filter types to send email
@@ -96,13 +92,11 @@ function notifyUsers() {
         var currency       = tbJSONitems[i].data["currency-INFO"]
         var strAmount      = tbJSONitems[i].data["amount-INFO"]
 
-		if (DEBUG) {
-			logger.debug("approversGroup = " + approversGroup);
-			logger.debug("notifiedGroup = " + notifiedGroup);
-			logger.debug("emailTo= " + emailTo);
-			logger.debug("emailCc= " + emailCc);
-			logger.debug("Amount = " + strAmount);
-		} 
+		logger.debug("approversGroup = " + approversGroup);
+		logger.debug("notifiedGroup = " + notifiedGroup);
+		logger.debug("emailTo= " + emailTo);
+		logger.debug("emailCc= " + emailCc);
+		logger.debug("Amount = " + strAmount);
 
 		var amount = parseFloat(strAmount);
 		amount = amount.toFixed(2);
