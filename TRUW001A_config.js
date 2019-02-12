@@ -7,6 +7,7 @@ module.exports = {
     moment    = require('moment');
     path      = require('path');
     fs        = require('fs');
+    gutil     = require('gulp-util')
     config          = require('./config.json');
     CRLF            = "\r\n"
     DEBUG           = config.DEBUG
@@ -34,6 +35,26 @@ module.exports = {
     console.log(" ")
     console.log("Script is starting at " + moment().format("DD/MM/YYYY - HH:mm") + ": " + nomeScript )
     console.log("---------------------------------------------------------------------------------")
+  },
+
+  eraseAllFilesFromPreviousRun: function () {
+    console.log( "Erase all files from previous run ... ")
+    this.eraseFile( config.arqToken     )
+    this.eraseFile( config.arqProjectID )
+    this.eraseFile( config.arqSAP       )
+    this.eraseFile( config.arqTBitem    )
+    this.eraseFile( config.arqUsers     )
+  },
+
+  eraseFile: function (fileName) {
+        fs.exists(fileName, function(exists) {
+            if(exists) {
+                console.log(gutil.colors.green('File ' + fileName + '. Deleting now ...'));
+                fs.unlink(fileName);
+            } else {
+                console.log(gutil.colors.red('File ' + fileName + 'not found, so not deleting.'));
+            }
+        })
   },
 
   logWithError: function (urltb, response, body, error) {

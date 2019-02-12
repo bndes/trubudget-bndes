@@ -21,6 +21,8 @@ saptb_config.inicioLibVar(__filename)
     console.log("urlSapPass       = " + "******************")
     console.log("---------------------------------------------------------------------------------")
 
+saptb_config.eraseAllFilesFromPreviousRun()
+
 acessasSAP()
 
 saptb_config.fimLibVar(__filename)
