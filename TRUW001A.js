@@ -4,35 +4,58 @@
 
 const execSync = require('child_process').execSync
 
-var log00 = execSync('node TRUW001A_010_init.js')
-console.log(" " + log00)
+var argParam = process.argv[2];
+var step = 1;
 
-var log01 = execSync('node TRUW001A_020_sap_dwload.js')
-console.log(" " + log01)
+if (argParam) {
+    step = parseInt(argParam);  
+}
 
-var log02 = execSync('node TRUW001A_030_tru_auth.js')
-console.log(" " + log02)
+switch (step) {
 
-var log03 = execSync('node TRUW001A_040_tru_prjlist.js')
-console.log(" " + log03)
+    case 0:
 
-var log04 = execSync('node TRUW001A_050_tru_mkitem.js')
-console.log(" " + log04)
+    case 10:
+    var log = execSync('node TRUW001A_010_init.js')
+    console.log(" " + log)
 
-var log05 = execSync('node TRUW001A_060_tru_upload.js')
-console.log(" " + log05)
+    case 20:    
+    log = execSync('node TRUW001A_020_sap_dwload.js')
+    console.log(" " + log)
 
-var log06 = execSync('node TRUW001A_070_tru_grant.js')
-console.log(" " + log06)
+    case 30:    
+    log = execSync('node TRUW001A_030_tru_auth.js')
+    console.log(" " + log)
 
-var log07 = execSync('node TRUW001A_080_tru_closeitem.js')
-console.log(" " + log07)
+    case 40:    
+    log = execSync('node TRUW001A_040_tru_prjlist.js')
+    console.log(" " + log)
 
-var log08 = execSync('node TRUW001A_090_tru_grplist.js')
-console.log(" " + log08)
+    case 50:    
+    log = execSync('node TRUW001A_050_tru_mkitem.js')
+    console.log(" " + log)
 
-var log09 = execSync('node TRUW001A_100_tru_mail.js')
-console.log(" " + log09)
+    case 60:    
+    log = execSync('node TRUW001A_060_tru_upload.js')
+    console.log(" " + log)
+
+    case 70:    
+    log = execSync('node TRUW001A_070_tru_grant.js')
+    console.log(" " + log)
+
+    case 80:    
+    log = execSync('node TRUW001A_080_tru_closeitem.js')
+    console.log(" " + log)
+
+    case 90:    
+    log = execSync('node TRUW001A_090_tru_grplist.js')
+    console.log(" " + log)
+
+    case 100:    
+    log = execSync('node TRUW001A_100_tru_mail.js')
+    console.log(" " + log)
+}
+
 
 setTimeout(function() {
     console.log('ALL DONE!');

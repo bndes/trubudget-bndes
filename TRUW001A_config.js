@@ -16,7 +16,8 @@ module.exports = {
     arqProjectID    = config.arqProjectID
     arqSAP          = config.arqSAP
     arqTBitem       = config.arqTBitem
-	arqUsers        = config.arqUsers
+    arqUsers        = config.arqUsers
+    fsExecutionData = config.fsExecutionData
     tbNomeProjeto   = config.tb_nome_projeto
     urlbasesap      = config.urlbasesap
 
@@ -25,31 +26,46 @@ module.exports = {
     urlTbUser       = process.env.TRUW001A_TRU_USER
     urlTbPass       = process.env.TRUW001A_TRU_PASS
 
-
     mailHost        = config.mailHost
     mailPort        = config.mailPort
 
+    var executionTime = moment().format("DD/MM/YYYY - HH:mm");
+    this.changeValueInExecutionData("lastStepTime", executionTime);
+    this.changeValueInExecutionData("lastScriptToBeExecuted", nomeScript);    
+
     console.log(" ")
     console.log(" ")
     console.log(" ")
-    console.log("Script is starting at " + moment().format("DD/MM/YYYY - HH:mm") + ": " + nomeScript )
+    console.log("Script is starting at " + executionTime + ": " + nomeScript )
     console.log("---------------------------------------------------------------------------------")
   },
 
-  eraseAllFilesFromPreviousRun: function () {
-    console.log( "Erase all files from previous run ... ")
-    this.eraseFile( config.arqToken     )
-    this.eraseFile( config.arqProjectID )
-    this.eraseFile( config.arqSAP       )
-    this.eraseFile( config.arqTBitem    )
-    this.eraseFile( config.arqUsers     )
+
+
+  changeValueInExecutionData: function changeValueInExecutionData(tag, value) {
+
+    var data = fs.readFileSync(fsExecutionData, 'utf8');
+
+    executionData = JSON.parse(data); //now it an object
+    executionData[tag] = value; //add some data
+
+    jsonData = JSON.stringify(executionData); //convert it back to json
+    fs.writeFileSync(fsExecutionData, jsonData) 
+
   },
+
 
   eraseFile: function (fileName) {
         fs.exists(fileName, function(exists) {
             if(exists) {
                 console.log('File ' + fileName + '. Deleting now ...')
-                fs.unlink(fileName)
+                fs.unlink(fileName, function(err) {
+                  if(err) {
+                      console.log('Could not delete file  ' + fileName + '.')
+                      process.exitCode = 1
+                      process.exit();                      
+                  }
+                })
             } else {
                 console.log('File ' + fileName + ' not found, so not deleting.')
             }
