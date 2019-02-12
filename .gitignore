@@ -3,7 +3,10 @@
 *arq*.json
 
 # Config
-config.json
+package-lock.json
 
 # NPM Dependencies
 node_modules
+
+# Manual test files
+teste.js
