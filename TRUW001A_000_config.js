@@ -54,7 +54,6 @@ module.exports = {
 
   },
 
-
   eraseFile: function (fileName) {
         fs.exists(fileName, function(exists) {
             if(exists) {
