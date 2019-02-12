@@ -9,7 +9,8 @@
     "arqProjectID"    : "arqProjectID.txt",
     "arqSAP"          : "arqSAP.json",
     "arqTBitem"       : "arqTBitem.json",
-	"arqUsers"        : "arqUsers.json",
+    "arqUsers"        : "arqUsers.json",
+    "fsExecutionData" : "executionData.json", 
     "mailHost"        : "mail.bndes.net",
     "mailPort"        : "25"
 

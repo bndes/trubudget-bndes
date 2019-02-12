@@ -57,7 +57,6 @@ function findEmailsInGroup(groupId) {
         logger.error( "Could not find a this use group: " + group )
         process.exitCode = 1
 		process.exit();
-		//TODO FIXME: terminar a execucao - precisa rever todo o codigo para isso.
 	}
 
 	userEmails = JSON.stringify(group.users)
