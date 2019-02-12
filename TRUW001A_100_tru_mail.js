@@ -41,7 +41,7 @@ function readItensToSendEmail() {
 		return item.data["datatype-INFO"]==2;
 	}
 	tbJSONitems = tbJSONitems.filter(equalToType2);
-	logger.info(tbJSONitems);
+	logger.debug(tbJSONitems);
 
     return tbJSONitems
 }
