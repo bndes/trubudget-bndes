@@ -50,6 +50,15 @@ module.exports = {
 
   },
 
+
+  getValueInExecutionData: function (tag) {
+
+    var data = fs.readFileSync(fsExecutionData, 'utf8');
+
+    executionData = JSON.parse(data); //now it an object
+    return executionData[tag];
+  },  
+
   eraseFile: function (fileName) {
         fs.exists(fileName, function(exists) {
             if(exists) {
