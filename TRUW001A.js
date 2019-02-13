@@ -19,7 +19,7 @@ if (argParamStep) {
     step = parseInt(argParamStep);  
 }
 
-//saveReceivedDates();
+saveReceivedOrDefaultDates();
 
 
 
@@ -59,6 +59,7 @@ switch (step) {
         
 }
 
+
 setTimeout(function() {
     console.log('ALL DONE!');
     console.log('');
@@ -73,34 +74,43 @@ function runNow(scriptName) {
     saptb_config.changeValueInExecutionData("lastCommandExecutedOK", scriptName)
 }
 
-function saveReceivedDates() {
+
+function saveReceivedOrDefaultDates() {
 
     var argParamInicialDate = process.argv[3];
-    var initialDate = moment(); //default value
+    var initialDate = moment().subtract(intervaloDias, 'days'); //default value
 
     if (argParamInicialDate)  {
         initialDate = moment(argParamInicialDate, "YYYYMMDD");
 
         if (!initialDate.isValid()) { 
-            log.error("initialDate was present but is invalid. The expect format is YYYYMMDD. The received was=" + argParamInicialDate);
-            initialDate = moment(); //default value
+            logger.error("initialDate was present but is invalid. The expect format is YYYYMMDD. The received was=" + argParamInicialDate);
+            initialDate = moment().subtract(intervaloDias, 'days'); //default value
+            process.exitCode = 1
+            process.exit();
+                
         }
     }
 
     var argParamFinalDate = process.argv[4];
-    var finalDate = moment().add(1, 'days').format("YYYYMMDD"); //default value
+    var finalDate = moment().add(1, 'days') //default value
 
     if (argParamFinalDate)  {
         finalDate = moment(argParamFinalDate, "YYYYMMDD");
 
         if (!finalDate.isValid()) { 
-            log.error("initialDate was present but is invalid. The expect format is YYYYMMDD. The received was=" + argParamInicialDate);
-            finalDate = moment(argParamFinalDate, "YYYYMMDD"); //default value
+            logger.error("finalDate was present but is invalid. The expect format is YYYYMMDD. The received was=" + argParamFinalDate);
+            finalDate = moment().add(1, 'days') //default value
+            process.exitCode = 1
+            process.exit();
+    
         }
     }
 
+    logger.info("Initial date = " + initialDate.format("YYYYMMDD") + " and Final date= " + finalDate.format("YYYYMMDD"));
+    saptb_config.changeValueInExecutionData("initialDateToCollectData", initialDate.format("YYYYMMDD"))
+    saptb_config.changeValueInExecutionData("finalDateToCollectData", finalDate.format("YYYYMMDD"))
     
-    console.log(initialDate);
-    console.log(finalDate);    
+
 
 }
