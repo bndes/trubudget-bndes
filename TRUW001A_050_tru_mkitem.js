@@ -18,13 +18,33 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao() {
 
     var objetoSAP = []
 
+    var empresa       = "emp" //TODO: vem do arqSAP objetoSAP[i].empresa
+    var numdoc        = "num" //TODO: vem do arqSAP objetoSAP[i].numdoc
+    var dataExercicio = "exe" //TODO: vem do arqSAP objetoSAP[i].exercicio
+
+/*
+//TODO: fazer filtro do arqSAP para conter apenas os registros que ainda nao foram gravados no Trubudget, consultando o arquivo 
+// arqTbUploadDate.json
+    {
+        "empresa-numdoc-exercicio" : "yyyymmdd",
+        "empresa-numdoc-exercicio" : "yyyymmdd",
+        "empresa-numdoc-exercicio" : "yyyymmdd"
+    }
+*/
+
     for (var i = 0; i < linhas.length; i++) {
         objetoSAP[i] = JSON.parse(linhas[i])
         logger.debug(objetoSAP[i])
         if ( objetoSAP[i].contrato != undefined ) {
             var projetoOPE = objetoSAP[i].contrato.substr(0,7)
 
-            acessaTrubudgetListaDeSubProjetos( projetoOPE, objetoSAP[i].referencia, objetoSAP[i].valor, objetoSAP[i].dataPagamento )
+            acessaTrubudgetListaDeSubProjetos( projetoOPE, 
+                objetoSAP[i].referencia, 
+                objetoSAP[i].valor, 
+                objetoSAP[i].dataPagamento,
+                empresa, 
+                numdoc,
+                dataExercicio )
 
             logger.debug ("projetoOPE: " + projetoOPE)
         }
@@ -94,10 +114,14 @@ function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymen
                         logger.debug( "Projeto OPE      : " + projetoOpe )
                         logger.debug( "Referencia       : " + referencia )
                         logger.debug( "Valor            : " + valor )
+                        logger.debug( "Empresa          : " + empresa )
+                        logger.debug( "Numdoc           : " + numdoc )
+                        logger.debug( "DataExercicio    : " + dataExercicio )
 
                         var entradaJSONOne  =     {
                           "apiVersion": "1.0",
                           "data": {
+                            "PK-INFO" : empresa + numdoc + exercicio,
                             "datatype-INFO": "1",
                             "projectId": projectID,
                             "subprojectId": subProjectID,
@@ -151,10 +175,10 @@ function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymen
                                 "base64": "dGVzdCBiYXNlNjRTdHJpbmc="
                               }
                             ] ,
-                            "project-number" : projetoOpe,
+                            "project-number"    : projetoOpe,
                             "approvers-groupid" : jsonCamposAdicionais["approvers-groupid"],
-                            "notified-groupid" : jsonCamposAdicionais["notified-groupid"],
-							"payment-date"   : paymentDate
+                            "notified-groupid"  : jsonCamposAdicionais["notified-groupid"],
+							"payment-date"      : paymentDate
                           }
                         }
                         logger.debug("entradaJSONTwo")
