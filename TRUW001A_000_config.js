@@ -33,16 +33,12 @@ module.exports = {
     mailHost        = config.mailHost
     mailPort        = config.mailPort
 
-    var executionTime = moment().format("DD/MM/YYYY - HH:mm");
-    this.changeValueInExecutionData("lastStepTime", executionTime);
-    this.changeValueInExecutionData("lastScriptToBeExecuted", nomeScript);    
-
     logger.info("Starting " + nomeScript )
     logger.info("---------------------------------------------------------------------------------")
   },
 
 
-  changeValueInExecutionData: function changeValueInExecutionData(tag, value) {
+  changeValueInExecutionData: function (tag, value) {
 
     var data = fs.readFileSync(fsExecutionData, 'utf8');
 

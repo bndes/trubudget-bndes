@@ -1,61 +1,63 @@
 /******************************************************************************************************/
-/* SCRIPT 00 - ORQUESTRADOR DOS DEMAIS SCRIPTS, I.E., INVOCA CADA UM DOS SCRIPTS DE MANEIRA SINCRONA  */
+/* SCRIPT 00 - ORQUESTRADOR DOS DEMAIS SCRIPTS, I.E., INVOCA CADA UM DOS SCRIPTS DE MANEIRA SINCRONA 
+Esse script pode receber até 2 parâmetros 
+O primeiro parametro eh o passo a iniciar a execução. Caso nao seja recebido, assumira o valor 0.
+O segundo parametro eh a data inicial a processar os pagamentos. Caso nao seja recebido, assumira o valor de hoje.
+O terceiro parametro eh a data final a processar os pagamentos. Caso nao seja recebido, assumira o valor de hoje+1.
+*/
 /******************************************************************************************************/
 
 const execSync = require('child_process').execSync
+var saptb_config = require('./TRUW001A_000_config.js');
 
-var argParam = process.argv[2];
+saptb_config.inicioLibVar(__filename)
+
+var argParamStep = process.argv[2];
 var step = 0;
 
-if (argParam) {
-    step = parseInt(argParam);  
+if (argParamStep) {
+    step = parseInt(argParamStep);  
 }
+
+//saveReceivedDates();
+
+
 
 switch (step) {
 
     case 0:
 
     case 10:
-    var log = execSync('node TRUW001A_010_init.js')
-    console.log(" " + log)
+        runNow("TRUW001A_010_init.js")
 
     case 20:    
-    log = execSync('node TRUW001A_020_sap_dwload.js')
-    console.log(" " + log)
-
+        runNow("TRUW001A_020_sap_dwload.js")
+    
     case 30:    
-    log = execSync('node TRUW001A_030_tru_auth.js')
-    console.log(" " + log)
-
+        runNow("TRUW001A_030_tru_auth.js")
+    
     case 40:    
-    log = execSync('node TRUW001A_040_tru_prjlist.js')
-    console.log(" " + log)
+        runNow("TRUW001A_040_tru_prjlist.js")
 
     case 50:    
-    log = execSync('node TRUW001A_050_tru_mkitem.js')
-    console.log(" " + log)
+        runNow("TRUW001A_050_tru_mkitem.js")
 
     case 60:    
-    log = execSync('node TRUW001A_060_tru_upload.js')
-    console.log(" " + log)
-
+        runNow("TRUW001A_060_tru_upload.js")
+    
     case 70:    
-    log = execSync('node TRUW001A_070_tru_grant.js')
-    console.log(" " + log)
-
+        runNow("TRUW001A_070_tru_grant.js")
+    
     case 80:    
-    log = execSync('node TRUW001A_080_tru_closeitem.js')
-    console.log(" " + log)
-
+        runNow("TRUW001A_080_tru_closeitem.js")
+    
     case 90:    
-    log = execSync('node TRUW001A_090_tru_grplist.js')
-    console.log(" " + log)
-
+        runNow("TRUW001A_090_tru_grplist.js")
+    
     case 100:    
-    log = execSync('node TRUW001A_100_tru_mail.js')
-    console.log(" " + log)
+        runNow("TRUW001A_100_tru_mail.js")
+        
 }
-
 
 setTimeout(function() {
     console.log('ALL DONE!');
@@ -63,3 +65,42 @@ setTimeout(function() {
     console.log('');
     console.log('');
 }, 1);
+
+function runNow(scriptName) {
+    var log = execSync('node ' + scriptName)
+    console.log(" " + log)
+    saptb_config.changeValueInExecutionData("lastCommandExecutedTime", moment().format("DD/MM/YYYY - HH:mm") )
+    saptb_config.changeValueInExecutionData("lastCommandExecutedOK", scriptName)
+}
+
+function saveReceivedDates() {
+
+    var argParamInicialDate = process.argv[3];
+    var initialDate = moment(); //default value
+
+    if (argParamInicialDate)  {
+        initialDate = moment(argParamInicialDate, "YYYYMMDD");
+
+        if (!initialDate.isValid()) { 
+            log.error("initialDate was present but is invalid. The expect format is YYYYMMDD. The received was=" + argParamInicialDate);
+            initialDate = moment(); //default value
+        }
+    }
+
+    var argParamFinalDate = process.argv[4];
+    var finalDate = moment().add(1, 'days').format("YYYYMMDD"); //default value
+
+    if (argParamFinalDate)  {
+        finalDate = moment(argParamFinalDate, "YYYYMMDD");
+
+        if (!finalDate.isValid()) { 
+            log.error("initialDate was present but is invalid. The expect format is YYYYMMDD. The received was=" + argParamInicialDate);
+            finalDate = moment(argParamFinalDate, "YYYYMMDD"); //default value
+        }
+    }
+
+    
+    console.log(initialDate);
+    console.log(finalDate);    
+
+}
