@@ -8,6 +8,7 @@
     "arqToken"        : "arqToken.txt",
     "arqProjectID"    : "arqProjectID.txt",
     "arqSAP"          : "arqSAP.json",
+    "arqTBUploadDate" : "arqTBUploadDate.json",
     "arqTBitem"       : "arqTBitem.json",
     "arqUsers"        : "arqUsers.json",
     "fsExecutionData" : "executionData.json", 

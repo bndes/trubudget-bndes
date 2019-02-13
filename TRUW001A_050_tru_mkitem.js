@@ -6,9 +6,22 @@ var saptb_config = require('./TRUW001A_000_config.js');
 
 saptb_config.inicioLibVar(__filename)
 
+
 leCadaDadoSAPparaGravarRespectivaLiberacao()
 
 process.exitCode = 0
+
+
+function leDadosDoUltimoUploadTrubudget() {
+    var linhas = fs.readFileSync(arqTBUploadDate, 'utf8', function(err, result) {
+		if(err) logger.error('error', err);
+	}).split( CRLF )
+      .filter(Boolean)
+
+    uploadTrubudget = JSON.parse(linhas)
+
+    console.log(uploadTrubudget)
+}
 
 function leCadaDadoSAPparaGravarRespectivaLiberacao() {
     var linhas = fs.readFileSync(arqSAP, 'utf8', function(err, result) {
@@ -24,7 +37,7 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao() {
 
 /*
 //TODO: fazer filtro do arqSAP para conter apenas os registros que ainda nao foram gravados no Trubudget, consultando o arquivo 
-// arqTbUploadDate.json
+// arqTBUploadDate
     {
         "empresa-numdoc-exercicio" : "yyyymmdd",
         "empresa-numdoc-exercicio" : "yyyymmdd",
