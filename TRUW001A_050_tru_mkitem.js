@@ -6,34 +6,44 @@ var saptb_config = require('./TRUW001A_000_config.js');
 
 saptb_config.inicioLibVar(__filename)
 
-
-leCadaDadoSAPparaGravarRespectivaLiberacao()
+leDadosDoArquivoNoUltimoUploadTrubudget()
 
 process.exitCode = 0
 
-
-function leDadosDoUltimoUploadTrubudget() {
+function leDadosDoArquivoNoUltimoUploadTrubudget() {
     var linhas = fs.readFileSync(arqTBUploadDate, 'utf8', function(err, result) {
 		if(err) logger.error('error', err);
-	}).split( CRLF )
-      .filter(Boolean)
+    }).split( CRLF )
+      .filter(Boolean)      
+    
+    uploadTrubudgetJSON = {}
 
-    uploadTrubudget = JSON.parse(linhas)
+    for (var i = 0; i < linhas.length; i++) {
+        var linhaStr = JSON.stringify(linhas[i])
+                
+        linhaStr     = Str(linhaStr).replaceAll( '\"' , ''  )
+        linhaStr     = Str(linhaStr).replaceAll( '\\' , ''  )
+        linhaStr     = Str(linhaStr).replaceAll( '{'  , ''  )
+        linhaStr     = Str(linhaStr).replaceAll( '}'  , '' )
 
-    console.log(uploadTrubudget)
+        var resp     = linhaStr.split( ':' , 2 );                
+        
+        uploadTrubudgetJSON[resp[0]] = resp[1]
+    } 
+
+    logger.debug(linhas)
+    logger.debug(uploadTrubudgetJSON)
+
+    leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON)
 }
 
-function leCadaDadoSAPparaGravarRespectivaLiberacao() {
+function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
     var linhas = fs.readFileSync(arqSAP, 'utf8', function(err, result) {
 		if(err) logger.error('error', err);
 	}).split( CRLF )
       .filter(Boolean)
 
     var objetoSAP = []
-
-    var empresa       = "emp" //TODO: vem do arqSAP objetoSAP[i].empresa
-    var numdoc        = "num" //TODO: vem do arqSAP objetoSAP[i].numdoc
-    var dataExercicio = "exe" //TODO: vem do arqSAP objetoSAP[i].exercicio
 
 /*
 //TODO: fazer filtro do arqSAP para conter apenas os registros que ainda nao foram gravados no Trubudget, consultando o arquivo 
@@ -51,20 +61,35 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao() {
         if ( objetoSAP[i].contrato != undefined ) {
             var projetoOPE = objetoSAP[i].contrato.substr(0,7)
 
-            acessaTrubudgetListaDeSubProjetos( projetoOPE, 
-                objetoSAP[i].referencia, 
-                objetoSAP[i].valor, 
-                objetoSAP[i].dataPagamento,
-                empresa, 
-                numdoc,
-                dataExercicio )
+            var empresa       = "123" //TODO: vem do arqSAP objetoSAP[i].empresa
+            var numdoc        = "123" //TODO: vem do arqSAP objetoSAP[i].numdoc
+            var dataExercicio = i //TODO: vem do arqSAP objetoSAP[i].exercicio
+            var pksap         = empresa + numdoc + dataExercicio
+            logger.debug(pksap)
+            logger.debug(uploadTrubudgetJSON[pksap])
+            
+            //Cria arquivo novo para gravar os workflowitems do trubudget
+            fs.writeFile( arqTBitem, "", function(err, result) {
+                if(err) logger.error('error', err);
+            });
+            /* se a chave do sap nao subiu (upload) para o trubudget, significa que a chave precisa ser gravada agora */
+            if ( uploadTrubudgetJSON[pksap] === undefined || uploadTrubudgetJSON[pksap] == "" ) {
+                
+                acessaTrubudgetListaDeSubProjetos( projetoOPE, 
+                    objetoSAP[i].referencia, 
+                    objetoSAP[i].valor, 
+                    objetoSAP[i].dataPagamento,
+                    empresa, 
+                    numdoc,
+                    dataExercicio )
 
-            logger.debug ("projetoOPE: " + projetoOPE)
+                logger.debug ("projetoOPE: " + projetoOPE)
+            }
         }
     }
 }
 
-function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymentDate) {
+function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymentDate, empresa, numdoc, dataExercicio) {
 
     var tokenAuth           = fs.readFileSync(arqToken, 'utf8', function(err, result) {
 		if(err) logger.error('error', err);
@@ -82,11 +107,6 @@ function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymen
     var dataUser            = moment().format("DD/MM/YYYY")
 
     logger.debug(stringAutorizacao)
-
-    //Cria arquivo novo
-    fs.writeFile( arqTBitem, "", function(err, result) {
-		if(err) logger.error('error', err);
-	});
 
     request(
         {
@@ -134,7 +154,7 @@ function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymen
                         var entradaJSONOne  =     {
                           "apiVersion": "1.0",
                           "data": {
-                            "PK-INFO" : empresa + numdoc + exercicio,
+                            "PK-INFO" : empresa + numdoc + dataExercicio,
                             "datatype-INFO": "1",
                             "projectId": projectID,
                             "subprojectId": subProjectID,
@@ -166,7 +186,7 @@ function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymen
                                 process.exitCode = 1
                                 return logger.error(err);
                             }
-                            logger.info("Data" + i + " - Part ONE - is now ready to be submitted to Trubudget");
+                            logger.info("Part ONE - is now ready to be submitted to Trubudget");
                         });
 
                         var entradaJSONTwo  =     {
@@ -203,7 +223,7 @@ function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymen
                                 process.exitCode = 1
                                 return logger.error(err);
                             }
-                            logger.info("Data" + i + " - Part TWO - is now ready to be submitted to Trubudget");
+                            logger.info("Part TWO - is now ready to be submitted to Trubudget");
                         });
 
                         //acessaTrubudgetParaGravarWorkflowItem(projectID, subProjectID, referencia, valor)

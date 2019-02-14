@@ -7,6 +7,7 @@ module.exports = {
     moment    = require('moment');
     path      = require('path');
     fs        = require('fs');
+    Str       = require('string');
     var log4js= require('log4js');
     logger    = log4js.getLogger();
     

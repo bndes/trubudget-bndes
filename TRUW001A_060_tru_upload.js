@@ -50,9 +50,31 @@ function acessaTrubudgetParaGravarWorkflowItem() {
                 json: true
             },
             function (error, response, body) {    
-                logger.debug ("status = " + response.statusCode )
+                logger.debug ("status = " + response )
                 if (!error && ( response.statusCode == 200 || response.statusCode == 201 ) ) {
-                    logger.info("WorkflowItem was saved Trubudget!" )
+                    logger.info("WorkflowItem was saved Trubudget!")                    
+                    var jsonBody  = JSON.parse(response.request.body)                    
+                    logger.debug( jsonBody )
+                    var PKInfo    = JSON.stringify(jsonBody.data['PK-INFO'])
+                    if ( PKInfo != undefined ) {
+                        PKInfo =  PKInfo + ""
+                        PKInfo        = Str(PKInfo).replaceAll('"','')
+                        PKInfo        = Str(PKInfo).replaceAll('\\','')
+                        var hoje      = moment().format("YYYYMMDD")
+                        logger.debug( PKInfo )
+                        var jSONlinha = {}
+                        jSONlinha[PKInfo] = hoje;
+                        logger.debug( jSONlinha )                    
+                    
+                        fs.appendFile( arqTBUploadDate, JSON.stringify(jSONlinha) + CRLF , function(err, result) {
+                            if(err) {
+                                process.exitCode = 1
+                                return logger.error(err);
+                            }
+                            logger.info("WorkflowItem was logged on disk (File: " + arqTBUploadDate + " ) ");
+                        });
+                    }                    
+
                     logger.debug(self.itemsSaved)
                     logger.debug(self.tbJSONitems[self.itemsSaved])
 
