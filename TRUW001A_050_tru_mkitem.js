@@ -11,30 +11,37 @@ leDadosDoArquivoNoUltimoUploadTrubudget()
 process.exitCode = 0
 
 function leDadosDoArquivoNoUltimoUploadTrubudget() {
-    var linhas = fs.readFileSync(arqTBUploadDate, 'utf8', function(err, result) {
-		if(err) logger.error('error', err);
-    }).split( CRLF )
-      .filter(Boolean)      
-    
-    uploadTrubudgetJSON = {}
-
-    for (var i = 0; i < linhas.length; i++) {
-        var linhaStr = JSON.stringify(linhas[i])
-                
-        linhaStr     = Str(linhaStr).replaceAll( '\"' , ''  )
-        linhaStr     = Str(linhaStr).replaceAll( '\\' , ''  )
-        linhaStr     = Str(linhaStr).replaceAll( '{'  , ''  )
-        linhaStr     = Str(linhaStr).replaceAll( '}'  , '' )
-
-        var resp     = linhaStr.split( ':' , 2 );                
+    fs.exists(arqTBUploadDate, function(exists) {
         
-        uploadTrubudgetJSON[resp[0]] = resp[1]
-    } 
+        uploadTrubudgetJSON = {}
 
-    logger.debug(linhas)
-    logger.debug(uploadTrubudgetJSON)
+        if(exists)  {
+            var linhas = fs.readFileSync(arqTBUploadDate, 'utf8', function(err, result) {
+                if(err) logger.error('error', err);
+            }).split( CRLF )
+            .filter(Boolean)       
+            
+            for (var i = 0; i < linhas.length; i++) {
+                var linhaStr = JSON.stringify(linhas[i])
+                        
+                linhaStr     = Str(linhaStr).replaceAll( '\"' , ''  )
+                linhaStr     = Str(linhaStr).replaceAll( '\\' , ''  )
+                linhaStr     = Str(linhaStr).replaceAll( '{'  , ''  )
+                linhaStr     = Str(linhaStr).replaceAll( '}'  , '' )
 
-    leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON)
+                var resp     = linhaStr.split( ':' , 2 );                
+                
+                uploadTrubudgetJSON[resp[0]] = resp[1]
+            } 
+
+            logger.debug(linhas)
+            logger.debug(uploadTrubudgetJSON)
+        }
+
+        //it runs next function whether the file exists or not
+        leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON)
+    })
+    
 }
 
 function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
@@ -61,9 +68,13 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
         if ( objetoSAP[i].contrato != undefined ) {
             var projetoOPE = objetoSAP[i].contrato.substr(0,7)
 
-            var empresa       = "123" //TODO: vem do arqSAP objetoSAP[i].empresa
-            var numdoc        = "123" //TODO: vem do arqSAP objetoSAP[i].numdoc
-            var dataExercicio = i //TODO: vem do arqSAP objetoSAP[i].exercicio
+            logger.debug(objetoSAP[i].empresa)
+            logger.debug(objetoSAP[i].referencia)
+            logger.debug(objetoSAP[i].exercicio)
+
+            var empresa       = objetoSAP[i].empresa
+            var numdoc        = objetoSAP[i].referencia
+            var dataExercicio = objetoSAP[i].exercicio
             var pksap         = empresa + numdoc + dataExercicio
             logger.debug(pksap)
             logger.debug(uploadTrubudgetJSON[pksap])
