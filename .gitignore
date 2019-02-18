@@ -1,6 +1,7 @@
 # Temp files
 *arq*.txt
 *arq*.json
+*.log
 
 # Config
 package-lock.json
