@@ -61,7 +61,7 @@ switch (step) {
 
 
 setTimeout(function() {
-    console.log('ALL DONE!');
+    logger.info('ALL DONE!');
     console.log('');
     console.log('');
     console.log('');

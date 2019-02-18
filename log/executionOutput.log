@@ -1,0 +1,213 @@
+[2019-02-18T12:57:48.733] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_010_init.js
+[2019-02-18T12:57:48.733] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T12:57:48.733] [INFO] executionOutput - Configuration:
+[2019-02-18T12:57:48.733] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T12:57:48.733] [INFO] executionOutput - arqProjectID     = data/arqProjectID.txt
+[2019-02-18T12:57:48.733] [INFO] executionOutput - arqTBitem        = data/arqTBitem.json
+[2019-02-18T12:57:48.733] [INFO] executionOutput - arqToken         = data/arqToken.txt
+[2019-02-18T12:57:48.733] [INFO] executionOutput - arqSAP           = data/arqSAP.json
+[2019-02-18T12:57:48.733] [INFO] executionOutput - arqTBUploadDate  = data/arqTBUploadDate.json
+[2019-02-18T12:57:48.733] [INFO] executionOutput - MOCK             = false
+[2019-02-18T12:57:48.733] [INFO] executionOutput - intervaloDias    = 60
+[2019-02-18T12:57:48.733] [INFO] executionOutput - tbNomeProjeto    = Amazon Fund TB2
+[2019-02-18T12:57:48.733] [INFO] executionOutput - urlbasesap       = api-sap-d.bndes.net/sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV
+[2019-02-18T12:57:48.733] [INFO] executionOutput - urlbasetb        = https://trubudget.bndes.gov.br/test/api
+[2019-02-18T12:57:48.749] [INFO] executionOutput - urlSapUser       = undefined
+[2019-02-18T12:57:48.749] [INFO] executionOutput - urlSapPass       = ******************
+[2019-02-18T12:57:48.749] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T12:57:48.749] [INFO] executionOutput - Erase all files from previous run ... 
+[2019-02-18T12:57:48.749] [INFO] executionOutput - File data/arqToken.txt not found, so not deleting.
+[2019-02-18T12:57:48.749] [INFO] executionOutput - File data/arqSAP.json not found, so not deleting.
+[2019-02-18T12:57:48.749] [INFO] executionOutput - File data/arqProjectID.txt not found, so not deleting.
+[2019-02-18T12:57:48.749] [INFO] executionOutput - File data/arqTBitem.json not found, so not deleting.
+[2019-02-18T12:57:48.749] [INFO] executionOutput - File data/arqUsers.json not found, so not deleting.
+[2019-02-18T12:57:49.894] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_020_sap_dwload.js
+[2019-02-18T12:57:49.894] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T12:57:49.910] [INFO] executionOutput - Disbursements on SAP Amazon Fund from 20181220 until 20190219 ... 
+[2019-02-18T12:57:50.605] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T12:57:50.605] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T12:57:50.606] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T12:57:50.606] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T12:57:50.606] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T12:57:50.606] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T12:57:50.606] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T12:57:50.607] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T12:57:50.607] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T12:57:50.607] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T12:57:50.607] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T12:57:50.607] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T12:57:50.607] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T12:57:50.607] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T12:57:51.782] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_030_tru_auth.js
+[2019-02-18T12:57:51.782] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T12:57:52.141] [INFO] executionOutput - Trubudget Authentication Token is now ready
+[2019-02-18T12:57:53.272] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_040_tru_prjlist.js
+[2019-02-18T12:57:53.272] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T12:57:53.761] [INFO] executionOutput - ProjectID of Amazon Fund TB2 was selected.
+[2019-02-18T12:57:54.968] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_050_tru_mkitem.js
+[2019-02-18T12:57:54.978] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T12:57:55.086] [INFO] executionOutput - Part ONE - is now ready to be submitted to Trubudget
+[2019-02-18T12:57:55.086] [INFO] executionOutput - Part TWO - is now ready to be submitted to Trubudget
+[2019-02-18T12:57:55.117] [INFO] executionOutput - Part TWO - is now ready to be submitted to Trubudget
+[2019-02-18T12:57:55.117] [INFO] executionOutput - Part ONE - is now ready to be submitted to Trubudget
+[2019-02-18T12:57:55.117] [INFO] executionOutput - Part ONE - is now ready to be submitted to Trubudget
+[2019-02-18T12:57:55.117] [INFO] executionOutput - Part TWO - is now ready to be submitted to Trubudget
+[2019-02-18T12:57:55.117] [INFO] executionOutput - Part ONE - is now ready to be submitted to Trubudget
+[2019-02-18T12:57:55.117] [INFO] executionOutput - Part TWO - is now ready to be submitted to Trubudget
+[2019-02-18T12:57:56.318] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_060_tru_upload.js
+[2019-02-18T12:57:56.318] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T12:57:56.522] [INFO] executionOutput - WorkflowItem was saved Trubudget!
+[2019-02-18T12:57:56.522] [INFO] executionOutput - WorkflowItem was saved Trubudget!
+[2019-02-18T12:57:56.522] [INFO] executionOutput - WorkflowItem was saved Trubudget!
+[2019-02-18T12:57:56.538] [INFO] executionOutput - WorkflowItem was saved Trubudget!
+[2019-02-18T12:57:56.539] [INFO] executionOutput - WorkflowItem was saved Trubudget!
+[2019-02-18T12:57:56.539] [INFO] executionOutput - WorkflowItem was saved Trubudget!
+[2019-02-18T12:57:56.539] [INFO] executionOutput - WorkflowItem was saved Trubudget!
+[2019-02-18T12:57:56.539] [INFO] executionOutput - WorkflowItem was saved Trubudget!
+[2019-02-18T12:57:56.539] [INFO] executionOutput - WorkflowItem was logged on disk (File: data/arqTBUploadDate.json ) 
+[2019-02-18T12:57:56.539] [INFO] executionOutput - WorkflowItem was logged on disk (File: data/arqTBUploadDate.json ) 
+[2019-02-18T12:57:56.539] [INFO] executionOutput - WorkflowItem was logged on disk (File: data/arqTBUploadDate.json ) 
+[2019-02-18T12:57:56.539] [INFO] executionOutput - WorkflowItem was logged on disk (File: data/arqTBUploadDate.json ) 
+[2019-02-18T12:57:57.720] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_070_tru_grant.js
+[2019-02-18T12:57:57.720] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T12:57:58.388] [INFO] executionOutput - Success on project permission grant ... OK
+[2019-02-18T12:57:58.404] [INFO] executionOutput - Success on workflow permission grant ... OK
+[2019-02-18T12:57:58.404] [INFO] executionOutput - Success on workflow permission grant ... OK
+[2019-02-18T12:57:58.404] [INFO] executionOutput - Success on subproject permission grant ... OK
+[2019-02-18T12:57:58.404] [INFO] executionOutput - Success on project permission grant ... OK
+[2019-02-18T12:57:58.404] [INFO] executionOutput - Success on workflow permission grant ... OK
+[2019-02-18T12:57:58.404] [INFO] executionOutput - Success on subproject permission grant ... OK
+[2019-02-18T12:57:59.709] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_080_tru_closeitem.js
+[2019-02-18T12:57:59.709] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T12:58:00.380] [INFO] executionOutput - Success on closing the workflowitem ... OK
+[2019-02-18T12:58:01.530] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_090_tru_grplist.js
+[2019-02-18T12:58:01.530] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T12:58:01.621] [INFO] executionOutput - User groups are saved
+[2019-02-18T12:58:02.929] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_100_tru_mail.js
+[2019-02-18T12:58:02.929] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T12:58:03.007] [INFO] executionOutput - Sucesso ao enviar emails
+[2019-02-18T12:58:03.007] [INFO] executionOutput - Sucesso ao enviar emails
+[2019-02-18T12:58:03.007] [INFO] executionOutput - Sucesso ao enviar emails
+[2019-02-18T12:58:03.022] [INFO] executionOutput - Sucesso ao enviar emails
+[2019-02-18T12:57:47.530] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A.js
+[2019-02-18T12:57:47.530] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T12:57:47.546] [INFO] executionOutput - Initial date = 20181220 and Final date= 20190219
+[2019-02-18T13:01:47.613] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_010_init.js
+[2019-02-18T13:01:47.615] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T13:01:47.615] [INFO] executionOutput - Configuration:
+[2019-02-18T13:01:47.616] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T13:01:47.616] [INFO] executionOutput - arqProjectID     = data/arqProjectID.txt
+[2019-02-18T13:01:47.616] [INFO] executionOutput - arqTBitem        = data/arqTBitem.json
+[2019-02-18T13:01:47.616] [INFO] executionOutput - arqToken         = data/arqToken.txt
+[2019-02-18T13:01:47.616] [INFO] executionOutput - arqSAP           = data/arqSAP
+[2019-02-18T13:01:47.616] [INFO] executionOutput - arqTBUploadDate  = data/arqTBUploadDate.json
+[2019-02-18T13:01:47.617] [INFO] executionOutput - MOCK             = false
+[2019-02-18T13:01:47.617] [INFO] executionOutput - intervaloDias    = 60
+[2019-02-18T13:01:47.617] [INFO] executionOutput - tbNomeProjeto    = Amazon Fund TB2
+[2019-02-18T13:01:47.617] [INFO] executionOutput - urlbasesap       = api-sap-d.bndes.net/sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV
+[2019-02-18T13:01:47.617] [INFO] executionOutput - urlbasetb        = https://trubudget.bndes.gov.br/test/api
+[2019-02-18T13:01:47.617] [INFO] executionOutput - urlSapUser       = undefined
+[2019-02-18T13:01:47.617] [INFO] executionOutput - urlSapPass       = ******************
+[2019-02-18T13:01:47.617] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T13:01:47.618] [INFO] executionOutput - Erase all files from previous run ... 
+[2019-02-18T13:01:47.619] [INFO] executionOutput - File data/arqToken.txt. Deleting now ...
+[2019-02-18T13:01:47.619] [INFO] executionOutput - File data/arqSAP not found, so not deleting.
+[2019-02-18T13:01:47.620] [INFO] executionOutput - File data/arqTBitem.json. Deleting now ...
+[2019-02-18T13:01:47.620] [INFO] executionOutput - File data/arqUsers.json. Deleting now ...
+[2019-02-18T13:01:47.620] [INFO] executionOutput - File data/arqProjectID.txt. Deleting now ...
+[2019-02-18T13:01:48.782] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_020_sap_dwload.js
+[2019-02-18T13:01:48.782] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T13:01:48.797] [INFO] executionOutput - Disbursements on SAP Amazon Fund from 20181220 until 20190219 ... 
+[2019-02-18T13:01:49.000] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T13:01:49.000] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T13:01:49.000] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T13:01:49.000] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T13:01:49.000] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T13:01:49.000] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T13:01:49.000] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T13:01:49.000] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T13:01:49.000] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T13:01:49.000] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T13:01:49.000] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T13:01:49.000] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T13:01:49.000] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T13:01:49.000] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T13:01:50.197] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_030_tru_auth.js
+[2019-02-18T13:01:50.197] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T13:01:50.416] [INFO] executionOutput - Trubudget Authentication Token is now ready
+[2019-02-18T13:01:51.629] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_040_tru_prjlist.js
+[2019-02-18T13:01:51.631] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T13:01:52.184] [INFO] executionOutput - ProjectID of Amazon Fund TB2 was selected.
+[2019-02-18T13:01:53.354] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_050_tru_mkitem.js
+[2019-02-18T13:01:53.354] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T13:02:49.257] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_010_init.js
+[2019-02-18T13:02:49.257] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T13:02:49.257] [INFO] executionOutput - Configuration:
+[2019-02-18T13:02:49.257] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T13:02:49.257] [INFO] executionOutput - arqProjectID     = data/arqProjectID.txt
+[2019-02-18T13:02:49.257] [INFO] executionOutput - arqTBitem        = data/arqTBitem.json
+[2019-02-18T13:02:49.257] [INFO] executionOutput - arqToken         = data/arqToken.txt
+[2019-02-18T13:02:49.257] [INFO] executionOutput - arqSAP           = data/arqSAP
+[2019-02-18T13:02:49.257] [INFO] executionOutput - arqTBUploadDate  = data/arqTBUploadDate.json
+[2019-02-18T13:02:49.273] [INFO] executionOutput - MOCK             = false
+[2019-02-18T13:02:49.273] [INFO] executionOutput - intervaloDias    = 60
+[2019-02-18T13:02:49.273] [INFO] executionOutput - tbNomeProjeto    = Amazon Fund TB2
+[2019-02-18T13:02:49.273] [INFO] executionOutput - urlbasesap       = api-sap-d.bndes.net/sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV
+[2019-02-18T13:02:49.273] [INFO] executionOutput - urlbasetb        = https://trubudget.bndes.gov.br/test/api
+[2019-02-18T13:02:49.273] [INFO] executionOutput - urlSapUser       = undefined
+[2019-02-18T13:02:49.273] [INFO] executionOutput - urlSapPass       = ******************
+[2019-02-18T13:02:49.273] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T13:02:49.273] [INFO] executionOutput - Erase all files from previous run ... 
+[2019-02-18T13:02:49.273] [INFO] executionOutput - File data/arqProjectID.txt. Deleting now ...
+[2019-02-18T13:02:49.273] [INFO] executionOutput - File data/arqToken.txt. Deleting now ...
+[2019-02-18T13:02:49.273] [INFO] executionOutput - File data/arqSAP not found, so not deleting.
+[2019-02-18T13:02:49.273] [INFO] executionOutput - File data/arqUsers.json not found, so not deleting.
+[2019-02-18T13:02:49.273] [INFO] executionOutput - File data/arqTBitem.json not found, so not deleting.
+[2019-02-18T13:02:50.512] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_020_sap_dwload.js
+[2019-02-18T13:02:50.512] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T13:02:50.527] [INFO] executionOutput - Disbursements on SAP Amazon Fund from 20181220 until 20190219 ... 
+[2019-02-18T13:02:50.633] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T13:02:50.633] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T13:02:50.634] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T13:02:50.634] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T13:02:50.634] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T13:02:50.634] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T13:02:50.634] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T13:02:50.635] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T13:02:50.635] [INFO] executionOutput - SAP data copy stored
+[2019-02-18T13:02:50.635] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T13:02:50.635] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T13:02:50.635] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T13:02:50.635] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T13:02:50.635] [INFO] executionOutput - SAP data locally stored
+[2019-02-18T13:02:51.760] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_030_tru_auth.js
+[2019-02-18T13:02:51.775] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T13:02:51.897] [INFO] executionOutput - Trubudget Authentication Token is now ready
+[2019-02-18T13:02:53.039] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_040_tru_prjlist.js
+[2019-02-18T13:02:53.039] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T13:02:53.382] [INFO] executionOutput - ProjectID of Amazon Fund TB2 was selected.
+[2019-02-18T13:02:54.551] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_050_tru_mkitem.js
+[2019-02-18T13:02:54.551] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T13:02:55.899] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_060_tru_upload.js
+[2019-02-18T13:02:55.899] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T13:02:57.102] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_070_tru_grant.js
+[2019-02-18T13:02:57.102] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T13:02:57.613] [INFO] executionOutput - Success on project permission grant ... OK
+[2019-02-18T13:02:57.618] [INFO] executionOutput - Success on workflow permission grant ... OK
+[2019-02-18T13:02:57.620] [INFO] executionOutput - Success on workflow permission grant ... OK
+[2019-02-18T13:02:57.621] [INFO] executionOutput - Success on project permission grant ... OK
+[2019-02-18T13:02:57.624] [INFO] executionOutput - Success on workflow permission grant ... OK
+[2019-02-18T13:02:57.626] [INFO] executionOutput - Success on subproject permission grant ... OK
+[2019-02-18T13:02:57.628] [INFO] executionOutput - Success on subproject permission grant ... OK
+[2019-02-18T13:02:58.810] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_080_tru_closeitem.js
+[2019-02-18T13:02:58.810] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T13:02:59.290] [INFO] executionOutput - Success on closing the workflowitem ... OK
+[2019-02-18T13:03:00.540] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_090_tru_grplist.js
+[2019-02-18T13:03:00.540] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T13:03:00.638] [INFO] executionOutput - User groups are saved
+[2019-02-18T13:03:01.927] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A_100_tru_mail.js
+[2019-02-18T13:03:01.943] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T13:02:48.043] [INFO] executionOutput - Starting D:\git.repo\trubudget-bndes\TRUW001A.js
+[2019-02-18T13:02:48.043] [INFO] executionOutput - ---------------------------------------------------------------------------------
+[2019-02-18T13:02:48.043] [INFO] executionOutput - Initial date = 20181220 and Final date= 20190219
+[2019-02-18T13:03:01.944] [INFO] executionOutput - ALL DONE!

@@ -9,23 +9,22 @@ module.exports = {
     fs        = require('fs');
     Str       = require('string');
     var log4js= require('log4js');
-    logger    = log4js.getLogger();
-    
-    config          = require('./config.json');
-    logger.level    = config.logLevel; //trace, debug, info, warn, error, fatal
-    CRLF            = "\r\n"
-    MOCK            = config.MOCK
-    intervaloDias   = config.intervaloDias
-    urlbasetb       = config.urlbasetb
-    arqToken        = config.arqToken
-    arqProjectID    = config.arqProjectID 
-    arqTBUploadDate = config.arqTBUploadDate
-    arqSAP          = config.arqSAP
-    arqTBitem       = config.arqTBitem
-    arqUsers        = config.arqUsers
-    fsExecutionData = config.fsExecutionData
-    tbNomeProjeto   = config.tb_nome_projeto
-    urlbasesap      = config.urlbasesap
+   
+    config            = require('./config.json');
+    CRLF              = "\r\n"
+    MOCK              = config.MOCK
+    intervaloDias     = config.intervaloDias
+    urlbasetb         = config.urlbasetb
+    arqToken          = config.arqToken
+    arqProjectID      = config.arqProjectID 
+    arqTBUploadDate   = config.arqTBUploadDate
+    arqSAP            = config.arqSAP
+    arqTBitem         = config.arqTBitem
+    arqUsers          = config.arqUsers
+    fsExecutionData   = config.fsExecutionData
+    fsExecutionOutput = config.fsExecutionOutput
+    tbNomeProjeto     = config.tb_nome_projeto
+    urlbasesap        = config.urlbasesap
 
     urlSapUser      = process.env.TRUW001A_SAP_USER
     urlSapPass      = process.env.TRUW001A_SAP_PASS
@@ -34,6 +33,13 @@ module.exports = {
 
     mailHost        = config.mailHost
     mailPort        = config.mailPort
+
+    log4js.configure({
+      appenders: { executionOutput: { type: 'file', filename: fsExecutionOutput } },
+      categories: { default: { appenders: ['executionOutput'], level: config.logLevel } }
+    }) //trace, debug, info, warn, error, fatal
+
+    logger    = log4js.getLogger('executionOutput');
 
     logger.info("Starting " + nomeScript )
     logger.info("---------------------------------------------------------------------------------")

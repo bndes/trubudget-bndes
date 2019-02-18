@@ -45,7 +45,7 @@ function leDadosDoArquivoNoUltimoUploadTrubudget() {
 }
 
 function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
-    var linhas = fs.readFileSync(arqSAP, 'utf8', function(err, result) {
+    var linhas = fs.readFileSync(arqSAP + ".json", 'utf8', function(err, result) {
 		if(err) logger.error('error', err);
 	}).split( CRLF )
       .filter(Boolean)

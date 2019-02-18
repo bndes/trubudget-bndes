@@ -13,8 +13,8 @@ process.exitCode = 0
 function acessasSAP() {
 
     var agora    = moment().format("YYYYMMDDHHmm")
-    var nomeDoArquivo   = agora + "_" + arqSAP
-    var copiaDoArquivo  = arqSAP
+    var nomeDoArquivo   = arqSAP + "_" +  agora + ".json"
+    var copiaDoArquivo  = arqSAP + ".json"
 
     var dataInicial = saptb_config.getValueInExecutionData("initialDateToCollectData");   
     var dataFinal   = saptb_config.getValueInExecutionData("finalDateToCollectData");
