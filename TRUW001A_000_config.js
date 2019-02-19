@@ -10,7 +10,7 @@ module.exports = {
     Str       = require('string');
     var log4js= require('log4js');
    
-    config            = require('./config.json');
+    config            = require('./config/config.json');
     CRLF              = "\r\n"
     MOCK              = config.MOCK
     intervaloDias     = config.intervaloDias

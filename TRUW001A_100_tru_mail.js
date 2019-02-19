@@ -1,5 +1,5 @@
 /******************************************************************************************************/
-/* SCRIPT 08 - ENVIA NOTIFICACOES PARA AS PARTES INTERESSADAS                                         */
+/* READ THE USER GROUPS IN A TEMPORARY FILE AND SEND EMAILS TO THE PROPER APPROVERS AND NOTIFIED PEOPLE 
 /******************************************************************************************************/
 
 var saptb_config = require('./TRUW001A_000_config.js');
@@ -63,8 +63,6 @@ function findEmailsInGroup(groupId) {
 					 .replace ("[", "")
 					 .replace ("]", "");
 
-	//TODO FIXME: verificar se sao mesmo emails?
-
 	return userEmails;
 }
 
@@ -82,7 +80,7 @@ function notifyUsers() {
         var approversGroup = tbJSONitems[i].data["approvers-groupid"]
         
         var emailTo        = findEmailsInGroup(approversGroup)
-        var emailCc        = config.emailCc //%AGS-DEMAF-GEMAF1, %AGS-DEMAF-GEMAF2, %AGS-DEMAF-GEMAF3, %AGS-DEMAF-GEMAF4,julio.guiomar@bndes.gov.br
+        var emailCc        = config.emailCc 
         var projectNumber  = tbJSONitems[i].data["project-number"]
 		var projectName    = tbNomeProjeto
 		var subprojectName = tbJSONitems[i].data["subprojectName"]
@@ -117,11 +115,6 @@ function notifyUsers() {
 		templateDoEMailTXT = templateDoEMailTXT.replace(/<amount>/g, amount);
 		templateDoEMailTXT = templateDoEMailTXT.replace(/<payment-date>/g, paymentDate);
 
-
-								/*
-        var templateDoEMailHTML = '<p>Foi incluído novo comentário na ideia <strong>' + ideia.title + '</strong>.</p><p>Quem comentou: ' + nomeQuemComentou + '</p><p>Comentário: ' + textoComentario + "</p><p>Acesse a ideia através do link: " + config.negocio.url_compartilhamento_ideia + ideia._id + "</p>" // html body
-*/
-//TODO: setar o HTML
         var mailOptions = {
             from   : emailFrom,
             to     : emailTo,

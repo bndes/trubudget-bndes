@@ -1,5 +1,5 @@
 /******************************************************************************************************/
-/* SCRIPT 06 - ACESSA O TRUBUDGET PARA ATRIBUIR PERMISSOES E TRATAR WORKFLOWITEMS RECEM-CRIADOS.      */
+/* ACCESS TRUBUDGET AND CLOSE THE SECOND WORKFLOWITEM
 /******************************************************************************************************/
 
 var saptb_config = require('./TRUW001A_000_config.js');

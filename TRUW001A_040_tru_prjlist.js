@@ -1,6 +1,5 @@
 /******************************************************************************************************/
-/* SCRIPT 03 - ACESSA O TRUBUDGET E LISTA TODOS OS PROJETOS EXISTENTES. O PROJETO DESEJADO EH GRAVADO */
-/*             EM ARQUIVO NO DISCO.                                                                   */
+/* ACCESS TRUBUDGET, LIST ALL THE PROJECTS AND SAVE IN A TEMPORARY FILE
 /******************************************************************************************************/
 var saptb_config = require('./TRUW001A_000_config.js');
 

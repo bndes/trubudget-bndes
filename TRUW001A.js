@@ -1,9 +1,11 @@
 /******************************************************************************************************/
-/* SCRIPT 00 - ORQUESTRADOR DOS DEMAIS SCRIPTS, I.E., INVOCA CADA UM DOS SCRIPTS DE MANEIRA SINCRONA 
-Esse script pode receber até 2 parâmetros 
-O primeiro parametro eh o passo a iniciar a execução. Caso nao seja recebido, assumira o valor 0.
-O segundo parametro eh a data inicial a processar os pagamentos. Caso nao seja recebido, assumira o valor de hoje.
-O terceiro parametro eh a data final a processar os pagamentos. Caso nao seja recebido, assumira o valor de hoje+1.
+/* MAIN SCRIPT
+/*
+/* THIS SCRIPT CALLS THE OTHER SUBSCRIPTS SYNCHRONOUSLY
+/* PARAMETERS (IN ORDER):
+/*  1) X (NUMBER)      - STARTS FROM THE SUBSCRIPT/STEP NUMBER (FROM 0 TO 100). DEFAULT: 0
+/*  2) YYYYMMDD (DATE) - THE INITIAL DATE OF PROCESSING DATA. DEFAULT: TODAY - INTERVAL(CONFIG FILE)
+/*  3) YYYYMMDD (DATE) - THE FINAL DATE OF PROCESSING DATA.   DEFAULT: TOMORROW
 */
 /******************************************************************************************************/
 
@@ -20,8 +22,6 @@ if (argParamStep) {
 }
 
 saveReceivedOrDefaultDates();
-
-
 
 switch (step) {
 

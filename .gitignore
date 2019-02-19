@@ -13,3 +13,6 @@ node_modules
 teste.js
 /log/executionOutput.log
 /control/executionData.json
+/data/*.json
+/data/*.txt
+/config/config.json

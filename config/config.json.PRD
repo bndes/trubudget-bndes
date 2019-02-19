@@ -1,0 +1,20 @@
+{
+    "tb_nome_projeto"   : "XXXXXXXXXXXXXXXXX Amazon Fund TB2",
+    "MOCK"              : false,
+    "logLevel"          : "info", 
+    "intervaloDias"     : "30",
+    "urlbasetb"         : "https://trubudget.bndes.gov.br/PROD/api",
+    "urlbasesap"        : "XXXXXXXXXXXX api-sap-d.bndes.net/sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV",
+    "arqToken"          : "data/arqToken.txt",
+    "arqProjectID"      : "data/arqProjectID.txt",
+    "arqSAP"            : "data/arqSAP",
+    "arqTBUploadDate"   : "control/arqTBUploadDate.json",
+    "arqTBitem"         : "data/arqTBitem.json",
+    "arqUsers"          : "data/arqUsers.json",
+    "fsExecutionData"   : "control/executionData.json", 
+    "fsExecutionOutput" : "log/executionOutput.log",    
+    "mailHost"          : "mail.bndes.net",
+    "mailPort"          : "25",
+    "emailCc"           : "%AGS-DEMAF-GEMAF1, %AGS-DEMAF-GEMAF2, %AGS-DEMAF-GEMAF3, %AGS-DEMAF-GEMAF4,julio.guiomar@bndes.gov.br"
+
+}

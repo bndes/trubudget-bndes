@@ -1,6 +1,5 @@
 /******************************************************************************************************/
-/* SCRIPT 04 - ACESSA O TRUBUDGET E LISTA TODOS OS SUBPROJETOS DO PROJETO DESEJADO E MONTA A LISTA DE */
-/*             WORKFLOW ITEMS A SEREM GRAVADOS NUM PROXIMO PASSO.                                     */
+/* ACCESS TRUBUDGET, LIST THE SUBPROJECTS OF THE DESIRED PROJECT AND MAKE THE WORKFLOWITEMS IN A TEMPORARY FILE
 /******************************************************************************************************/
 var saptb_config = require('./TRUW001A_000_config.js');
 
@@ -51,16 +50,6 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
       .filter(Boolean)
 
     var objetoSAP = []
-
-/*
-//TODO: fazer filtro do arqSAP para conter apenas os registros que ainda nao foram gravados no Trubudget, consultando o arquivo 
-// arqTBUploadDate
-    {
-        "empresa-numdoc-exercicio" : "yyyymmdd",
-        "empresa-numdoc-exercicio" : "yyyymmdd",
-        "empresa-numdoc-exercicio" : "yyyymmdd"
-    }
-*/
 
     for (var i = 0; i < linhas.length; i++) {
         objetoSAP[i] = JSON.parse(linhas[i])

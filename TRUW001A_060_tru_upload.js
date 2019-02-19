@@ -1,5 +1,5 @@
 /******************************************************************************************************/
-/* SCRIPT 05 - ACESSA O TRUBUDGET E GRAVAR TODOS OS WORKFLOWS ITEMS MONTADOS NO PASSO ANTERIOR.       */
+/* ACCESS TRUBUDGET AND UPLOAD THE WORKFLOWITEMS MADE
 /******************************************************************************************************/
 
 var saptb_config = require('./TRUW001A_000_config.js');

@@ -1,5 +1,5 @@
 /******************************************************************************************************/
-/* SCRIPT 07 - ACESSA O TRUBUDGET PARA SALVAR GRUPOS DE USUARIOS EM ARQUIVO                           */
+/* ACCESS TRUBUDGET AND SAVE THE USER GROUPS IN A TEMPORARY FILE 
 /******************************************************************************************************/
 
 var saptb_config = require('./TRUW001A_000_config.js');

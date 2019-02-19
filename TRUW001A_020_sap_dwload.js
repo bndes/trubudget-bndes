@@ -1,5 +1,5 @@
 /******************************************************************************************************/
-/* SCRIPT 01 - ACESSA O SAP E FAZ DOWNLOAD DAS LIBERACOES DE ACORDO COM O FILTRO PREDEFINIDO          */
+/* DOWNLOADS DATA FROM ERP SYSTEM (SAP)
 /******************************************************************************************************/
 
 var saptb_config = require('./TRUW001A_000_config.js');

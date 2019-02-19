@@ -1,6 +1,5 @@
 /******************************************************************************************************/
-/* SCRIPT 02 - ACESSA O TRUBUDGET E REALIZA A AUTENTICACAO DO USUARIO DE SERVICO. O TOKEN EH GRAVADO  */
-/*             EM ARQUIVO NO DISCO. O NOME DO PROJETO DESEJADO ESTA CONFIGURADO NO CONFIG.JSON        */
+/* AUTHENTICATE ON TRUBUDGET AND SAVE THE TOKEN AT A TEMPORARY FILE 
 /******************************************************************************************************/
 
 var saptb_config = require('./TRUW001A_000_config.js');
