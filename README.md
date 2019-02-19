@@ -14,10 +14,11 @@ This repository contains the software developed in BNDES related to the KfW Trub
 Create a dockerfile with node and npm and follow the steps below.
 
 1. Create the following env variables:
-TRUW001A_SAP_USER – SAP service user
-TRUW001A_SAP_PASS – Password of SAP service user
-TRUW001A_TRU_USER - Trubudget service user
-TRUW001A_TRU_PASS – Password of Trubudget service user
+
+    TRUW001A_SAP_USER – SAP service user <br>
+    TRUW001A_SAP_PASS – Password of SAP service user <br>
+    TRUW001A_TRU_USER - Trubudget service user <br>
+    TRUW001A_TRU_PASS – Password of Trubudget service user
 
 2. Rename the file "config/config.json.PRD" to "config/config.json"
 
@@ -36,4 +37,4 @@ TRUW001A_TRU_PASS – Password of Trubudget service user
 
 ## Execution Guide
 
-The docker need to be called by TWS (Daily routine). The easiest way is to create a Rundeck script to be the mediator. So, TWS will call Rundeck and Rundeck will call the container. The container will fire npm start, as described in the installation guide.
+The docker needs to be called by TWS daily. The easiest way is to create a Rundeck script to be the mediator. So, TWS will call Rundeck and Rundeck will call the container. The container will fire npm start, as described in the installation guide.
