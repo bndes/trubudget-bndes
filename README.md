@@ -37,4 +37,4 @@ Create a dockerfile with node and npm and follow the steps below.
 
 ## Execution Guide
 
-The docker needs to be called by TWS daily. The easiest way is to create a Rundeck script to be the mediator. So, TWS will call Rundeck and Rundeck will call the container. The container will fire npm start, as described in the installation guide.
+The docker needs to be called by TWS daily. It should run at the begining of the night production. The easiest way is to create a Rundeck script to be the mediator. So, TWS will call Rundeck and Rundeck will call the container. The container will fire npm start, as described in the installation guide.
