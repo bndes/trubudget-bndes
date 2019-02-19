@@ -62,14 +62,11 @@ switch (step) {
 
 setTimeout(function() {
     logger.info('ALL DONE!');
-    console.log('');
-    console.log('');
-    console.log('');
 }, 1);
 
 function runNow(scriptName) {
     var log = execSync('node ' + scriptName)
-    console.log(" " + log)
+    logger.info(" " + log)
     saptb_config.changeValueInExecutionData("lastCommandExecutedTime", moment().format("DD/MM/YYYY - HH:mm") )
     saptb_config.changeValueInExecutionData("lastCommandExecutedOK", scriptName)
 }

@@ -80,19 +80,17 @@ function notifyUsers() {
 
     for (var i = 0; i < tbJSONitems.length; i++) {
         var approversGroup = tbJSONitems[i].data["approvers-groupid"]
-        var notifiedGroup  = tbJSONitems[i].data["notified-groupid"]
-
+        
         var emailTo        = findEmailsInGroup(approversGroup)
-        var emailCc       = findEmailsInGroup(notifiedGroup)
+        var emailCc        = config.emailCc //%AGS-DEMAF-GEMAF1, %AGS-DEMAF-GEMAF2, %AGS-DEMAF-GEMAF3, %AGS-DEMAF-GEMAF4,julio.guiomar@bndes.gov.br
         var projectNumber  = tbJSONitems[i].data["project-number"]
 		var projectName    = tbNomeProjeto
 		var subprojectName = tbJSONitems[i].data["subprojectName"]
-		var paymentDate   = tbJSONitems[i].data["payment-date"]
+		var paymentDate    = tbJSONitems[i].data["payment-date"]
         var currency       = tbJSONitems[i].data["currency-INFO"]
         var strAmount      = tbJSONitems[i].data["amount-INFO"]
 
-		logger.debug("approversGroup = " + approversGroup);
-		logger.debug("notifiedGroup = " + notifiedGroup);
+		logger.debug("approversGroup = " + approversGroup);		
 		logger.debug("emailTo= " + emailTo);
 		logger.debug("emailCc= " + emailCc);
 		logger.debug("Amount = " + strAmount);

@@ -18,8 +18,8 @@ logger.info("intervaloDias    = " + config.intervaloDias)
 logger.info("tbNomeProjeto    = " + config.tb_nome_projeto)
 logger.info("urlbasesap       = " + config.urlbasesap)
 logger.info("urlbasetb        = " + config.urlbasetb)
-logger.info("urlSapUser       = " + config.urlSapUser)
-logger.info("urlSapPass       = " + "******************")
+logger.info("urlSapUser       = " + urlSapUser)
+logger.info("urlTbUser        = " + urlTbUser)
 logger.info("---------------------------------------------------------------------------------")
 
 

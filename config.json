@@ -8,12 +8,13 @@
     "arqToken"          : "data/arqToken.txt",
     "arqProjectID"      : "data/arqProjectID.txt",
     "arqSAP"            : "data/arqSAP",
-    "arqTBUploadDate"   : "data/arqTBUploadDate.json",
+    "arqTBUploadDate"   : "control/arqTBUploadDate.json",
     "arqTBitem"         : "data/arqTBitem.json",
     "arqUsers"          : "data/arqUsers.json",
-    "fsExecutionData"   : "executionData.json", 
+    "fsExecutionData"   : "control/executionData.json", 
     "fsExecutionOutput" : "log/executionOutput.log",    
     "mailHost"          : "mail.bndes.net",
-    "mailPort"          : "25"
+    "mailPort"          : "25",
+    "emailCc"           : "josej@bndes.gov.br"
 
 }

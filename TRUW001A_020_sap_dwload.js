@@ -21,9 +21,6 @@ function acessasSAP() {
 
     logger.info("Disbursements on SAP Amazon Fund from " + dataInicial + " until " + dataFinal + " ... " )
 
-    //VARIAVEIS DE CONEXAO SAP
-    //var urlsap = 'api-sap-d.bndes.net//sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV/LiberacaoOperacaoSet?$format=json&$filter=empresa%20eq%20%27FA%27%20and%20tipoDocumento%20eq%20%27LC%27%20and%20(%20dataLc%20ge%20%2720190102%27%20and%20dataLc%20le%20%2720190103%27)';
-
     var paramPesquisa = "dataPagamento"
     var urlsap = urlbasesap + '/LiberacaoOperacaoSet?$format=json&$filter=empresa%20eq%20%27FA%27%20and%20tipoDocumento%20eq%20%27LC%27%20and%20(%20' + paramPesquisa + '%20ge%20%27'+dataInicial+'%27%20and%20' + paramPesquisa + '%20le%20%27'+dataFinal+'%27)'
     urlCompleta = "http://" + urlSapUser + ":" + urlSapPass + '@' + urlsap
