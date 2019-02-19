@@ -21,13 +21,18 @@ TRUW001A_TRU_PASS – Password of Trubudget service user
 
 2. To rename the file "control/executionData.json.INSTALL" to "control/executionData.json"
 
-3. Link the folder "control" to a volume with daily backup
+3. To rename the file "config/config.json.PRD" to "config/config.json"
 
-3. Execute npm install
+4. Link the folder "control" to an external volume (outside container) with daily backup
 
-4. Execute npm start
+5. Link the folder "data" to an external volume (outside container)
 
-5. C
+6. Link the folder "log" to an external volume (outside container)
+
+7. Execute npm install
+
+8. Execute npm start
+
 
 
 ## Execution Guide
