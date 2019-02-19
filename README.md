@@ -3,26 +3,25 @@ This repository contains the software developed in BNDES related to the KfW Trub
 
 ## Requirements
 
-| Component        |    Minimum Requirement |
-| ---------------- | ---------------------: |
-| CPU              |           2 x x86 2GHz |
-| RAM              |                   8 GB |
-| Disk space       |                  50 GB |
-| Operating system | Ubuntu 16.04 and above |   
-NODE
-NPM
+| Component        |    Minimum version     |
+| ---------------- | ---------------------  |
+| NODE             |      6.10.1 or greater |
+| NPM              |     3.10.10 or greater |
+
 
 ## Installation Guide
 
-1. To create the following env variables:
+Create a dockerfile with node and npm and follow the steps below.
+
+1. Create the following env variables:
 TRUW001A_SAP_USER – SAP service user
 TRUW001A_SAP_PASS – Password of SAP service user
 TRUW001A_TRU_USER - Trubudget service user
 TRUW001A_TRU_PASS – Password of Trubudget service user
 
-2. To rename the file "config/config.json.PRD" to "config/config.json"
+2. Rename the file "config/config.json.PRD" to "config/config.json"
 
-3. To rename the file "control/executionData.json.INSTALL" to "control/executionData.json"
+3. Rename the file "control/executionData.json.INSTALL" to "control/executionData.json"
 
 4. Link the folder "control" to an external volume (outside container) with daily backup. Move the file "control/executionData.json" to this external volume.
 
@@ -32,10 +31,9 @@ TRUW001A_TRU_PASS – Password of Trubudget service user
 
 7. Execute npm install
 
-8. Execute npm start
-
+8. Configure the running of the docker image to fire npm start execution.
 
 
 ## Execution Guide
 
-To be written...
+The docker need to be called by TWS (Daily routine). The easiest way is to create a Rundeck script to be the mediator. So, TWS will call Rundeck and Rundeck will call the container. The container will fire npm start, as described in the installation guide.
