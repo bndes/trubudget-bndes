@@ -9,7 +9,9 @@ This repository contains the software developed in BNDES related to the KfW Trub
 | NPM              |     3.10.10 or greater |
 
 
-## Installation Guide
+## Installation Guide - PRD
+
+Assure that config/config.json.PRD is correctly filled. 
 
 Create a dockerfile with node and npm and follow the steps below.
 
@@ -42,3 +44,11 @@ The volume "control" needs to be linked to a folder with daily backup. Move the 
 ## Execution Guide
 
 The docker needs to be called by TWS daily. It should run at the begining of the night production. The easiest way is to create a Rundeck script to be the mediator. So, TWS will call Rundeck and Rundeck will call the container. The container will fire npm start, as described in the installation guide.
+
+
+## Generated Files
+
+This integration script uses or generates the following files during its execution:
+
+* config.json - It contains parameters to be used as input of this integration script. Examples include: SAP URL, email configurations and name of other files.
+* 
