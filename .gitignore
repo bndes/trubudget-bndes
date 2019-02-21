@@ -4,7 +4,7 @@
 *.log
 
 # Config
-package-lock.json
+
 
 # NPM Dependencies
 node_modules
