@@ -50,5 +50,6 @@ The docker needs to be called by TWS daily. It should run at the begining of the
 
 This integration script uses or generates the following files during its execution:
 
-* config.json - It contains parameters to be used as input of this integration script. Examples include: SAP URL, email configurations and name of other files.
-* 
+* config.json - It contains parameters to be used as input of this integration script. Examples include: SAP URL, email configurations and name of other files. This file must exist, otherwise the program will stop with error in the beginning.
+* executionData.json - It contains parameters necessary to the current execution. For example, dates of which SAP data must be collected and last step executed without error.
+
