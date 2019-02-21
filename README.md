@@ -9,7 +9,9 @@ This repository contains the software developed in BNDES related to the KfW Trub
 | NPM              |     3.10.10 or greater |
 
 
-## Installation Guide
+## Installation Guide - PRD
+
+Assure that config/config.json.PRD is correctly filled. 
 
 Create a dockerfile with node and npm and follow the steps below.
 
