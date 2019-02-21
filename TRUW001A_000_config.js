@@ -47,14 +47,18 @@ module.exports = {
 
 
   changeValueInExecutionData: function (tag, value) {
+    fs.exists(fsExecutionData, function(exists) {
 
-    var data = fs.readFileSync(fsExecutionData, 'utf8');
-
-    executionData = JSON.parse(data); //now it an object
-    executionData[tag] = value; //add some data
-
-    jsonData = JSON.stringify(executionData); //convert it back to json
-    fs.writeFileSync(fsExecutionData, jsonData) 
+        if(exists) {
+          var data = fs.readFileSync(fsExecutionData, 'utf8');
+          executionData = JSON.parse(data); 
+        } else {
+          executionData = {};
+        }
+        executionData[tag] = value; //add some data      
+        jsonData = JSON.stringify(executionData); //convert it back to json
+        fs.writeFileSync(fsExecutionData, jsonData)
+    })  
 
   },
 
@@ -63,7 +67,7 @@ module.exports = {
 
     var data = fs.readFileSync(fsExecutionData, 'utf8');
 
-    executionData = JSON.parse(data); //now it an object
+    executionData = JSON.parse(data); //now, it is an object
     return executionData[tag];
   },  
 

@@ -85,39 +85,12 @@ function acessaTrubudgetParaGravarWorkflowItem() {
                     logger.debug(projectId)
                     logger.debug(subprojectId)
 
-                    //acessaTrubudgetListaWorkflowItems(stringAutorizacao, opcoesHeader, projectId, subprojectId)
-
                     self.itemsSaved++;
                 }
                 else {
-                    saptb_config.logWithError(urltb, response, body, error)
+                    saptb_config.logWithError(urltb, response, body, error, false)
                 }
             }
         )
     }
-}
-
-function acessaTrubudgetListaWorkflowItems(stringAutorizacao, opcoesHeader, projectID, subprojectId) {
-
-    var urltb               = urlbasetb + '/workflowitem.list?projectId=' + projectID + '&subprojectId=' + subprojectId
-
-    logger.debug(stringAutorizacao)
-
-    request(
-        {
-            url : urltb,
-            method:'GET',
-            headers: opcoesHeader,
-            json: true
-        },
-        function (error, response, body) {
-            logger.debug ("status = " + response.statusCode )
-            if (!error && response.statusCode == 200) {
-                logger.debug(body.data.workflowitems)
-            }
-            else {
-                saptb_config.logWithError(urltb, response, body, error)
-            }
-        }
-    )
 }

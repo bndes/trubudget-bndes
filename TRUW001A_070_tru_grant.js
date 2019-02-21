@@ -67,7 +67,7 @@ function acessaTrubudgetAtribuiPermissoesProjeto() {
                     logger.info( "Success on project permission grant ... " + body.data)
                 }
                 else {
-                    saptb_config.logWithError(urltb, response, body, error)
+                    saptb_config.logWithError(urltb, response, body, error, true)
                 }
             }
         )
