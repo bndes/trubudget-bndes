@@ -54,7 +54,7 @@ This integration script uses or generates the following files during its executi
 * executionData.json - It contains parameters necessary to the current execution. For example, dates of which SAP data must be collected and last step executed without error.
 * arqSAP.json - It contains the data extracted from SAP - disbursements (LC to Amazon Fund). The only filters are the initial and final date. The integration script also stores a copy of each execution of this file by creating a file called arqSAPYYYYMMDDHHmm.json.
 * arqProjectID.txt - It contains the identifier of the SAP project in this integration - Amazon Fund.
-* arqTBitem.json - It contains the items to be saved on Trubudget. This file will be used when upload, grant and closing items.
-* 
+* arqTBitem.json - It contains the items to be saved on Trubudget. Each disbursement creates two items. This file will be used when upload, grant and closing items.
+* arqTBUploadDate.json - It contains all disburments already read from arqSAP.json and the date the main workflow item of this disbursement was included in Trubuget.
 
 
