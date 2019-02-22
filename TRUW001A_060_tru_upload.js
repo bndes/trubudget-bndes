@@ -1,5 +1,5 @@
 /******************************************************************************************************/
-/* ACCESS TRUBUDGET AND UPLOAD THE WORKFLOWITEMS MADE
+/* ACCESS TRUBUDGET AND UPLOAD THE WORKFLOWITEMS THAT WERE IN THE TEMPORARY FILE
 /******************************************************************************************************/
 
 var saptb_config = require('./TRUW001A_000_config.js');

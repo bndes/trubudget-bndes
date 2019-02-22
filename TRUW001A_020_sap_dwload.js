@@ -12,6 +12,7 @@ process.exitCode = 0
 
 function acessasSAP() {
 
+console.log("agora");     
     var agora    = moment().format("YYYYMMDDHHmm")
     var nomeDoArquivo   = arqSAP + "_" +  agora + ".json"
     var copiaDoArquivo  = arqSAP + ".json"
@@ -52,14 +53,9 @@ function acessasSAP() {
                 if (!error && response.statusCode == 200) {
                     var objeto = JSON.parse(body)
                     gravaEmArquivo(objeto, nomeDoArquivo, copiaDoArquivo)
-
                 }
                 else {
-                    process.exitCode = 1
-                    logger.error( "Could not access: " + urlsap )
-                    logger.error( "response: "         + response )
-                    logger.error( "body: "             + body )
-                    logger.error( "error: "            + error )
+                    saptb_config.logWithError(urltb, response, body, error, true)
                 }
             }
         )

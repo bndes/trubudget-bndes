@@ -47,8 +47,10 @@ module.exports = {
 
 
   changeValueInExecutionData: function (tag, value) {
-    fs.exists(fsExecutionData, function(exists) {
+    console.log("execution");    
 
+    fs.exists(fsExecutionData, function(exists) {
+      console.log("inside exist");    
         if(exists) {
           var data = fs.readFileSync(fsExecutionData, 'utf8');
           executionData = JSON.parse(data); 
@@ -88,12 +90,15 @@ module.exports = {
         })
   },
 
-  logWithError: function (urltb, response, body, error) {
-    logger.error( "Could not access: " + urltb )
-    logger.error( "response.statusCode: " + response.statusCode )
-    logger.error( "body: "             + body )
-    logger.error( "error: "            + error )
-    process.exitCode = 1
+  logWithError: function (urltb, response, body, error, exitScript) {
+    logger.error( "Could not access: " + urltb );
+    logger.error( "response.statusCode: " + response.statusCode );
+    logger.error( "body: "             + body );
+    logger.error( "error: "            + error );
+    process.exitCode = 1;
+    if (exitScript) {
+      process.exit();
+    }
   }
 
 };

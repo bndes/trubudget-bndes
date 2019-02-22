@@ -44,10 +44,8 @@ function acessaTrubudgetAutenticacao() {
 
             }
             else {
-                logger.error("Could not access: " + urltb )
-                logger.error("Status code: " + response)
-                logger.error(error)
-                process.exitCode = 1
+                saptb_config.logWithError(urltb, response, body, error, true)
+
             }
         }
     )

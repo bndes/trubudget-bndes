@@ -1,5 +1,5 @@
 /******************************************************************************************************/
-/* ACCESS TRUBUDGET, LIST ALL THE PROJECTS AND SAVE IN A TEMPORARY FILE
+/* ACCESS TRUBUDGET, ITERATE IN ALL THE PROJECTS AND SAVE THE CONFIGURED ONE IN A TEMPORARY FILE
 /******************************************************************************************************/
 var saptb_config = require('./TRUW001A_000_config.js');
 
@@ -44,8 +44,7 @@ function acessaTrubudgetListaProjetos(chaveDoProjeto) {
                 }
             }
             else {
-                logger.error("Could not access: " + urltb )
-                process.exitCode = 1
+                saptb_config.logWithError(urltb, response, body, error, true)
             }
         }
     )

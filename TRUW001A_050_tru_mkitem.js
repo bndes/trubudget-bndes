@@ -1,5 +1,6 @@
 /******************************************************************************************************/
-/* ACCESS TRUBUDGET, LIST THE SUBPROJECTS OF THE DESIRED PROJECT AND MAKE THE WORKFLOWITEMS IN A TEMPORARY FILE
+/* ACCESS TRUBUDGET, ITERATE ON SAP DISBURSEMENTS FILTERING THE ONES NOT YET INCLUDED.
+THEN, SAVE THE WORKFLOWITEMS IN A TEMPORARY FILE.
 /******************************************************************************************************/
 var saptb_config = require('./TRUW001A_000_config.js');
 
@@ -75,7 +76,7 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
             /* se a chave do sap nao subiu (upload) para o trubudget, significa que a chave precisa ser gravada agora */
             if ( uploadTrubudgetJSON[pksap] === undefined || uploadTrubudgetJSON[pksap] == "" ) {
                 
-                acessaTrubudgetListaDeSubProjetos( projetoOPE, 
+                createWorkflowItemOnLocalStorage( projetoOPE, 
                     objetoSAP[i].referencia, 
                     objetoSAP[i].valor, 
                     objetoSAP[i].dataPagamento,
@@ -89,7 +90,7 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
     }
 }
 
-function acessaTrubudgetListaDeSubProjetos(projetoOpe, referencia, valor, paymentDate, empresa, numdoc, dataExercicio) {
+function createWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paymentDate, empresa, numdoc, dataExercicio) {
 
     var tokenAuth           = fs.readFileSync(arqToken, 'utf8', function(err, result) {
 		if(err) logger.error('error', err);
