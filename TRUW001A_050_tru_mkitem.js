@@ -21,7 +21,7 @@ function leDadosDoArquivoNoUltimoUploadTrubudget() {
             var linhas = fs.readFileSync(arqTBUploadDate, 'utf8', function(err, result) {
                 if(err) logger.error('error', err);
             }).split( CRLF )
-            .filter(Boolean)       
+            .filter(Boolean)
             
             for (var i = 0; i < linhas.length; i++) {
                 var linhaStr = JSON.stringify(linhas[i])
@@ -73,7 +73,7 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
             
             //Cria arquivo novo para gravar os workflowitems do trubudget
             fs.writeFileSync( arqTBitem, "");
-            
+
             /* se a chave do sap nao subiu (upload) para o trubudget, significa que a chave precisa ser gravada agora */
             if ( uploadTrubudgetJSON[pksap] === undefined || uploadTrubudgetJSON[pksap] == "" ) {
                 
