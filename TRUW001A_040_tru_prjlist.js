@@ -5,11 +5,11 @@ var saptb_config = require('./TRUW001A_000_config.js');
 
 saptb_config.inicioLibVar(__filename)
 
-acessaTrubudgetListaProjetos( tbNomeProjeto )
+acessaTrubudgetListaProjetos( config.tb_nome_projeto )
 
 process.exitCode = 0
 
-function acessaTrubudgetListaProjetos(chaveDoProjeto) {
+function acessaTrubudgetListaProjetos(projectNameDefinedInconfigFile) {
 
     var urltb               = urlbasetb + '/project.list'
     var tokenAuth           = fs.readFileSync(arqToken, 'utf8'); //Leitura do Arquivo produzido em script anterior
@@ -33,7 +33,7 @@ function acessaTrubudgetListaProjetos(chaveDoProjeto) {
                     for (j in objeto[i].log) {
                         if ( objeto[i].log[j].data.project != undefined ) {
                             logger.debug(objeto[i].log[j].data.project)
-                            if ( objeto[i].log[j].data.project.displayName === chaveDoProjeto ) {
+                            if ( objeto[i].log[j].data.project.displayName === projectNameDefinedInconfigFile ) {
                                 fs.writeFileSync( arqProjectID, objeto[i].log[j].data.project.id);
                                 logger.info("ProjectID of " + tbNomeProjeto + " was selected.")
                             }
