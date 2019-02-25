@@ -17,13 +17,11 @@ Create a dockerfile with node and npm and follow the steps below.
 
 1. Rename the file "config/config.json.PRD" to "config/config.json"
 
-2. Rename the file "control/executionData.json.INSTALL" to "control/executionData.json"
+2. Create the volume "control", "data" e "log" to be linked to an external volume (outside container).
 
-3. Create the volume "control", "data" e "log" to be linked to an external volume (outside container).
+3. Execute npm install
 
-4. Execute npm install
-
-5. Configure the running of the docker image to fire "npm start".
+4. Configure the running of the docker image to fire "npm start".
 
 ----
 
