@@ -43,6 +43,8 @@ The volume "control" needs to be linked to a folder with daily backup. The volum
 
 The docker needs to be called by TWS daily. It should run at the begining of the night production. The easiest way is to create a Rundeck script to be the mediator. So, TWS will call Rundeck and Rundeck will call the container. The container will fire npm start, as described in the installation guide.
 
+If it is not the first time the integration script is installed (in other words, it is an update of the integration script), it may be necessary to recover the files control/arqTBUploadDate.json and log/executionOutput.log of the previous executions.
+
 
 ## Generated Files
 
