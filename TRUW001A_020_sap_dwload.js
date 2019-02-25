@@ -26,13 +26,9 @@ console.log("agora");
     var urlsap = urlbasesap + '/LiberacaoOperacaoSet?$format=json&$filter=empresa%20eq%20%27FA%27%20and%20tipoDocumento%20eq%20%27LC%27%20and%20(%20' + paramPesquisa + '%20ge%20%27'+dataInicial+'%27%20and%20' + paramPesquisa + '%20le%20%27'+dataFinal+'%27)'
     urlCompleta = "http://" + urlSapUser + ":" + urlSapPass + '@' + urlsap
 
-	fs.writeFile(nomeDoArquivo, "", function(err, result) { //Cria arquivo novo (apaga se existir)
-		if(err) logger.error('error', err);
-	});
+	fs.writeFileSync(nomeDoArquivo, ""); //Cria arquivo novo (apaga se existir)
 
-	fs.writeFile(copiaDoArquivo, "", function(err, result) { //Cria arquivo novo (apaga se existir)
-		if(err) logger.error('error', err);
-	});
+	fs.writeFileSync(copiaDoArquivo, ""); //Cria arquivo novo (apaga se existir)
 
     if ( MOCK == true ) {
         objeto = 

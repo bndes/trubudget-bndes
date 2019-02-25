@@ -47,21 +47,18 @@ module.exports = {
 
 
   changeValueInExecutionData: function (tag, value) {
-    console.log("execution");    
-
-    fs.exists(fsExecutionData, function(exists) {
-      console.log("inside exist");    
-        if(exists) {
-          var data = fs.readFileSync(fsExecutionData, 'utf8');
-          executionData = JSON.parse(data); 
-        } else {
-          executionData = {};
-        }
-        executionData[tag] = value; //add some data      
-        jsonData = JSON.stringify(executionData); //convert it back to json
-        fs.writeFileSync(fsExecutionData, jsonData)
-    })  
-
+    
+    var executionData;
+    if (fs.existsSync(fsExecutionData)) {
+      var data = fs.readFileSync(fsExecutionData, 'utf8');
+      executionData = JSON.parse(data); 
+    }
+    else {
+      executionData = {};
+    }
+    executionData[tag] = value; //add some data      
+    jsonData = JSON.stringify(executionData); //convert it back to json
+    fs.writeFileSync(fsExecutionData, jsonData);
   },
 
 

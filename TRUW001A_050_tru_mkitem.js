@@ -10,6 +10,8 @@ leDadosDoArquivoNoUltimoUploadTrubudget()
 
 process.exitCode = 0
 
+//TODO: sempre sair no erro
+
 function leDadosDoArquivoNoUltimoUploadTrubudget() {
     fs.exists(arqTBUploadDate, function(exists) {
         
@@ -70,9 +72,8 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
             logger.debug(uploadTrubudgetJSON[pksap])
             
             //Cria arquivo novo para gravar os workflowitems do trubudget
-            fs.writeFile( arqTBitem, "", function(err, result) {
-                if(err) logger.error('error', err);
-            });
+            fs.writeFileSync( arqTBitem, "");
+            
             /* se a chave do sap nao subiu (upload) para o trubudget, significa que a chave precisa ser gravada agora */
             if ( uploadTrubudgetJSON[pksap] === undefined || uploadTrubudgetJSON[pksap] == "" ) {
                 

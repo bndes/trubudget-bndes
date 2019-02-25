@@ -34,9 +34,7 @@ function acessaTrubudgetListaProjetos(chaveDoProjeto) {
                         if ( objeto[i].log[j].data.project != undefined ) {
                             logger.debug(objeto[i].log[j].data.project)
                             if ( objeto[i].log[j].data.project.displayName === chaveDoProjeto ) {
-                                fs.writeFile( arqProjectID, objeto[i].log[j].data.project.id, function(err, result) {
-									if(err) logger.error('error', err);
-								});
+                                fs.writeFileSync( arqProjectID, objeto[i].log[j].data.project.id);
                                 logger.info("ProjectID of " + tbNomeProjeto + " was selected.")
                             }
                         }

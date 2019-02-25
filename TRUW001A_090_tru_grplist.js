@@ -32,9 +32,7 @@ function saveUserGroupsInFile(){
 			if (!error && response.statusCode == 200) {
 				var userGroups = body.data.groups
 
-                fs.writeFile( arqUsers, JSON.stringify(userGroups), function(err, result) { //Cria arquivo novo (apaga se existir)
-					if(err) logger.error('error', err);
-				});
+                fs.writeFileSync( arqUsers, JSON.stringify(userGroups) );
 
                 logger.info("User groups are saved")
             }

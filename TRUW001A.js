@@ -26,7 +26,7 @@ saveReceivedOrDefaultDates();
 switch (step) {
 
     case 0:
-
+ 
     case 10:
         runNow("TRUW001A_010_init.js")
 
@@ -106,8 +106,6 @@ function saveReceivedOrDefaultDates() {
 
     logger.info("Initial date = " + initialDate.format("YYYYMMDD") + " and Final date= " + finalDate.format("YYYYMMDD"));
     saptb_config.changeValueInExecutionData("initialDateToCollectData", initialDate.format("YYYYMMDD"))
-    saptb_config.changeValueInExecutionData("finalDateToCollectData", finalDate.format("YYYYMMDD"))
-    
-
+    saptb_config.changeValueInExecutionData("finalDateToCollectData", finalDate.format("YYYYMMDD"))    
 
 }

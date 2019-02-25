@@ -35,9 +35,7 @@ function acessaTrubudgetAutenticacao() {
             if (!error && response.statusCode == 200) {
                 tokenAuth = response.body.data.user.token
 
-                fs.writeFile( arqToken, tokenAuth, function(err, result) { //Cria arquivo novo (apaga se existir)
-					if(err) logger.error('error', err);
-				});
+                fs.writeFileSync( arqToken, tokenAuth); //Cria arquivo novo (apaga se existir)
 
 
                 logger.info("Trubudget Authentication Token is now ready")
