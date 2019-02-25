@@ -56,12 +56,15 @@ switch (step) {
     
     case 100:    
         runNow("TRUW001A_100_tru_mail.js")
+
+    case 110:    
+        runNow("TRUW001A_110_tru_checkerror.js")        
         
 }
 
 
 setTimeout(function() {
-    logger.info('ALL DONE!');
+    logger.info('ALL SCRIPTS SUBMITED!');
 }, 1);
 
 function runNow(scriptName) {

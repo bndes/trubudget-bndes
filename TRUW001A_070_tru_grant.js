@@ -23,7 +23,7 @@ loadsTokenAuth( acessaTrubudgetAtribuiPermissoesProjeto,
 process.exitCode = 0
 
 function loadsTokenAuth(function1, function2, function3) {
-    var tokenAuth       = fs.readFileSync(arqToken, 'utf8'); //Leitura do Arquivo produzido em script anterior
+    var tokenAuth       = fs.readFileSync(arqToken, 'utf8'); 
     stringAutorizacao   = "Bearer " + tokenAuth
     opcoesHeader        = { "content-type": "application/json", "accept": "application/json", "Authorization": stringAutorizacao };
 
