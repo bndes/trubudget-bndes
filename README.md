@@ -48,11 +48,15 @@ The docker needs to be called by TWS daily. It should run at the begining of the
 
 This integration script uses or generates the following files during its execution:
 
-* config.json - It contains parameters to be used as input of this integration script. Examples include: SAP URL, email configurations and name of other files. This file must exist, otherwise the program will stop with error in the beginning.
-* executionData.json - It contains parameters necessary to the current execution. For example, dates of which SAP data must be collected and last step executed without error.
-* arqSAP.json - It contains the data extracted from SAP - disbursements (LC to Amazon Fund). The only filters are the initial and final date. The integration script also stores a copy of each execution of this file by creating a file called arqSAPYYYYMMDDHHmm.json.
-* arqProjectID.txt - It contains the identifier of the Trubudget project in this integration - the id associated with the project name defined at config file.
-* arqTBitem.json - It contains the items to be saved on Trubudget. Each disbursement creates two items. This file will be used when upload, grant and closing items.
-* arqTBUploadDate.json - It contains all disburments already read from arqSAP.json and the date the main workflow item of this disbursement was included in Trubuget.
+* config/config.json - It contains parameters to be used as input of this integration script. Examples include: SAP URL, email configurations and name of other files. This file must exist, otherwise the program will stop with error in the beginning.
+* control/arqTBUploadDate.json - It contains all disburments already read from arqSAP.json and the date the main workflow item of this disbursement was included in Trubuget.
+* control/executionData.json - It contains parameters necessary to the current execution. For example, dates of which SAP data must be collected, last step executed without error and if errors occurred in the last execution. 
+* data/arqToken.txt - It stores JWT token to access Trubudget in the last execution.
+* data/arqSAP.json - It contains the data extracted from SAP in the last execution - disbursements (LC to Amazon Fund). The only filters are the initial and final date. The integration script also stores a copy of each execution of this file by creating a file called arqSAPYYYYMMDDHHmm.json.
+* data/arqProjectID.txt - It contains the identifier of the Trubudget project in the last execution of the  integration script - the id associated with the project name defined at config file.
+* data/arqTBitem.json - It contains the items to be saved on Trubudget recovered in the last execution of the integration script. Each disbursement creates two items. This file will be used when upload, grant and closing items.
+* data/arqUsers.json - It stores information of groups and users recovered in the last execution of the integration script.
+* log/executionOutput.log - It stores the log of all executions of the integration script. 
+
 
 
