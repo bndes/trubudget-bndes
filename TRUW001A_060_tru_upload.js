@@ -34,7 +34,7 @@ function leCadaDadoTBparaGravarWorkflowItem() {
 
 function acessaTrubudgetParaGravarWorkflowItem() {
     var urltb               = urlbasetb + '/subproject.createWorkflowitem'
-    var tokenAuth           = fs.readFileSync(arqToken, 'utf8'); //Leitura do Arquivo produzido em script anterior
+    var tokenAuth           = fs.readFileSync(arqToken, 'utf8');
     stringAutorizacao   = "Bearer " + tokenAuth
     opcoesHeader        = { "content-type": "application/json", "accept": "application/json", "Authorization": stringAutorizacao };
     var self = this

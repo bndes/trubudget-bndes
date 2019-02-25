@@ -18,10 +18,7 @@ function leDadosDoArquivoNoUltimoUploadTrubudget() {
         uploadTrubudgetJSON = {}
 
         if(exists)  {
-            var linhas = fs.readFileSync(arqTBUploadDate, 'utf8', function(err, result) {
-                if(err) logger.error('error', err);
-            }).split( CRLF )
-            .filter(Boolean)
+            var linhas = fs.readFileSync(arqTBUploadDate, 'utf8').split( CRLF ).filter(Boolean)       
             
             for (var i = 0; i < linhas.length; i++) {
                 var linhaStr = JSON.stringify(linhas[i])
@@ -47,10 +44,7 @@ function leDadosDoArquivoNoUltimoUploadTrubudget() {
 }
 
 function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
-    var linhas = fs.readFileSync(arqSAP + ".json", 'utf8', function(err, result) {
-		if(err) logger.error('error', err);
-	}).split( CRLF )
-      .filter(Boolean)
+    var linhas = fs.readFileSync(arqSAP + ".json", 'utf8').split( CRLF ).filter(Boolean)
 
     var objetoSAP = []
 
@@ -93,13 +87,8 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
 
 function createWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paymentDate, empresa, numdoc, dataExercicio) {
 
-    var tokenAuth           = fs.readFileSync(arqToken, 'utf8', function(err, result) {
-		if(err) logger.error('error', err);
-	}); //Leitura do Arquivo produzido em script anterior
-
-    var projectID           = fs.readFileSync(arqProjectID, 'utf8', function(err, result) {
-		if(err) logger.error('error', err);
-	}); //Leitura do Arquivo produzido em script anterior
+    var tokenAuth           = fs.readFileSync(arqToken, 'utf8');
+    var projectID           = fs.readFileSync(arqProjectID, 'utf8');
 
     var urltb               = urlbasetb + '/subproject.list?projectId=' + projectID
     var stringAutorizacao   = "Bearer " + tokenAuth
@@ -155,9 +144,9 @@ function createWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, payment
 
                         var entradaJSONOne  =     {
                           "apiVersion": "1.0",
-                          "data": {
-                            "PK-INFO" : empresa + numdoc + dataExercicio,
+                          "data": {                            
                             "datatype-INFO": "1",
+                            "PK-INFO" : empresa + numdoc + dataExercicio,
                             "projectId": projectID,
                             "subprojectId": subProjectID,
                             "subprojectName": subProjectName,

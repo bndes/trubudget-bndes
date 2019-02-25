@@ -5,7 +5,7 @@ var saptb_config = require('./TRUW001A_000_config.js');
 
 saptb_config.inicioLibVar(__filename)
 
-acessaTrubudgetListaProjetos( projectNameDefinedInconfigFile )
+acessaTrubudgetListaProjetos( config.tb_nome_projeto )
 
 process.exitCode = 0
 
