@@ -35,7 +35,7 @@ Execute the following steps:
     TRUW001A_TRU_PASS – Password of Trubudget service user
 
 2. Link the volumes to folders located outside the container. 
-The volume "control" needs to be linked to a folder with daily backup. Move the file "control/executionData.json" to this external folder. The volumes "data" and "log" do not need daily backup.
+The volume "control" needs to be linked to a folder with daily backup. The volumes "data" and "log" do not need daily backup.
 
 
 
