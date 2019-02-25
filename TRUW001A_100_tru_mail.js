@@ -17,7 +17,7 @@ process.exitCode = 0
 
 function readUserGroups() {
 
-	var userGroupsTxt = fs.readFileSync(arqUsers, 'utf8'); //Leitura do Arquivo produzido em script anterior
+	var userGroupsTxt = fs.readFileSync(arqUsers, 'utf8');
 
 	return JSON.parse(userGroupsTxt)
 
