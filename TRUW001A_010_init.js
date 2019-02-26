@@ -31,6 +31,4 @@ saptb_config.eraseFile( config.arqTBitem    )
 saptb_config.eraseFile( config.arqUsers     )
 
 saptb_config.changeValueInExecutionData("globalError", false)
-    
-
-process.exitCode = 0
+    process.exitCode = 0

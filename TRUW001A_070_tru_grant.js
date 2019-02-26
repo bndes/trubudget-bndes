@@ -6,75 +6,27 @@ var saptb_config = require('./TRUW001A_000_config.js');
 
 saptb_config.inicioLibVar(__filename)
 
-//FIXME ALL BELOW
-//identity       = "josej@bndes.gov.br"
-//projectId      = "f7757856f422392a33fc8ba118c63d91"
-//subprojectId   = "d773999ba22f5b594e5a3952165a6a01",
-//workflowitemId = "b25cbfe3a180697b2daf18bb333e40d7"
-//FIXME ALL ABOVE
-
-stringAutorizacao = ""
-opcoesHeader      = ""
-
-arqTBUploadDateJSONlist = []
-arqTBitemJSONlist = []
-
-loadArqToken()
-loadArqTBUploadDate() 
-loadArqTBitem()
+var dataTypeInfoTwo = 2
+opcoesHeader            = saptb_config.loadArqToken()
+arqTBUploadDateJSONlist = saptb_config.loadArqTBUploadDate() 
+arqTBitemJSONlist       = saptb_config.loadArqTBitem(dataTypeInfoTwo)
 iterateTheItemToGrant()
 
-process.exitCode = 0
-
-function loadArqToken() {
-    var tokenAuth       = fs.readFileSync(arqToken, 'utf8'); 
-    stringAutorizacao   = "Bearer " + tokenAuth
-    opcoesHeader        = { "content-type": "application/json", "accept": "application/json", "Authorization": stringAutorizacao };
-
-    logger.debug(stringAutorizacao)
-}
-
-function loadArqTBUploadDate() {
-    var linhas = fs.readFileSync(arqTBUploadDate, 'utf8')
-                    .split( CRLF )
-                    .filter(Boolean)
-
-    for (var i = 0; i < linhas.length; i++) {
-        arqTBUploadDateJSONlist[i] = JSON.parse(linhas[i])
-        logger.debug(arqTBUploadDateJSONlist[i])        
-    }
-}
-
-function loadArqTBitem() {    
-    var linhas = fs.readFileSync(arqTBitem, 'utf8')
-                    .split( CRLF )
-                    .filter(Boolean)
-
-    for (var i = 0; i < linhas.length; i++) {
-        arqTBitemJSONlist[i] = JSON.parse(linhas[i])
-        logger.debug(arqTBitemJSONlist[i])        
-    }
-}
 
 function iterateTheItemToGrant() {
-    for (var i = 0; i < arqTBitemJSONlist.length; i++) {             
-        var pkinfo         = arqTBitemJSONlist[i].data['PK-INFO']
-        var projectId      = arqTBitemJSONlist[i].data.projectId
-        var subprojectId   = arqTBitemJSONlist[i].data.subprojectId
-        console.log(pkinfo)
-        console.log(arqTBUploadDateJSONlist)
-        var workflowitemId = arqTBUploadDateJSONlist[pkinfo]
-        var identity       = urlSapUser
+    for (var i = 0; i < arqTBitemJSONlist.length; i++) {       
+        if ( arqTBitemJSONlist[i] != undefined )       {
+            var pkinfo         = arqTBitemJSONlist[i].data['PK-INFO']
+            var projectId      = arqTBitemJSONlist[i].data.projectId
+            var subprojectId   = arqTBitemJSONlist[i].data.subprojectId
+            var identity       = arqTBitemJSONlist[i].data['approvers-groupid'] //urlSapUser
+            var workflowitemId = saptb_config.findTheValueOfKey(arqTBUploadDateJSONlist, pkinfo)  //arqTBUploadDateJSONlist[pkinfo]
 
-        logger.debug( pkinfo         )
-        logger.debug( projectId      )
-        logger.debug( subprojectId   )
-        logger.debug( workflowitemId )
-        logger.debug( identity       ) 
-
-        acessaTrubudgetAtribuiPermissoesProjeto     (identity, projectId)
-        acessaTrubudgetAtribuiPermissoesSubProjeto  (identity, projectId, subprojectId)
-        acessaTrubudgetAtribuiPermissoesWorkflowItem(identity, projectId, subprojectId, workflowitemId)
+            acessaTrubudgetAtribuiPermissoesProjeto     (identity, projectId)
+            acessaTrubudgetAtribuiPermissoesSubProjeto  (identity, projectId, subprojectId)
+            acessaTrubudgetAtribuiPermissoesWorkflowItem(identity, projectId, subprojectId, workflowitemId)
+            logger.debug(pkinfo, identity, projectId, subprojectId, workflowitemId)
+        }        
     }
 }
 

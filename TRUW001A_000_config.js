@@ -45,6 +45,57 @@ module.exports = {
     logger.info("---------------------------------------------------------------------------------")
   },
 
+  loadArqToken: function() {
+      var tokenAuth       = fs.readFileSync(arqToken, 'utf8'); 
+      var stringAutorizacao   = "Bearer " + tokenAuth
+      var opcoesHeader        = { "content-type": "application/json", "accept": "application/json", "Authorization": stringAutorizacao };
+
+      logger.debug(stringAutorizacao)
+
+      return opcoesHeader
+  },  
+
+  findTheValueOfKey: function(keyValueJSONlist, key) {
+    
+    for( var i=0; i < keyValueJSONlist.length; i++ ) {
+          logger.debug( keyValueJSONlist[i] )
+          logger.debug( keyValueJSONlist[i][key] )
+          if ( keyValueJSONlist[i][key] != undefined )
+              return keyValueJSONlist[i][key]
+      }    
+  },
+
+  loadArqTBUploadDate: function()  {
+      var arqTBUploadDateJSONlist = []
+      var linhas = fs.readFileSync(arqTBUploadDate, 'utf8')
+                      .split( CRLF )
+                      .filter(Boolean)
+
+      for (var i = 0; i < linhas.length; i++) {
+          arqTBUploadDateJSONlist[i] = JSON.parse(linhas[i])        
+          logger.debug(arqTBUploadDateJSONlist[i])        
+      }
+
+      return arqTBUploadDateJSONlist
+  },
+
+  loadArqTBitem: function(datatype) {    
+      var arqTBitemJSONlist = []
+      var linhas = fs.readFileSync(arqTBitem, 'utf8')
+                      .split( CRLF )  
+                      .filter(Boolean)
+
+      for (var i = 0; i < linhas.length; i++) {
+          arqTBitemJSONlist[i] = JSON.parse(linhas[i])
+          if ( arqTBitemJSONlist[i].data["datatype-INFO"] == datatype || datatype == undefined ) {             
+              logger.debug( arqTBitemJSONlist[i] )
+          } else {
+              arqTBitemJSONlist[i] = undefined
+          }
+      }
+
+      return arqTBitemJSONlist
+  },
 
   changeValueInExecutionData: function (tag, value) {
     
