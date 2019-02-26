@@ -51,7 +51,7 @@ function acessasSAP() {
                     gravaEmArquivo(objeto, nomeDoArquivo, copiaDoArquivo)
                 }
                 else {
-                    saptb_config.logWithError(urltb, response, body, error, true)
+                    saptb_config.logWithErrorConnection(urltb, response, body, error, true)
                 }
             }
         )
@@ -73,15 +73,13 @@ function gravaEmArquivo(objeto, nomeDoArquivo, copiaDoArquivo) {
         var linhaDeDado = JSON.stringify(objeto.d.results[i]) + CRLF
         fs.appendFile( nomeDoArquivo, linhaDeDado, function(err) {
             if(err) {
-                process.exitCode = 1
-                return logger.error(err);
+                saptb_config.logWithError ("Could not save " + nomeDoArquivo, err, true);
             }
             logger.info("SAP data locally stored");
         });
         fs.appendFile( copiaDoArquivo, linhaDeDado, function(err) {
             if(err) {
-                process.exitCode = 1
-                return logger.error(err);
+                saptb_config.logWithError ("Could not save " + copiaDoArquivo, err, true);                
             }
             logger.info("SAP data copy stored");
         });

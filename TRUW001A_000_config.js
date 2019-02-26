@@ -127,9 +127,8 @@ module.exports = {
                 logger.info('File ' + fileName + '. Deleting now ...')
                 fs.unlink(fileName, function(err) {
                   if(err) {
-                      logger.error('Could not delete file  ' + fileName + '.')
-                      process.exitCode = 1
-                      process.exit();                      
+                      var msg = 'Could not delete file  ' + fileName + '.';
+                      module.exports.logWithError(msg, err, true)                     
                   }
                 })
             } else {
@@ -138,7 +137,7 @@ module.exports = {
         })
   },
 
-  logWithError: function (urltb, response, body, error, exitScript) {
+  logWithErrorConnection: function (urltb, response, body, error, exitScript) {
     logger.error( "Could not access: " + urltb );
     logger.error( "response.statusCode: " + response.statusCode );
     logger.error( "body: "             + body );
@@ -147,6 +146,19 @@ module.exports = {
     if (exitScript) {
       process.exit();
     }
+  },
+
+  logWithError: function (msg, error, exitScript) {
+    logger.error( "message: "            + msg );    
+    logger.error( "error: "            + error );    
+    process.exitCode = 1;
+    if (exitScript) {
+      process.exit();
+    }
+    else {
+      module.exports.changeValueInExecutionData("globalError",true)
+    }
   }
+
 
 };

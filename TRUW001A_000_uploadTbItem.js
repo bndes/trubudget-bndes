@@ -38,7 +38,7 @@ module.exports = {
 
                     }
                     else {
-                        saptb_config.logWithError(urltb, response, body, error, false)
+                        saptb_config.logWithErrorConnection(urltb, response, body, error, false)
                     }
                 }
             )
@@ -67,13 +67,10 @@ module.exports = {
     
         fs.appendFile( arqTBUploadDate, JSON.stringify(jSONlinha) + CRLF , function(err, result) {
             if(err) {
-                logger.error(err);
-                logger.error("It was not possible to write on arqTBUploadDate");
-                logger.error("It is necessary to sync file in order to avoid duplication in Trubudget");
-                logger.error(JSON.stringify(jSONlinha));                    
+                var msg = "It was not possible to write on arqTBUploadDate\nIt is necessary to sync file in order to avoid duplication in Trubudget\n";
+                msg += JSON.stringify(jSONlinha);
 
-                //TODO:  problema NAO É UM PROBLEMA DE CONEXAO!! rever prints
-                saptb_config.logWithError(urltb, response, response.body, error, true)
+                saptb_config.logWithError(msg, error, true)
             }
             logger.info("WorkflowItem was logged on disk (File: " + arqTBUploadDate + " ) ");
         });

@@ -65,7 +65,7 @@ function acessaTrubudgetFechaPrimeiroWorkflowItem(projectId, subprojectId, workf
                 logger.info( "Success on closing the workflowitem ... " + body.data)
             }
             else {
-                saptb_config.logWithError(urltb, response, body, error, false)
+                saptb_config.logWithErrorConnection(urltb, response, body, error, false)
             }
         }
     )

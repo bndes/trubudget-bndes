@@ -86,12 +86,9 @@ function saveReceivedOrDefaultDates() {
     if (argParamInicialDate)  {
         initialDate = moment(argParamInicialDate, "YYYYMMDD");
 
-        if (!initialDate.isValid()) { 
-            logger.error("initialDate was present but is invalid. The expect format is YYYYMMDD. The received was=" + argParamInicialDate);
-            initialDate = moment().subtract(intervaloDias, 'days'); //default value
-            process.exitCode = 1
-            process.exit();
-                
+        if (!initialDate.isValid()) {
+            var msg = "initialDate was present but is invalid. The expect format is YYYYMMDD. The received was=" + argParamInicialDate; 
+            saptb_config.logWithError (msg, null, true);
         }
     }
 
@@ -102,11 +99,8 @@ function saveReceivedOrDefaultDates() {
         finalDate = moment(argParamFinalDate, "YYYYMMDD");
 
         if (!finalDate.isValid()) { 
-            logger.error("finalDate was present but is invalid. The expect format is YYYYMMDD. The received was=" + argParamFinalDate);
-            finalDate = moment().add(1, 'days') //default value
-            process.exitCode = 1
-            process.exit();
-    
+            var msg = "finalDate was present but is invalid. The expect format is YYYYMMDD. The received was=" + argParamFinalDate;
+            saptb_config.logWithError (msg, null, true);    
         }
     }
 
