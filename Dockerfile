@@ -4,8 +4,7 @@ ADD . /trubudget
 
 WORKDIR /trubudget
 
-RUN cp config/config.json.PRD config/config.json && \
-    cp control/executionData.json.INSTALL control/executionData.json 
+RUN cp config/config.json.PRD config/config.json 
 
 RUN npm install
 

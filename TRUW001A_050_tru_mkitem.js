@@ -219,6 +219,10 @@ function createWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, payment
 
                         //acessaTrubudgetParaGravarWorkflowItem(projectID, subProjectID, referencia, valor)
                     }
+                    else {
+                        logger.error( "Could not match SAP project " + projetoOpe + " with Trubudget project " + chaveIntegracao )
+                        saptb_config.changeValueInExecutionData("globalError",true)
+                    }
                 }
             }
             else {
