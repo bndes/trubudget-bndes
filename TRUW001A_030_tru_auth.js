@@ -17,6 +17,7 @@ function acessaTrubudgetAutenticacao() {
 
     entradaJSON = JSON.parse(entradaJSON)
 
+    logger.debug("entradaJSON")
     logger.debug(entradaJSON)
 
     var requestTb = {   url : urltb,
@@ -26,23 +27,24 @@ function acessaTrubudgetAutenticacao() {
                         json: true
                     }
 
+    logger.debug("requestTb")                    
     logger.debug(requestTb)
 
     request(
         requestTb
         ,
         function (error, response) {
+
+            //TODO: response pode ser null
+            
             if (!error && response.statusCode == 200) {
                 tokenAuth = response.body.data.user.token
-
                 fs.writeFileSync( arqToken, tokenAuth); //Cria arquivo novo (apaga se existir)
-
-
                 logger.info("Trubudget Authentication Token is now ready")
 
             }
             else {
-                saptb_config.logWithError(urltb, response, body, error, true)
+                saptb_config.logWithError(urltb, response, response.body, error, true)
 
             }
         }

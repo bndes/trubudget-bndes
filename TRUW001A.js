@@ -43,8 +43,11 @@ switch (step) {
         runNow("TRUW001A_050_tru_mkitem.js")
 
     case 60:    
-        runNow("TRUW001A_060_tru_upload.js")
-    
+        runNow("TRUW001A_060_tru_upload_first.js")
+
+    case 65:    
+        runNow("TRUW001A_060_tru_upload_second.js")
+        
     case 70:    
         runNow("TRUW001A_070_tru_grant.js")
     
