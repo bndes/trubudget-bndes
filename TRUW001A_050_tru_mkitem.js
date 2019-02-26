@@ -1,6 +1,6 @@
 /******************************************************************************************************/
 /* ACCESS TRUBUDGET, ITERATE ON SAP DISBURSEMENTS FILTERING THE ONES NOT YET INCLUDED.
-THEN, SAVE THE WORKFLOWITEMS IN A TEMPORARY FILE.
+THEN, SAVE THE WORKFLOWITEMS IN A TEMPORARY FILE (arqTbItem).
 /******************************************************************************************************/
 var saptb_config = require('./TRUW001A_000_config.js');
 
@@ -33,6 +33,7 @@ function leDadosDoArquivoNoUltimoUploadTrubudget() {
                 uploadTrubudgetJSON[resp[0]] = resp[1]
             } 
 
+            logger.debug("############## VERIFICANDO DADOS");
             logger.debug(linhas)
             logger.debug(uploadTrubudgetJSON)
         }
@@ -61,7 +62,7 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
             var empresa       = objetoSAP[i].empresa
             var numdoc        = objetoSAP[i].referencia
             var dataExercicio = objetoSAP[i].exercicio
-            var pksap         = empresa + numdoc + dataExercicio
+            var pksap         = empresa + numdoc + dataExercicio + "1" //Eh suficiente testar o primeiro item
             logger.debug(pksap)
             logger.debug(uploadTrubudgetJSON[pksap])
             
@@ -110,10 +111,14 @@ function createWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, payment
             logger.debug ("status = " + response.statusCode )
             if (!error && response.statusCode == 200) {
                 var objeto = body.data.items
+                
+                var projectMatched = false;
                 for (i in objeto) {
                     logger.debug(objeto[i].data.description)
                     
                     //var nomeDoSubProjeto = objeto[i].data.displayName
+
+                    //TODO: REVER QUANDO TIVER OS NOVOS CAMPOS
                     var chaveIntegracao = objeto[i].data.description
                     var jsonCamposAdicionais
                     try {
@@ -141,12 +146,13 @@ function createWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, payment
                         logger.debug( "Empresa          : " + empresa )
                         logger.debug( "Numdoc           : " + numdoc )
                         logger.debug( "DataExercicio    : " + dataExercicio )
+                        var type = 1
 
                         var entradaJSONOne  =     {
                           "apiVersion": "1.0",
                           "data": {                            
-                            "datatype-INFO": "1",
-                            "PK-INFO" : empresa + numdoc + dataExercicio,
+                            "datatype-INFO": type,
+                            "PK-INFO" : empresa + numdoc + dataExercicio + type,
                             "projectId": projectID,
                             "subprojectId": subProjectID,
                             "subprojectName": subProjectName,
@@ -180,10 +186,13 @@ function createWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, payment
                             logger.info("Part ONE - is now ready to be submitted to Trubudget");
                         });
 
+                        type = 2
+
                         var entradaJSONTwo  =     {
                           "apiVersion": "1.0",
                           "data": {
-                            "datatype-INFO": "2",
+                            "datatype-INFO": type,
+                            "PK-INFO" : empresa + numdoc + dataExercicio + type,
                             "projectId": projectID,
                             "subprojectId": subProjectID,
                             "subprojectName": subProjectName,
@@ -217,20 +226,25 @@ function createWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, payment
                             logger.info("Part TWO - is now ready to be submitted to Trubudget");
                         });
 
-                        //acessaTrubudgetParaGravarWorkflowItem(projectID, subProjectID, referencia, valor)
+                        projectMatched = true;
+                        break;
+
                     }
-                    else {
-                        logger.error( "Could not match SAP project " + projetoOpe + " with Trubudget project " + chaveIntegracao )
-                        saptb_config.changeValueInExecutionData("globalError",true)
-                    }
+                } //fecha for 
+
+
+                if (!projectMatched) {                    
+                    logger.error( "Could not match SAP project " + projetoOpe + " with Trubudget projects" )
+                    saptb_config.changeValueInExecutionData("globalError",true)
                 }
+
+
             }
             else {
                 logger.error("Could not access: " + urltb )
                 process.exitCode = 1
             }
-        }
-    )
+        })
 }
 
 
