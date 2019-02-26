@@ -14,6 +14,7 @@ function checkError() {
     if ( globalError ) {
         logger.error('THERE IS A GLOBAL ERROR ON EXECUTION. CHECK THE LOGS.');
         process.exitCode = 1
+        process.exit();
     }
     else {
         logger.info('ALL SCRIPTS ENDED CORRECTLY!');

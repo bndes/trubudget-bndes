@@ -101,6 +101,7 @@ module.exports = {
     logger.error( "message: "            + msg );    
     logger.error( "error: "            + error );    
     process.exitCode = 1;
+
     if (exitScript) {
       process.exit();
     }
