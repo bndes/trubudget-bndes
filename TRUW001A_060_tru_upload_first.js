@@ -11,8 +11,6 @@ saptb_config.inicioLibVar(__filename)
 tbJSONitems = leCadaDadoTBparaGravarWorkflowItem()
 tbItem_upload.uploadTBItem(tbJSONitems);
 
-process.exitCode = 0
-
 function leCadaDadoTBparaGravarWorkflowItem() {
 
     var tbJSONitems = []

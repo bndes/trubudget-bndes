@@ -37,11 +37,7 @@ function saveUserGroupsInFile(){
                 logger.info("User groups are saved")
             }
             else {
-                logger.error( "Could not access: " + urltb )
-                logger.error( "response.statusCode: " + response.statusCode )
-                logger.error( "body: "             + body )
-                logger.error( "error: "            + error )
-                process.exitCode = 1
+                saptb_config.logWithErrorConnection(urltb, response, response.body, error, true)
             }
         }
     )

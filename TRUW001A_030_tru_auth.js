@@ -44,7 +44,7 @@ function acessaTrubudgetAutenticacao() {
 
             }
             else {
-                saptb_config.logWithError(urltb, response, response.body, error, true)
+                saptb_config.logWithErrorConnection(urltb, response, response.body, error, true)
 
             }
         }

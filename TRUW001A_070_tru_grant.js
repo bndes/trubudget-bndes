@@ -67,7 +67,7 @@ function acessaTrubudgetAtribuiPermissoesProjeto() {
                     logger.info( "Success on project permission grant ... " + body.data)
                 }
                 else {
-                    saptb_config.logWithError(urltb, response, body, error, true)
+                    saptb_config.logWithErrorConnection(urltb, response, body, error, true)
                 }
             }
         )
@@ -107,7 +107,7 @@ function acessaTrubudgetAtribuiPermissoesSubProjeto() {
                     logger.info( "Success on subproject permission grant ... " + body.data)
                 }
                 else {
-                    saptb_config.logWithError(urltb, response, body, error)
+                    saptb_config.logWithErrorConnection(urltb, response, body, error)
                 }
             }
         )
@@ -148,7 +148,7 @@ function acessaTrubudgetAtribuiPermissoesWorkflowItem() {
                     logger.info( "Success on workflow permission grant ... " + body.data)
                 }
                 else {
-                    saptb_config.logWithError(urltb, response, body, error)
+                    saptb_config.logWithErrorConnection(urltb, response, body, error)
                 }
             }
         )

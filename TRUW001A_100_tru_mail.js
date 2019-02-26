@@ -54,9 +54,8 @@ function findEmailsInGroup(groupId) {
 	}
 	var group = userGroups.filter(equalToGroupId)[0];
 	if (!group) {
-        logger.error( "Could not find a this use group: " + group )
-        process.exitCode = 1
-		process.exit();
+		var msg = "Could not find a user group: " + group
+		saptb_config.logWithError (msg, null, true);
 	}
 
 	userEmails = JSON.stringify(group.users)
@@ -127,8 +126,8 @@ function notifyUsers() {
         {
             if (err)
             {
-				logger.error("Erro ao enviar emails");
-				logger.error(err);
+				var str = "Erro ao enviar emails";
+				saptb_config.logWithError (msg, err, true);
             }
             else
             {

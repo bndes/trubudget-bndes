@@ -178,15 +178,10 @@ function createWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, payment
                         logger.debug(entradaJSONOne)
 
                         var linhaDeDado =  JSON.stringify(entradaJSONOne) + CRLF
-                        fs.appendFile( arqTBitem, linhaDeDado, function(err, result) {
-                            if(err) {
-                                process.exitCode = 1
-                                return logger.error(err);
-                            }
-                            logger.info("Part ONE - is now ready to be submitted to Trubudget");
-                        });
+                        fs.appendFileSync( arqTBitem, linhaDeDado, 'utf8');
+                        logger.info("Part ONE - is now ready to be submitted to Trubudget");                        
 
-                        type = 2
+                        type = 2;
 
                         var entradaJSONTwo  =     {
                           "apiVersion": "1.0",
@@ -218,31 +213,24 @@ function createWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, payment
                         logger.debug(entradaJSONTwo)
 
                         var linhaDeDado =  JSON.stringify(entradaJSONTwo) + CRLF
-                        fs.appendFile( arqTBitem, linhaDeDado, function(err, result) {
-                            if(err) {
-                                process.exitCode = 1
-                                return logger.error(err);
-                            }
-                            logger.info("Part TWO - is now ready to be submitted to Trubudget");
-                        });
+                        fs.appendFileSync( arqTBitem, linhaDeDado, 'utf8');
 
                         projectMatched = true;
                         break;
-
                     }
+                    
                 } //fecha for 
 
 
-                if (!projectMatched) {                    
-                    logger.error( "Could not match SAP project " + projetoOpe + " with Trubudget projects" )
-                    saptb_config.changeValueInExecutionData("globalError",true)
+                if (!projectMatched) {                     
+                    var msg = "Could not match SAP project " + projetoOpe + " with Trubudget projects"
+                    saptb_config.logWithError (msg, err, false);                    
                 }
 
 
             }
             else {
-                logger.error("Could not access: " + urltb )
-                process.exitCode = 1
+                saptb_config.logWithErrorConnection(urltb, response, response.body, error, false)
             }
         })
 }
