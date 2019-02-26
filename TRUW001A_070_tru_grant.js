@@ -7,35 +7,78 @@ var saptb_config = require('./TRUW001A_000_config.js');
 saptb_config.inicioLibVar(__filename)
 
 //FIXME ALL BELOW
-identity       = "josej@bndes.gov.br"
-projectId      = "f7757856f422392a33fc8ba118c63d91"
-subprojectId   = "d773999ba22f5b594e5a3952165a6a01",
-workflowitemId = "b25cbfe3a180697b2daf18bb333e40d7"
-stringAutorizacao = ""
-opcoesHeader      = ""
+//identity       = "josej@bndes.gov.br"
+//projectId      = "f7757856f422392a33fc8ba118c63d91"
+//subprojectId   = "d773999ba22f5b594e5a3952165a6a01",
+//workflowitemId = "b25cbfe3a180697b2daf18bb333e40d7"
 //FIXME ALL ABOVE
 
-loadsTokenAuth( acessaTrubudgetAtribuiPermissoesProjeto,
-                acessaTrubudgetAtribuiPermissoesSubProjeto,
-                acessaTrubudgetAtribuiPermissoesWorkflowItem )
+stringAutorizacao = ""
+opcoesHeader      = ""
 
+arqTBUploadDateJSONlist = []
+arqTBitemJSONlist = []
+
+loadArqToken()
+loadArqTBUploadDate() 
+loadArqTBitem()
+iterateTheItemToGrant()
 
 process.exitCode = 0
 
-function loadsTokenAuth(function1, function2, function3) {
+function loadArqToken() {
     var tokenAuth       = fs.readFileSync(arqToken, 'utf8'); 
     stringAutorizacao   = "Bearer " + tokenAuth
     opcoesHeader        = { "content-type": "application/json", "accept": "application/json", "Authorization": stringAutorizacao };
 
     logger.debug(stringAutorizacao)
-
-    function1()
-    function2()
-    function3()
 }
 
+function loadArqTBUploadDate() {
+    var linhas = fs.readFileSync(arqTBUploadDate, 'utf8')
+                    .split( CRLF )
+                    .filter(Boolean)
 
-function acessaTrubudgetAtribuiPermissoesProjeto() {
+    for (var i = 0; i < linhas.length; i++) {
+        arqTBUploadDateJSONlist[i] = JSON.parse(linhas[i])
+        logger.debug(arqTBUploadDateJSONlist[i])        
+    }
+}
+
+function loadArqTBitem() {    
+    var linhas = fs.readFileSync(arqTBitem, 'utf8')
+                    .split( CRLF )
+                    .filter(Boolean)
+
+    for (var i = 0; i < linhas.length; i++) {
+        arqTBitemJSONlist[i] = JSON.parse(linhas[i])
+        logger.debug(arqTBitemJSONlist[i])        
+    }
+}
+
+function iterateTheItemToGrant() {
+    for (var i = 0; i < arqTBitemJSONlist.length; i++) {             
+        var pkinfo         = arqTBitemJSONlist[i].data['PK-INFO']
+        var projectId      = arqTBitemJSONlist[i].data.projectId
+        var subprojectId   = arqTBitemJSONlist[i].data.subprojectId
+        console.log(pkinfo)
+        console.log(arqTBUploadDateJSONlist)
+        var workflowitemId = arqTBUploadDateJSONlist[pkinfo]
+        var identity       = urlSapUser
+
+        logger.debug( pkinfo         )
+        logger.debug( projectId      )
+        logger.debug( subprojectId   )
+        logger.debug( workflowitemId )
+        logger.debug( identity       ) 
+
+        acessaTrubudgetAtribuiPermissoesProjeto     (identity, projectId)
+        acessaTrubudgetAtribuiPermissoesSubProjeto  (identity, projectId, subprojectId)
+        acessaTrubudgetAtribuiPermissoesWorkflowItem(identity, projectId, subprojectId, workflowitemId)
+    }
+}
+
+function acessaTrubudgetAtribuiPermissoesProjeto(identity, projectId) {
 
     var urltb      = urlbasetb + '/project.intent.grantPermission'
     var actionList = [ "project.viewDetails" , "project.viewSummary"]
@@ -74,7 +117,7 @@ function acessaTrubudgetAtribuiPermissoesProjeto() {
     } )
 }
 
-function acessaTrubudgetAtribuiPermissoesSubProjeto() {
+function acessaTrubudgetAtribuiPermissoesSubProjeto(identity, projectId, subprojectId) {
 
     var urltb      = urlbasetb + '/subproject.intent.grantPermission'
     var actionList = [ "subproject.viewDetails" , "subproject.viewSummary" ]
@@ -114,7 +157,7 @@ function acessaTrubudgetAtribuiPermissoesSubProjeto() {
     } )
 }
 
-function acessaTrubudgetAtribuiPermissoesWorkflowItem() {
+function acessaTrubudgetAtribuiPermissoesWorkflowItem(identity, projectId, subprojectId, workflowitemId) {
     var urltb      = urlbasetb + '/workflowitem.intent.grantPermission'
     var actionList = [ "workflowitem.update" , "workflowitem.close" , "workflowitem.view" ]
 
