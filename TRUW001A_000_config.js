@@ -23,6 +23,7 @@ module.exports = {
     arqUsers          = config.arqUsers
     fsExecutionData   = config.fsExecutionData
     fsExecutionOutput = config.fsExecutionOutput
+    fsPilotProjectsFilter = config.fsPilotProjectsFilter
     tbNomeProjeto     = config.tb_nome_projeto
     urlbasesap        = config.urlbasesap
 

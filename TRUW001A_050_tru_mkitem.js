@@ -6,42 +6,36 @@ var saptb_config = require('./TRUW001A_000_config.js');
 
 saptb_config.inicioLibVar(__filename)
 
-leDadosDoArquivoNoUltimoUploadTrubudget()
+leDadosDoArquivoNoUltimoUploadTrubudget();
+
+leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON)
 
 process.exitCode = 0
 
-//TODO: sempre sair no erro
-
 function leDadosDoArquivoNoUltimoUploadTrubudget() {
-    fs.exists(arqTBUploadDate, function(exists) {
+
+    var fileExists = fs.existsSync(arqTBUploadDate);
+    uploadTrubudgetJSON = {}
+
+    if(fileExists)  {
+        var linhas = fs.readFileSync(arqTBUploadDate, 'utf8').split( CRLF ).filter(Boolean)       
         
-        uploadTrubudgetJSON = {}
+        for (var i = 0; i < linhas.length; i++) {
+            var linhaStr = JSON.stringify(linhas[i])
+                    
+            linhaStr     = Str(linhaStr).replaceAll( '\"' , ''  )
+            linhaStr     = Str(linhaStr).replaceAll( '\\' , ''  )
+            linhaStr     = Str(linhaStr).replaceAll( '{'  , ''  )
+            linhaStr     = Str(linhaStr).replaceAll( '}'  , '' )
 
-        if(exists)  {
-            var linhas = fs.readFileSync(arqTBUploadDate, 'utf8').split( CRLF ).filter(Boolean)       
+            var resp     = linhaStr.split( ':' , 2 );                
             
-            for (var i = 0; i < linhas.length; i++) {
-                var linhaStr = JSON.stringify(linhas[i])
-                        
-                linhaStr     = Str(linhaStr).replaceAll( '\"' , ''  )
-                linhaStr     = Str(linhaStr).replaceAll( '\\' , ''  )
-                linhaStr     = Str(linhaStr).replaceAll( '{'  , ''  )
-                linhaStr     = Str(linhaStr).replaceAll( '}'  , '' )
+            uploadTrubudgetJSON[resp[0]] = resp[1]
+        } 
 
-                var resp     = linhaStr.split( ':' , 2 );                
-                
-                uploadTrubudgetJSON[resp[0]] = resp[1]
-            } 
-
-            logger.debug("############## VERIFICANDO DADOS");
-            logger.debug(linhas)
-            logger.debug(uploadTrubudgetJSON)
-        }
-
-        //it runs next function whether the file exists or not
-        leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON)
-    })
-    
+        logger.debug(linhas)
+        logger.debug(uploadTrubudgetJSON)
+    }    
 }
 
 function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
@@ -71,22 +65,27 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
 
             /* se a chave do sap nao subiu (upload) para o trubudget, significa que a chave precisa ser gravada agora */
             if ( uploadTrubudgetJSON[pksap] === undefined || uploadTrubudgetJSON[pksap] == "" ) {
-                
-                createWorkflowItemOnLocalStorage( projetoOPE, 
-                    objetoSAP[i].referencia, 
-                    objetoSAP[i].valor, 
-                    objetoSAP[i].dataPagamento,
-                    empresa, 
-                    numdoc,
-                    dataExercicio )
 
-                logger.debug ("projetoOPE: " + projetoOPE)
+                if (checkPilotFilter(projetoOPE)) {
+
+                    createOneWorkflowItemOnLocalStorage( projetoOPE, 
+                        objetoSAP[i].referencia, 
+                        objetoSAP[i].valor, 
+                        objetoSAP[i].dataPagamento,
+                        empresa, 
+                        numdoc,
+                        dataExercicio )
+    
+                    logger.debug ("projetoOPE: " + projetoOPE)
+    
+                }
+
             }
         }
     }
 }
 
-function createWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paymentDate, empresa, numdoc, dataExercicio) {
+function createOneWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paymentDate, empresa, numdoc, dataExercicio) {
 
     var tokenAuth           = fs.readFileSync(arqToken, 'utf8');
     var projectID           = fs.readFileSync(arqProjectID, 'utf8');
@@ -218,7 +217,7 @@ function createWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, payment
                         projectMatched = true;
                         break;
                     }
-                    
+
                 } //fecha for 
 
 
@@ -233,6 +232,24 @@ function createWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, payment
                 saptb_config.logWithErrorConnection(urltb, response, response.body, error, false)
             }
         })
+}
+
+
+function checkPilotFilter(projectNumber) {
+    
+    var fileExists = fs.existsSync(fsPilotProjectsFilter);
+    if(fileExists)  {
+        var originalFsLines = fs.readFileSync(fsPilotProjectsFilter, 'utf8').split( CRLF ).filter(Boolean) 
+
+        var filteredLines = originalFsLines.filter(function (projectFsLine) {
+            return projectFsLine==projectNumber;
+        });
+
+        return filteredLines.length > 0;
+    }
+    
+    //If there is no file, there is no filter
+    return true;
 }
 
 
