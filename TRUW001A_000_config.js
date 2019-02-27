@@ -138,12 +138,13 @@ module.exports = {
   },
 
   logWithErrorConnection: function (urltb, response, error, exitScript) {
-    logger.error( "Could not access: " + urltb );
+    logger.error( "Could not access: " + urltb + error);
+
     if ( response != null && response != undefined ) {
       logger.error( "response.statusCode: " + response.statusCode );
       logger.error( "body: "             + response.body );
     }
-    logger.error( "error: "            + error );
+    
     process.exitCode = 1;
     if (exitScript) {
       process.exit();

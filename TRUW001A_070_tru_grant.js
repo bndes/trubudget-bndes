@@ -25,7 +25,8 @@ function iterateTheItemToGrant() {
             acessaTrubudgetAtribuiPermissoesProjeto     (identity, projectId)
             acessaTrubudgetAtribuiPermissoesSubProjeto  (identity, projectId, subprojectId)
             acessaTrubudgetAtribuiPermissoesWorkflowItem(identity, projectId, subprojectId, workflowitemId)
-            logger.debug(pkinfo, identity, projectId, subprojectId, workflowitemId)
+            acessaTrubudgetAtribuiAprovadorWorkflowItem (identity, projectId, subprojectId, workflowitemId)
+            logger.info(pkinfo, identity, projectId, subprojectId, workflowitemId)
         }        
     }
 }
@@ -57,8 +58,7 @@ function acessaTrubudgetAtribuiPermissoesProjeto(identity, projectId) {
                 json: true
             },
             function (error, response, body) {
-                logger.debug ("status = " + response.statusCode )
-                if (!error && response.statusCode == 200) {
+                if (!error && response != null && response != undefined && response.statusCode == 200) {
                     logger.info( "Success on project permission grant ... " + body.data)
                 }
                 else {
@@ -96,9 +96,8 @@ function acessaTrubudgetAtribuiPermissoesSubProjeto(identity, projectId, subproj
                 headers: opcoesHeader,
                 json: true
             },
-            function (error, response, body) {
-                logger.debug ("status = " + response.statusCode )
-                if (!error && response.statusCode == 200) {
+            function (error, response, body) {                
+                if (!error && response != null && response != undefined && response.statusCode == 200) {
                     logger.info( "Success on subproject permission grant ... " + body.data)
                 }
                 else {
@@ -138,8 +137,7 @@ function acessaTrubudgetAtribuiPermissoesWorkflowItem(identity, projectId, subpr
                 json: true
             },
             function (error, response, body) {
-                logger.debug ("status = " + response.statusCode )
-                if (!error && response.statusCode == 200) {
+                if (!error && response != null && response != undefined && response.statusCode == 200) {
                     logger.info( "Success on workflow permission grant ... " + body.data)
                 }
                 else {
@@ -148,4 +146,39 @@ function acessaTrubudgetAtribuiPermissoesWorkflowItem(identity, projectId, subpr
             }
         )
     } )
+}
+
+function acessaTrubudgetAtribuiAprovadorWorkflowItem(identity, projectId, subprojectId, workflowitemId) {
+    var urltb      = urlbasetb + '/workflowitem.assign'
+    
+    var entradaJSON =  {  "apiVersion": "1.0",
+                            "data":
+                            {
+                            "identity"      : identity ,
+                            "projectId"     : projectId,
+                            "subprojectId"  : subprojectId,
+                            "workflowitemId": workflowitemId
+                            }
+                        }
+
+    logger.debug(entradaJSON)
+
+    request(
+        {
+            url : urltb,
+            method:'POST',
+            body: entradaJSON,
+            headers: opcoesHeader,
+            json: true
+        },
+        function (error, response, body) {
+            if (!error && response != null && response != undefined && response.statusCode == 200) {
+                logger.info( "Success on workflow assignment  ... " + body.data)
+            }
+            else {
+                saptb_config.logWithErrorConnection(urltb, response, error, true)
+            }
+        }
+    )
+    
 }
