@@ -42,7 +42,7 @@ function acessaTrubudgetListaProjetos(projectNameDefinedInconfigFile) {
                 }
             }
             else {
-                saptb_config.logWithErrorConnection(urltb, response, body, error, true)
+                saptb_config.logWithErrorConnection(urltb, response, error, true)
             }
         }
     )

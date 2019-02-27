@@ -164,8 +164,8 @@ function createWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, payment
                             "amountType": "disbursed",
                             "documents": [
                               {
-                                "id": "classroom-contract",
-                                "base64": "dGVzdCBiYXNlNjRTdHJpbmc="
+                                "id": "",
+                                "base64": ""
                               }
                             ] ,
                             "project-number"  : projetoOpe,
@@ -199,8 +199,8 @@ function createWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, payment
                             "amountType": "N/A",
                             "documents": [
                               {
-                                "id": "classroom-contract",
-                                "base64": "dGVzdCBiYXNlNjRTdHJpbmc="
+                                "id": "",
+                                "base64": ""
                               }
                             ] ,
                             "project-number"    : projetoOpe,
@@ -230,7 +230,7 @@ function createWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, payment
 
             }
             else {
-                saptb_config.logWithErrorConnection(urltb, response, response.body, error, false)
+                saptb_config.logWithErrorConnection(urltb, response, error, false)
             }
         })
 }

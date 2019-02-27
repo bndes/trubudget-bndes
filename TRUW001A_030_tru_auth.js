@@ -34,17 +34,15 @@ function acessaTrubudgetAutenticacao() {
         requestTb
         ,
         function (error, response) {
-
-            //TODO: response pode ser null
-            
-            if (!error && response.statusCode == 200) {
+           
+            if (!error && response != null && response != undefined && response.statusCode == 200) {
                 tokenAuth = response.body.data.user.token
                 fs.writeFileSync( arqToken, tokenAuth); //Cria arquivo novo (apaga se existir)
                 logger.info("Trubudget Authentication Token is now ready")
 
             }
             else {
-                saptb_config.logWithErrorConnection(urltb, response, response.body, error, true)
+                saptb_config.logWithErrorConnection(urltb, response, error, true)
 
             }
         }
