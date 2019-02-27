@@ -192,7 +192,7 @@ function createWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, payment
                             "subprojectId": subProjectID,
                             "subprojectName": subProjectName,
                             "status": "open",
-                            "displayName": "Recebimento do desembolso ",
+                            "displayName": "Recebimento do desembolso de R$ " + valor,
                             "description": "Atestamos o recebimento de R$ " + valor + " em " + dataUser + " (" + datahoraseg + ")",
                             "currency-INFO": "BRL",
                             "amount-INFO": valor,
