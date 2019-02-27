@@ -22,6 +22,7 @@ arqTBitemJSONlist       = saptb_config.loadArqTBitem(dataTypeInfoOne)
 iterateTheItemToGrant()
 
 function iterateTheItemToGrant() {
+    logger.debug( " arqTBitemJSONlist.length: " + arqTBitemJSONlist.length )
     for (var i = 0; i < arqTBitemJSONlist.length; i++) {       
         if ( arqTBitemJSONlist[i] != undefined )       {
             var pkinfo         = arqTBitemJSONlist[i].data['PK-INFO']
@@ -34,8 +35,6 @@ function iterateTheItemToGrant() {
         }        
     }
 }
-
-process.exitCode = 0
 
 function acessaTrubudgetFechaPrimeiroWorkflowItem(projectId, subprojectId, workflowitemId) {
     var urltb      = urlbasetb + '/workflowitem.close'

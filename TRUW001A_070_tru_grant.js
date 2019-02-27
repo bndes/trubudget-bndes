@@ -12,8 +12,8 @@ arqTBUploadDateJSONlist = saptb_config.loadArqTBUploadDate()
 arqTBitemJSONlist       = saptb_config.loadArqTBitem(dataTypeInfoTwo)
 iterateTheItemToGrant()
 
-
 function iterateTheItemToGrant() {
+    logger.debug( " arqTBitemJSONlist.length: " + arqTBitemJSONlist.length )
     for (var i = 0; i < arqTBitemJSONlist.length; i++) {       
         if ( arqTBitemJSONlist[i] != undefined )       {
             var pkinfo         = arqTBitemJSONlist[i].data['PK-INFO']

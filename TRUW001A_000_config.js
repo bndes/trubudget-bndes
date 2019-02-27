@@ -88,7 +88,7 @@ module.exports = {
       for (var i = 0; i < linhas.length; i++) {
           arqTBitemJSONlist[i] = JSON.parse(linhas[i])
           if ( arqTBitemJSONlist[i].data["datatype-INFO"] == datatype || datatype == undefined ) {             
-              logger.debug( arqTBitemJSONlist[i] )
+              logger.debug( " TRUW001A_000_config :: arqTBitemJSONlist[i] : " + arqTBitemJSONlist[i] )
           } else {
               arqTBitemJSONlist[i] = undefined
           }

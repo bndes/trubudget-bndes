@@ -224,7 +224,7 @@ function createWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, payment
 
                 if (!projectMatched) {                     
                     var msg = "Could not match SAP project " + projetoOpe + " with Trubudget projects"
-                    saptb_config.logWithError (msg, err, false);                    
+                    saptb_config.logWithError (msg, error, false);                    
                 }
 
 
