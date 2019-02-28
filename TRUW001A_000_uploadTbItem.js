@@ -34,7 +34,13 @@ module.exports = {
                     if (!error && ( response.statusCode == 200 || response.statusCode == 201 ) ) {
                         logger.info("WorkflowItem was saved Trubudget!")                    
                         var jsonBody  = JSON.parse(response.request.body)
-                        module.exports.saveOnLocalStorage(jsonBody);
+
+                        var PKInfo = jsonBody.data['PK-INFO'];
+
+                        //TODO: RECUPERAR ID DO TRUBUDGET 
+                        var trItemId      = "1234567890";
+
+                        module.exports.saveOnLocalStorage(PKInfo, trItemId);
 
                     }
                     else {
@@ -46,20 +52,9 @@ module.exports = {
     },
 
 
-    //TODO: fazer receber JSON.parse(response.request.body) 
-    saveOnLocalStorage: function saveOnLocalStorage(jsonBody) {
+    saveOnLocalStorage: function saveOnLocalStorage(PKInfo, trItemId) {
 
         logger.debug("saveOnLocalStorage")        
-        var PKInfo    = JSON.stringify(jsonBody.data['PK-INFO'])
-        
-        PKInfo =  PKInfo + ""
-        PKInfo        = Str(PKInfo).replaceAll('"','')
-        PKInfo        = Str(PKInfo).replaceAll('\\','')
-        logger.debug( PKInfo )
-
-
-        //TODO: RECUPERAR ID DO TRUBUDGET 
-        var trItemId      = "1234567890";
 
         var jSONlinha = {}
         jSONlinha[PKInfo] = trItemId;
