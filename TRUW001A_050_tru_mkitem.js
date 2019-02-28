@@ -157,7 +157,7 @@ function createOneWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paym
                             "subprojectName": subProjectName,
                             "status": "open",
                             "displayName": "Desembolso registrado em " + datahora,
-                            "description": "Criado automaticamente (" + datahoraseg + ")",
+                            "description": "Criado automaticamente (" + referencia + ")",
                             "currency": "BRL",
                             "amount": valor,
                             "amountType": "disbursed",
