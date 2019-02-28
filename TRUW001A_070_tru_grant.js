@@ -14,21 +14,29 @@ iterateTheItemToGrant()
 
 function iterateTheItemToGrant() {
     logger.debug( " arqTBitemJSONlist.length: " + arqTBitemJSONlist.length )
-    for (var i = 0; i < arqTBitemJSONlist.length; i++) {       
-        if ( arqTBitemJSONlist[i] != undefined )       {
-            var pkinfo         = arqTBitemJSONlist[i].data['PK-INFO']
-            var projectId      = arqTBitemJSONlist[i].data.projectId
-            var subprojectId   = arqTBitemJSONlist[i].data.subprojectId
-            var identity       = arqTBitemJSONlist[i].data['approvers-groupid'] //urlSapUser
-            var workflowitemId = saptb_config.findTheValueOfKey(arqTBUploadDateJSONlist, pkinfo)  //arqTBUploadDateJSONlist[pkinfo]
+    if ( MOCK == true ) {
+        changeItems("MOCK", MOCKJSON.identity, MOCKJSON.projectId, 
+                     MOCKJSON.subprojectId, MOCKJSON.workflowitemId)
+    } else {
+        for (var i = 0; i < arqTBitemJSONlist.length; i++) {       
+            if ( arqTBitemJSONlist[i] != undefined )       {
+                var pkinfo         = arqTBitemJSONlist[i].data['PK-INFO']
+                var projectId      = arqTBitemJSONlist[i].data.projectId
+                var subprojectId   = arqTBitemJSONlist[i].data.subprojectId
+                var identity       = arqTBitemJSONlist[i].data['approvers-groupid'] //urlSapUser
+                var workflowitemId = saptb_config.findTheValueOfKey(arqTBUploadDateJSONlist, pkinfo)  //arqTBUploadDateJSONlist[pkinfo]
+                changeItems(pkinfo, identity, projectId, subprojectId, workflowitemId)
+            }        
+        }
+    }    
+}
 
-            acessaTrubudgetAtribuiPermissoesProjeto     (identity, projectId)
-            acessaTrubudgetAtribuiPermissoesSubProjeto  (identity, projectId, subprojectId)
-            acessaTrubudgetAtribuiPermissoesWorkflowItem(identity, projectId, subprojectId, workflowitemId)
-            acessaTrubudgetAtribuiAprovadorWorkflowItem (identity, projectId, subprojectId, workflowitemId)
-            logger.info(pkinfo, identity, projectId, subprojectId, workflowitemId)
-        }        
-    }
+function changeItems(pkinfo, identity, projectId, subprojectId, workflowitemId) {
+    acessaTrubudgetAtribuiPermissoesProjeto     (identity, projectId)
+    acessaTrubudgetAtribuiPermissoesSubProjeto  (identity, projectId, subprojectId)
+    acessaTrubudgetAtribuiPermissoesWorkflowItem(identity, projectId, subprojectId, workflowitemId)
+    acessaTrubudgetAtribuiAprovadorWorkflowItem (identity, projectId, subprojectId, workflowitemId)
+    logger.info(pkinfo, identity, projectId, subprojectId, workflowitemId)
 }
 
 function acessaTrubudgetAtribuiPermissoesProjeto(identity, projectId) {
