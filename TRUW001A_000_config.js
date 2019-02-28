@@ -13,6 +13,7 @@ module.exports = {
     config            = require('./config/config.json');
     CRLF              = "\r\n"
     MOCK              = config.MOCK
+    MOCKJSON          = require('./config/mock.json');
     intervaloDias     = config.intervaloDias
     urlbasetb         = config.urlbasetb
     arqToken          = config.arqToken
