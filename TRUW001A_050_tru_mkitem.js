@@ -240,7 +240,11 @@ function checkPilotFilter(projectNumber) {
     
     var fileExists = fs.existsSync(fsPilotProjectsFilter);
     if(fileExists)  {
-        var originalFsLines = fs.readFileSync(fsPilotProjectsFilter, 'utf8').split( CRLF ).filter(Boolean) 
+        var originalFsLines = fs.readFileSync(fsPilotProjectsFilter, 'utf8').split( CRLF ).filter(Boolean)
+        
+        if (originalFsLines.length==0) {
+            return true; //empty file -> no filter to do
+        }
 
         var filteredLines = originalFsLines.filter(function (projectFsLine) {
             return projectFsLine==projectNumber;
