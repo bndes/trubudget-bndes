@@ -160,16 +160,10 @@ function createOneWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paym
                             "subprojectName": subProjectName,
                             "status": "open",
                             "displayName": "Desembolso registrado em " + datahora,
-                            "description": "Criado automaticamente (" + datahoraseg + ")",
+                            "description": "Criado automaticamente (" + referencia + ")",
                             "currency": "BRL",
                             "amount": valor,
                             "amountType": "disbursed",
-                            "documents": [
-                              {
-                                "id": "",
-                                "base64": ""
-                              }
-                            ] ,
                             "project-number"  : projetoOpe,
                             "approvers-groupid" : approvalGroup,
 							"payment-date"   : paymentDate
@@ -198,12 +192,6 @@ function createOneWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paym
                             "currency-INFO": "BRL",
                             "amount-INFO": valor,
                             "amountType": "N/A",
-                            "documents": [
-                              {
-                                "id": "",
-                                "base64": ""
-                              }
-                            ] ,
                             "project-number"    : projetoOpe,
                             "approvers-groupid" : approvalGroup,
 							"payment-date"      : paymentDate
