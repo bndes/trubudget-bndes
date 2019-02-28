@@ -128,6 +128,9 @@ function createOneWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paym
                         process.exitCode = 1
                         return
                     }
+                    var approvalGroup = jsonCamposAdicionais["approvers-groupid"];
+                    //FIM TODO
+
 
                     if ( chaveIntegracao != undefined && chaveIntegracao.includes( projetoOpe ) ) {
 						logger.debug(objeto[i])
@@ -168,8 +171,7 @@ function createOneWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paym
                               }
                             ] ,
                             "project-number"  : projetoOpe,
-                            "approvers-groupid" : jsonCamposAdicionais["approvers-groupid"],
-                            "notified-groupid"  : jsonCamposAdicionais["notified-groupid"],
+                            "approvers-groupid" : approvalGroup,
 							"payment-date"   : paymentDate
                           }
                         }
@@ -203,8 +205,7 @@ function createOneWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paym
                               }
                             ] ,
                             "project-number"    : projetoOpe,
-                            "approvers-groupid" : jsonCamposAdicionais["approvers-groupid"],
-                            "notified-groupid"  : jsonCamposAdicionais["notified-groupid"],
+                            "approvers-groupid" : approvalGroup,
 							"payment-date"      : paymentDate
                           }
                         }
