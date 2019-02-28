@@ -37,7 +37,7 @@ function saveUserGroupsInFile(){
                 logger.info("User groups are saved")
             }
             else {
-                saptb_config.logWithErrorConnection(urltb, response, response.body, error, true)
+                saptb_config.logWithErrorConnection(urltb, response, error, true)
             }
         }
     )

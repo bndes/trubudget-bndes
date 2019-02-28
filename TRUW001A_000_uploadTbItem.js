@@ -38,7 +38,7 @@ module.exports = {
 
                     }
                     else {
-                        saptb_config.logWithErrorConnection(urltb, response, body, error, false)
+                        saptb_config.logWithErrorConnection(urltb, response, error, false)
                     }
                 }
             )

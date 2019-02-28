@@ -163,8 +163,8 @@ function createOneWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paym
                             "amountType": "disbursed",
                             "documents": [
                               {
-                                "id": "classroom-contract",
-                                "base64": "dGVzdCBiYXNlNjRTdHJpbmc="
+                                "id": "",
+                                "base64": ""
                               }
                             ] ,
                             "project-number"  : projetoOpe,
@@ -191,15 +191,15 @@ function createOneWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paym
                             "subprojectId": subProjectID,
                             "subprojectName": subProjectName,
                             "status": "open",
-                            "displayName": "Recebimento do desembolso ",
+                            "displayName": "Recebimento do desembolso de R$ " + valor,
                             "description": "Atestamos o recebimento de R$ " + valor + " em " + dataUser + " (" + datahoraseg + ")",
                             "currency-INFO": "BRL",
                             "amount-INFO": valor,
                             "amountType": "N/A",
                             "documents": [
                               {
-                                "id": "classroom-contract",
-                                "base64": "dGVzdCBiYXNlNjRTdHJpbmc="
+                                "id": "",
+                                "base64": ""
                               }
                             ] ,
                             "project-number"    : projetoOpe,
@@ -223,13 +223,13 @@ function createOneWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paym
 
                 if (!projectMatched) {                     
                     var msg = "Could not match SAP project " + projetoOpe + " with Trubudget projects"
-                    saptb_config.logWithError (msg, err, false);                    
+                    saptb_config.logWithError (msg, error, false);                    
                 }
 
 
             }
             else {
-                saptb_config.logWithErrorConnection(urltb, response, response.body, error, false)
+                saptb_config.logWithErrorConnection(urltb, response, error, false)
             }
         })
 }

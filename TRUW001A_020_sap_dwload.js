@@ -30,6 +30,7 @@ function acessasSAP() {
 	fs.writeFileSync(copiaDoArquivo, ""); //Cria arquivo novo (apaga se existir)
 
     if ( MOCK == true ) {
+/*        
         objeto = 
         {"d":{"results":[
             {"__metadata":{"id":"http://api-sap-d.bndes.net:80/sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV/LiberacaoOperacaoSet(empresa='FA',referencia='9010000000',exercicio='2019')","uri":"http://api-sap-d.bndes.net:80/sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV/LiberacaoOperacaoSet(empresa='FA',referencia='9010000000',exercicio='2019')","type":"ZFI_GW_LIB_SAP_TBG_SRV.LiberacaoOperacao"},"empresa":"FA","tipoDocumento":"","dataPagamento":"02/01/2019","contrato":"00000123456","valor":"5000.00000","referencia":"9010000000","exercicio":"2019"},
@@ -37,6 +38,11 @@ function acessasSAP() {
             {"__metadata":{"id":"http://api-sap-d.bndes.net:80/sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV/LiberacaoOperacaoSet(empresa='FA',referencia='9010000002',exercicio='2019')","uri":"http://api-sap-d.bndes.net:80/sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV/LiberacaoOperacaoSet(empresa='FA',referencia='9010000002',exercicio='2019')","type":"ZFI_GW_LIB_SAP_TBG_SRV.LiberacaoOperacao"},"empresa":"FA","tipoDocumento":"","dataPagamento":"02/01/2019","contrato":"00123454500","valor":"1111.11000","referencia":"9010000002","exercicio":"2019"},
             {"__metadata":{"id":"http://api-sap-d.bndes.net:80/sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV/LiberacaoOperacaoSet(empresa='FA',referencia='9010000002',exercicio='2019')","uri":"http://api-sap-d.bndes.net:80/sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV/LiberacaoOperacaoSet(empresa='FA',referencia='9999999999',exercicio='2019')","type":"ZFI_GW_LIB_SAP_TBG_SRV.LiberacaoOperacao"},"empresa":"FA","tipoDocumento":"","dataPagamento":"02/01/2019","contrato":"99999999999","valor":"9999.99000","referencia":"9999999999","exercicio":"2019"},
             {"__metadata":{"id":"http://api-sap-d.bndes.net:80/sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV/LiberacaoOperacaoSet(empresa='FA',referencia='9010000003',exercicio='2019')","uri":"http://api-sap-d.bndes.net:80/sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV/LiberacaoOperacaoSet(empresa='FA',referencia='9010000003',exercicio='2019')","type":"ZFI_GW_LIB_SAP_TBG_SRV.LiberacaoOperacao"},"empresa":"FA","tipoDocumento":"","dataPagamento":"10/01/2019","contrato":"00123456852","valor":"1234.00000","referencia":"9010000003","exercicio":"2019"}]}}
+*/
+        objeto = 
+        {"d":{"results":[
+            {"__metadata":{"id":"http://api-sap-d.bndes.net:80/sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV/LiberacaoOperacaoSet(empresa='FA',referencia='8888883411',exercicio='2019')","uri":"http://api-sap-d.bndes.net:80/sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV/LiberacaoOperacaoSet(empresa='FA',referencia='8888883411',exercicio='2019')","type":"ZFI_GW_LIB_SAP_TBG_SRV.LiberacaoOperacao"},"empresa":"FA","tipoDocumento":"","dataPagamento":"02/01/2019","contrato":"77777774111","valor":"9999.99000","referencia":"8888883411","exercicio":"2019"},
+            {"__metadata":{"id":"http://api-sap-d.bndes.net:80/sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV/LiberacaoOperacaoSet(empresa='FA',referencia='8888883456',exercicio='2019')","uri":"http://api-sap-d.bndes.net:80/sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV/LiberacaoOperacaoSet(empresa='FA',referencia='8888883456',exercicio='2019')","type":"ZFI_GW_LIB_SAP_TBG_SRV.LiberacaoOperacao"},"empresa":"FA","tipoDocumento":"","dataPagamento":"02/01/2019","contrato":"77777774567","valor":"5000.00000","referencia":"8888883456","exercicio":"2019"}]}}
 
         gravaEmArquivo(objeto, nomeDoArquivo, copiaDoArquivo)
     }
@@ -51,7 +57,7 @@ function acessasSAP() {
                     gravaEmArquivo(objeto, nomeDoArquivo, copiaDoArquivo)
                 }
                 else {
-                    saptb_config.logWithErrorConnection(urltb, response, body, error, true)
+                    saptb_config.logWithErrorConnection(urltb, response, error, true)
                 }
             }
         )
