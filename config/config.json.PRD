@@ -13,6 +13,7 @@
     "arqUsers"          : "data/arqUsers.json",
     "fsExecutionData"   : "control/executionData.json", 
     "fsExecutionOutput" : "log/executionOutput.log",    
+    "fsPilotProjectsFilter"   : "control/pilotProjectsFilter.txt",
     "mailHost"          : "mail.bndes.net",
     "mailPort"          : "25",
     "emailCc"           : "%AGS-DEMAF-GEMAF1, %AGS-DEMAF-GEMAF2, %AGS-DEMAF-GEMAF3, %AGS-DEMAF-GEMAF4,julio.guiomar@bndes.gov.br"

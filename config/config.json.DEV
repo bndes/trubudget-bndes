@@ -13,6 +13,7 @@
     "arqUsers"          : "data/arqUsers.json",
     "fsExecutionData"   : "control/executionData.json", 
     "fsExecutionOutput" : "log/executionOutput.log",    
+    "fsPilotProjectsFilter"   : "control/pilotProjectsFilter.txt",
     "mailHost"          : "mail.bndes.net",
     "mailPort"          : "25",
     "emailCc"           : "josej@bndes.gov.br"
