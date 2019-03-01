@@ -98,7 +98,7 @@ function notifyUsers() {
         var templateDoEMailTXT  = "Prezado cliente,\n\n" +
 								"Esta é uma notificação automática do sistema TruBudget.\r\n" +
 								"Um novo item de workflow foi gerado a partir de uma liberação de crédito realizada pelo BNDES.\n\n" +
-								"AÇÃO NECESSÝRIA: Acesse o site https://trubudget.bndes.gov.br com suas credenciais e confirme o recebimento deste desembolso na conta bancária do projeto.\n"+
+								"AÇÃO NECESSÁRIA: Acesse o site https://trubudget.bndes.gov.br com suas credenciais e confirme o recebimento deste desembolso na conta bancária do projeto.\n"+
 								"Sua ação é fundamental para aprimorar a transparência na utilização destes recursos.\n\n" +
 								"A liberação de crédito se refere aos dados abaixo:\n" +
 								"Programa: <project-name>\n" +

@@ -36,6 +36,7 @@ module.exports = {
                         var jsonBody  = JSON.parse(response.request.body)
 
                         var PKInfo = jsonBody.data['PK-INFO'];
+                        
 
                         //TODO: RECUPERAR ID DO TRUBUDGET 
                         var trItemId      = "1234567890";

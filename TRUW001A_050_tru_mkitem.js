@@ -3,40 +3,16 @@
 THEN, SAVE THE WORKFLOWITEMS IN A TEMPORARY FILE (arqTbItem).
 /******************************************************************************************************/
 var saptb_config = require('./TRUW001A_000_config.js');
+var CreatorDisbursement = require('./Disbursement');
 
 saptb_config.inicioLibVar(__filename)
 
-leDadosDoArquivoNoUltimoUploadTrubudget();
+var uploadTrubudgetJSON = saptb_config.loadArqTBUploadDate();
 
 leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON)
 
 process.exitCode = 0
 
-function leDadosDoArquivoNoUltimoUploadTrubudget() {
-
-    var fileExists = fs.existsSync(arqTBUploadDate);
-    uploadTrubudgetJSON = {}
-
-    if(fileExists)  {
-        var linhas = fs.readFileSync(arqTBUploadDate, 'utf8').split( CRLF ).filter(Boolean)       
-        
-        for (var i = 0; i < linhas.length; i++) {
-            var linhaStr = JSON.stringify(linhas[i])
-                    
-            linhaStr     = Str(linhaStr).replaceAll( '\"' , ''  )
-            linhaStr     = Str(linhaStr).replaceAll( '\\' , ''  )
-            linhaStr     = Str(linhaStr).replaceAll( '{'  , ''  )
-            linhaStr     = Str(linhaStr).replaceAll( '}'  , '' )
-
-            var resp     = linhaStr.split( ':' , 2 );                
-            
-            uploadTrubudgetJSON[resp[0]] = resp[1]
-        } 
-
-        logger.debug(linhas)
-        logger.debug(uploadTrubudgetJSON)
-    }    
-}
 
 function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
     var linhas = fs.readFileSync(arqSAP + ".json", 'utf8').split( CRLF ).filter(Boolean)
@@ -50,21 +26,24 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
             var projetoOPE = objetoSAP[i].contrato.substr(0,7)
 
             logger.debug(objetoSAP[i].empresa)
-            logger.debug(objetoSAP[i].referencia)
+            logger.debug(objetoSAP[i].faturaSAP)
             logger.debug(objetoSAP[i].exercicio)
 
             var empresa       = objetoSAP[i].empresa
-            var numdoc        = objetoSAP[i].referencia
+            var numdoc        = objetoSAP[i].faturaSAP
             var dataExercicio = objetoSAP[i].exercicio
-            var pksap         = empresa + numdoc + dataExercicio + "1" //Eh suficiente testar o primeiro item
-            logger.debug(pksap)
-            logger.debug(uploadTrubudgetJSON[pksap])
+
+            //Eh suficiente testar o primeiro item, por isso cria com "1"
+            var pkInfoSap = CreatorDisbursement.Disbursement(empresa, numdoc, dataExercicio, "1").getPkInfo(); 
+            
+            logger.debug(pkInfoSap)
+            logger.debug(uploadTrubudgetJSON[pkInfoSap])
             
             //Cria arquivo novo para gravar os workflowitems do trubudget
             fs.writeFileSync( arqTBitem, "");
 
             /* se a chave do sap nao subiu (upload) para o trubudget, significa que a chave precisa ser gravada agora */
-            if ( uploadTrubudgetJSON[pksap] === undefined || uploadTrubudgetJSON[pksap] == "" ) {
+            if ( checkIfNotIncluded(pkInfoSap) ) {
 
                 if (checkPilotFilter(projetoOPE)) {
 
@@ -115,8 +94,6 @@ function createOneWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paym
                 for (i in objeto) {
                     logger.debug(objeto[i].data.description)
                     
-                    //var nomeDoSubProjeto = objeto[i].data.displayName
-
                     //TODO: REVER QUANDO TIVER OS NOVOS CAMPOS
                     var chaveIntegracao = objeto[i].data.description
                     var jsonCamposAdicionais
@@ -154,7 +131,7 @@ function createOneWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paym
                           "apiVersion": "1.0",
                           "data": {                            
                             "datatype-INFO": type,
-                            "PK-INFO" : empresa + numdoc + dataExercicio + type,
+                            "PK-INFO" : CreatorDisbursement.Disbursement(empresa, numdoc, dataExercicio, type).getPkInfo(),
                             "projectId": projectID,
                             "subprojectId": subProjectID,
                             "subprojectName": subProjectName,
@@ -178,11 +155,12 @@ function createOneWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paym
 
                         type = 2;
 
+
                         var entradaJSONTwo  =     {
                           "apiVersion": "1.0",
                           "data": {
                             "datatype-INFO": type,
-                            "PK-INFO" : empresa + numdoc + dataExercicio + type,
+                            "PK-INFO" :  CreatorDisbursement.Disbursement(empresa, numdoc, dataExercicio, type).getPkInfo(),
                             "projectId": projectID,
                             "subprojectId": subProjectID,
                             "subprojectName": subProjectName,
@@ -243,6 +221,12 @@ function checkPilotFilter(projectNumber) {
     
     //If there is no file, there is no filter
     return true;
+}
+
+
+function checkIfNotIncluded(pkInfoSap) {
+
+    return (uploadTrubudgetJSON[pkInfoSap] === undefined || uploadTrubudgetJSON[pkInfoSap] == "");
 }
 
 
