@@ -25,7 +25,7 @@ Create a dockerfile with node and npm and follow the steps below.
 
 ----
 
-Execute the following steps:
+Execute the following steps (docker-compose.yml):
 
 1. Create the following env variables:
 
@@ -36,6 +36,9 @@ Execute the following steps:
 
 2. Link the volumes to folders located outside the container. 
 The volume "control" needs to be linked to a folder with daily backup. The volumes "data" and "log" do not need daily backup.
+
+3. If you are running in DSV, you need to use replace config.json with config.json.DEV. Similar comments to other envs. 
+
 
 
 
