@@ -76,25 +76,24 @@ If it is not the first time the integration script is installed (in other words,
 
 ## docker-compose example DEV
 
-version: "2"
+version: "2" <br>
+services: <br>
+   trubudget: <br>
+      image:  bndes/trubudget:0.0.3 <br>
+      environment: <br>
+        - TRUW001A_SAP_USER=${TRUW001A_SAP_USER} <br>
+        - TRUW001A_SAP_PASS=${TRUW001A_SAP_PASS} <br>
+        - TRUW001A_TRU_USER=${TRUW001A_TRU_USER} <br>
+        - TRUW001A_TRU_PASS=${TRUW001A_TRU_PASS} <br>
+        - TRU_CONFIG_FILE=config/config.json.DEV <br>
+      volumes: <br>
+       - /opt/docker/volumes/trubudget/control:/trubudget/control <br>
+       - /opt/docker/volumes/trubudget/log:/trubudget/log <br>
+       - /opt/docker/volumes/trubudget/data:/trubudget/data <br>
+      command: bash -c "cp $$TRU_CONFIG_FILE config/config.json ;  npm start" <br>
 
-services:
-   trubudget:
-      image:  bndes/trubudget:0.0.3
-      environment:
-        - TRUW001A_SAP_USER=${TRUW001A_SAP_USER}
-        - TRUW001A_SAP_PASS=${TRUW001A_SAP_PASS}
-        - TRUW001A_TRU_USER=${TRUW001A_TRU_USER}
-        - TRUW001A_TRU_PASS=${TRUW001A_TRU_PASS}
-        - TRU_CONFIG_FILE=config/config.json.DEV
-      volumes:
-       - /opt/docker/volumes/trubudget/control:/trubudget/control
-       - /opt/docker/volumes/trubudget/log:/trubudget/log
-       - /opt/docker/volumes/trubudget/data:/trubudget/data
-      command: bash -c "cp $$TRU_CONFIG_FILE config/config.json ;  npm start"
-
-networks:
-   default:
-      external:
+networks: <br>
+   default:<br>
+      external:<br>
           name: docker_default
 
