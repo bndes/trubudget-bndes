@@ -25,7 +25,14 @@ Create a dockerfile with node and npm and follow the steps below.
 
 ----
 
-Execute the following steps (docker-compose.yml):
+Create the directories and assign permissions
+mkdir -p /opt/docker/volumes/trubudget/
+mkdir -p /opt/docker/volumes/trubudget/control 
+mkdir -p /opt/docker/volumes/trubudget/log 
+mkdir -p /opt/docker/volumes/trubudget/data 
+
+
+Execute the following steps using docker-compose.yml:
 
 1. Create the following env variables:
 
@@ -44,6 +51,14 @@ The volume "control" needs to be linked to a folder with daily backup. The volum
 
 
 ## Execution Guide
+
+In DSV:
+* cd /opt/docker/composers/trubudget
+* Check if it is necessary to change docker-compose.yml. Analyze mainly the image name.
+* docker pull image-name
+* docker-compose up
+
+In PRD:
 
 The docker needs to be called by TWS daily. It should run at the begining of the night production. The easiest way is to create a Rundeck script to be the mediator. So, TWS will call Rundeck and Rundeck will call the container. The container will fire npm start, as described in the installation guide.
 
