@@ -36,10 +36,10 @@ Execute the following steps to prepare the env (if not prepared):
 
 2. Create a file .env defining 
 
-TRUW001A_SAP_USER=xx <br>
-TRUW001A_SAP_PASS=xx <br>
-TRUW001A_TRU_USER=xx <br>
-TRUW001A_TRU_PASS=xx
+    TRUW001A_SAP_USER – SAP service user <br>
+    TRUW001A_SAP_PASS – Password of SAP service user <br>
+    TRUW001A_TRU_USER - Trubudget service user <br>
+    TRUW001A_TRU_PASS – Password of Trubudget service user
 
 3. Assign the necessary permissions.
 
@@ -47,12 +47,7 @@ TRUW001A_TRU_PASS=xx
 
 Execute the following steps using docker-compose.yml:
 
-1. Reference the following env variables:
-
-    TRUW001A_SAP_USER – SAP service user <br>
-    TRUW001A_SAP_PASS – Password of SAP service user <br>
-    TRUW001A_TRU_USER - Trubudget service user <br>
-    TRUW001A_TRU_PASS – Password of Trubudget service user
+1. Reference all the env variables (see definition before)
 
 2. Link the volumes to folders located outside the container. 
 The volume "control" needs to be linked to a folder with daily backup. The volumes "data" and "log" do not need daily backup.
