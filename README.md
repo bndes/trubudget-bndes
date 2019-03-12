@@ -36,9 +36,9 @@ Execute the following steps to prepare the env (if not prepared):
 
 2. Create a file .env defining 
 
-TRUW001A_SAP_USER=xx
-TRUW001A_SAP_PASS=xx
-TRUW001A_TRU_USER=xx
+TRUW001A_SAP_USER=xx <br>
+TRUW001A_SAP_PASS=xx <br>
+TRUW001A_TRU_USER=xx <br>
 TRUW001A_TRU_PASS=xx
 
 3. Assign the necessary permissions.
