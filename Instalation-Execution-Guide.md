@@ -81,25 +81,16 @@ version: "2"
 services:
    trubudget:
       image:  bndes/trubudget:0.0.3
-#      ports:
-#      - 10220:9200
-#      restart: always
       environment:
-#       - http_proxy=http://proxy01.bndes.net:8080
-#       - https_proxy=http://proxy01.bndes.net:8080
-#       - HTTP_PROXY=http://proxy01.bndes.net:8080
-#       - HTTPS_PROXY=http://proxy01.bndes.net:8080
         - TRUW001A_SAP_USER=${TRUW001A_SAP_USER}
         - TRUW001A_SAP_PASS=${TRUW001A_SAP_PASS}
         - TRUW001A_TRU_USER=${TRUW001A_TRU_USER}
         - TRUW001A_TRU_PASS=${TRUW001A_TRU_PASS}
-#        - TRU_CONFIG_FILE=config/config.json.PRD
         - TRU_CONFIG_FILE=config/config.json.DEV
       volumes:
        - /opt/docker/volumes/trubudget/control:/trubudget/control
        - /opt/docker/volumes/trubudget/log:/trubudget/log
        - /opt/docker/volumes/trubudget/data:/trubudget/data
-#       - /opt/docker/composers/trubudget/trubudget-bndes:/trubudget
       command: bash -c "cp $$TRU_CONFIG_FILE config/config.json ;  npm start"
 
 networks:
