@@ -25,16 +25,29 @@ Create a dockerfile with node and npm and follow the steps below.
 
 ----
 
-Create the directories and assign permissions
-mkdir -p /opt/docker/volumes/trubudget/
-mkdir -p /opt/docker/volumes/trubudget/control 
-mkdir -p /opt/docker/volumes/trubudget/log 
-mkdir -p /opt/docker/volumes/trubudget/data 
+Execute the following steps to prepare the env (if not prepared):
 
+1. Create the directories and assign permissions 
+* mkdir -p /opt/docker/volumes/trubudget/
+* mkdir -p /opt/docker/volumes/trubudget/control 
+* mkdir -p /opt/docker/volumes/trubudget/log 
+* mkdir -p /opt/docker/volumes/trubudget/data 
+
+
+2. Create a file .env defining 
+
+TRUW001A_SAP_USER=xx
+TRUW001A_SAP_PASS=xx
+TRUW001A_TRU_USER=xx
+TRUW001A_TRU_PASS=xx
+
+3. Assign the necessary permissions.
+
+------
 
 Execute the following steps using docker-compose.yml:
 
-1. Create the following env variables:
+1. Reference the following env variables:
 
     TRUW001A_SAP_USER – SAP service user <br>
     TRUW001A_SAP_PASS – Password of SAP service user <br>
