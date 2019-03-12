@@ -37,8 +37,9 @@ Execute the following steps (docker-compose.yml):
 2. Link the volumes to folders located outside the container. 
 The volume "control" needs to be linked to a folder with daily backup. The volumes "data" and "log" do not need daily backup.
 
-3. If you are running in DSV, you need to use replace config.json with config.json.DEV. Similar comments to other envs. 
+3. If you are running in DSV, you need to execute a command to replace config.json with config.json.DEV. Similar comments to other envs. 
 
+4. Execute npm start
 
 
 
