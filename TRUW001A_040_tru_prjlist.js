@@ -31,14 +31,22 @@ function acessaTrubudgetListaProjetos(projectNameDefinedInconfigFile) {
                 var objeto = body.data.items
                 for (i in objeto) {
                     for (j in objeto[i].log) {
-                        if ( objeto[i].log[j].data.project != undefined ) {
-                            logger.debug(objeto[i].log[j].data.project)
-                            if ( objeto[i].log[j].data.project.displayName === projectNameDefinedInconfigFile ) {
-                                fs.writeFileSync( arqProjectID, objeto[i].log[j].data.project.id);
-                                logger.info("ProjectID of " + tbNomeProjeto + " was selected.")
-                            }
-                        }
+                        //percorre o array ate chegar no ultimo elemento    
                     }
+                    logger.debug("objeto[i].log[j].entityId")
+                    logger.debug(objeto[i].log[j].entityId)                        
+                    for (k in objeto[i].log[j].snapshot) {                            
+                        //percorre o array ate chegar no ultimo elemento    
+                    }   
+                    logger.debug("objeto[i].log[j].snapshot[k]")
+                    logger.debug(objeto[i].log[j].snapshot[k])
+                    if ( objeto[i].log[j].snapshot[k] != undefined ) {
+                        if ( objeto[i].log[j].snapshot[k] === projectNameDefinedInconfigFile ) {
+                            fs.writeFileSync( arqProjectID, objeto[i].log[j].entityId);
+                            logger.info("ProjectID of " + tbNomeProjeto + " was selected.")
+                        }
+                    }                     
+                    
                 }
             }
             else {
