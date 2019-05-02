@@ -23,7 +23,7 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
         objetoSAP[i] = JSON.parse(linhas[i])
         logger.debug(objetoSAP[i])
         if ( objetoSAP[i].contrato != undefined ) {
-            var projetoOPE = objetoSAP[i].contrato.substr(0,7)
+            var contratoSCC = objetoSAP[i].contrato  //.substr(0,7)
 
             logger.debug(objetoSAP[i].empresa)
             logger.debug(objetoSAP[i].faturaSAP)
@@ -45,9 +45,9 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
             /* se a chave do sap nao subiu (upload) para o trubudget, significa que a chave precisa ser gravada agora */
             if ( checkIfNotIncluded(pkInfoSap) ) {
 
-                if (checkPilotFilter(projetoOPE)) {
+                if (checkPilotFilter(contratoSCC)) {
 
-                    createOneWorkflowItemOnLocalStorage( projetoOPE, 
+                    createOneWorkflowItemOnLocalStorage( contratoSCC, 
                         objetoSAP[i].referencia, 
                         objetoSAP[i].valor, 
                         objetoSAP[i].dataPagamento,
@@ -55,7 +55,7 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
                         numdoc,
                         dataExercicio )
     
-                    logger.debug ("projetoOPE: " + projetoOPE)
+                    logger.debug ("contratoSCC: " + contratoSCC)
     
                 }
 
@@ -64,7 +64,7 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
     }
 }
 
-function createOneWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paymentDate, empresa, numdoc, dataExercicio) {
+function createOneWorkflowItemOnLocalStorage(contratoSCC, referencia, valor, paymentDate, empresa, numdoc, dataExercicio) {
 
     var tokenAuth           = fs.readFileSync(arqToken, 'utf8');
     var projectID           = fs.readFileSync(arqProjectID, 'utf8');
@@ -92,24 +92,29 @@ function createOneWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paym
                 
                 var projectMatched = false;
                 for (i in objeto) {
-                    logger.debug(objeto[i].data.description)
+                    logger.debug("objeto[i].data")
+                    logger.debug(objeto[i].data)
+                    logger.debug(objeto[i].data.additionalData)
+                    logger.debug(objeto[i].data.additionalData['contract'])
                     
-                    //TODO: REVER QUANDO TIVER OS NOVOS CAMPOS
-                    var chaveIntegracao = objeto[i].data.description
+                    //TODO: REVER QUANDO TIVER OS NOVOS CAMPOS  
+                    /*                  
                     var jsonCamposAdicionais
                     try {
-                        jsonCamposAdicionais = JSON.parse(objeto[i].data.description)
+                        jsonCamposAdicionais = JSON.parse(objeto[i].data.additionalData)
                     } catch (error) {
-                        logger.error("The Sub-project comment is not a JSON object (" + projetoOpe + ")");
+                        logger.error("The Sub-project comment is not a JSON object (" + contratoSCC + ")");
                         logger.error(error)
                         process.exitCode = 1
                         return
                     }
-                    var approvalGroup = jsonCamposAdicionais["approvers-groupid"];
+                    */
+                    var approvalGroup   = objeto[i].data.additionalData["approvers-groupid"];
+                    var chaveIntegracao = objeto[i].data.additionalData['contract']
                     //FIM TODO
 
 
-                    if ( chaveIntegracao != undefined && chaveIntegracao.includes( projetoOpe ) ) {
+                    if ( chaveIntegracao != undefined && chaveIntegracao.includes( contratoSCC ) ) {
 						logger.debug(objeto[i])
 						subProjectID = objeto[i].data.id
 						subProjectName = objeto[i].data.displayName
@@ -119,7 +124,7 @@ function createOneWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paym
                         logger.debug( "-------------------" )
                         logger.debug( "Projeto ID       : " + projectID )
                         logger.debug( "SubProjeto ID    : " + subProjectID )
-                        logger.debug( "Projeto OPE      : " + projetoOpe )
+                        logger.debug( "Projeto OPE      : " + contratoSCC )
                         logger.debug( "Referencia       : " + referencia )
                         logger.debug( "Valor            : " + valor )
                         logger.debug( "Empresa          : " + empresa )
@@ -140,8 +145,9 @@ function createOneWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paym
                             "description": "Criado automaticamente (" + referencia + ")",
                             "currency": "BRL",
                             "amount": valor,
+                            "exchangeRate": "1.0",
                             "amountType": "disbursed",
-                            "project-number"  : projetoOpe,
+                            "project-number"  : contratoSCC,
                             "approvers-groupid" : approvalGroup,
 							"payment-date"   : paymentDate
                           }
@@ -170,7 +176,7 @@ function createOneWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paym
                             "currency-INFO": "BRL",
                             "amount-INFO": valor,
                             "amountType": "N/A",
-                            "project-number"    : projetoOpe,
+                            "project-number"    : contratoSCC,
                             "approvers-groupid" : approvalGroup,
 							"payment-date"      : paymentDate
                           }
@@ -189,7 +195,7 @@ function createOneWorkflowItemOnLocalStorage(projetoOpe, referencia, valor, paym
 
 
                 if (!projectMatched) {                     
-                    var msg = "Could not match SAP project " + projetoOpe + " with Trubudget projects"
+                    var msg = "Could not match SAP project " + contratoSCC + " with Trubudget projects"
                     saptb_config.logWithError (msg, error, false);                    
                 }
 
