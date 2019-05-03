@@ -34,12 +34,11 @@ module.exports = {
                     if (!error && ( response.statusCode == 200 || response.statusCode == 201 ) ) {
                         logger.info("WorkflowItem was saved Trubudget!")                    
                         var jsonBody  = JSON.parse(response.request.body)
-
+                        logger.debug("response.body.data['workflowitem']['id']")
+                        var workflowitem_id = response.body.data['workflowitem']['id']                        
+                        logger.debug(workflowitem_id)
                         var PKInfo = jsonBody.data['PK-INFO'];
-                        
-
-                        //TODO: RECUPERAR ID DO TRUBUDGET 
-                        var trItemId      = "1234567890";
+                        var trItemId      = workflowitem_id;
 
                         module.exports.saveOnLocalStorage(PKInfo, trItemId);
 

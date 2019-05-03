@@ -28,42 +28,69 @@ switch (step) {
     case 0:
  
     case 10:
-        runNow("TRUW001A_010_init.js")
+        globalSkipSteps = saptb_config.getValueInExecutionData("globalSkipSteps");           
+        if ( !globalSkipSteps ) 
+            runNow("TRUW001A_010_init.js")
 
     case 20:    
-        runNow("TRUW001A_020_sap_dwload.js")
+        globalSkipSteps = saptb_config.getValueInExecutionData("globalSkipSteps");           
+        if ( !globalSkipSteps ) 
+            runNow("TRUW001A_020_sap_dwload.js")
     
-    case 30:    
-        runNow("TRUW001A_030_tru_auth.js")
+    case 30:
+        globalSkipSteps = saptb_config.getValueInExecutionData("globalSkipSteps");           
+        if ( !globalSkipSteps )         
+            runNow("TRUW001A_030_tru_auth.js")
     
     case 40:    
-        runNow("TRUW001A_040_tru_prjlist.js")
+        globalSkipSteps = saptb_config.getValueInExecutionData("globalSkipSteps");           
+        if ( !globalSkipSteps )     
+            runNow("TRUW001A_040_tru_prjlist.js")
 
-    case 50:    
-        runNow("TRUW001A_050_tru_mkitem.js")
+    case 50:
+        globalSkipSteps = saptb_config.getValueInExecutionData("globalSkipSteps");           
+        if ( !globalSkipSteps )     
+            runNow("TRUW001A_050_tru_mkitem.js")
 
     case 60:    
-        runNow("TRUW001A_060_tru_upload_first.js")
+        globalSkipSteps = saptb_config.getValueInExecutionData("globalSkipSteps");           
+        if ( !globalSkipSteps ) 
+            runNow("TRUW001A_060_tru_upload_first.js")
 
     case 65:    
-        runNow("TRUW001A_060_tru_upload_second.js")
+        globalSkipSteps = saptb_config.getValueInExecutionData("globalSkipSteps");           
+        if ( !globalSkipSteps )     
+            runNow("TRUW001A_060_tru_upload_second.js")
         
     case 70:    
-        runNow("TRUW001A_070_tru_grant.js")
+        globalSkipSteps = saptb_config.getValueInExecutionData("globalSkipSteps");           
+        if ( !globalSkipSteps )     
+            runNow("TRUW001A_070_tru_grant.js")
     
-    case 80:    
-        runNow("TRUW001A_080_tru_closeitem.js")
+    case 80:
+        globalSkipSteps = saptb_config.getValueInExecutionData("globalSkipSteps");           
+        if ( !globalSkipSteps )     
+            runNow("TRUW001A_080_tru_closeitem.js")
     
-    case 90:    
-        runNow("TRUW001A_090_tru_grplist.js")
+    case 90:
+        globalSkipSteps = saptb_config.getValueInExecutionData("globalSkipSteps");           
+        if ( !globalSkipSteps )     
+            runNow("TRUW001A_090_tru_grplist.js")
     
     case 100:    
-        runNow("TRUW001A_100_tru_mail.js")
+        globalSkipSteps = saptb_config.getValueInExecutionData("globalSkipSteps");           
+        if ( !globalSkipSteps ) 
+            runNow("TRUW001A_100_tru_mail.js")
 
     case 110:    
-        runNow("TRUW001A_110_tru_checkerror.js")        
+        globalSkipSteps = saptb_config.getValueInExecutionData("globalSkipSteps");           
+        if ( !globalSkipSteps ) 
+            runNow("TRUW001A_110_tru_checkerror.js")        
         
 }
+
+//Renews the Skip Steps to the next RUN
+saptb_config.changeValueInExecutionData("globalSkipSteps", false)
 
 
 setTimeout(function() {

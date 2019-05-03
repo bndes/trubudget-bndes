@@ -17,13 +17,20 @@ process.exitCode = 0
 function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
     var linhas = fs.readFileSync(arqSAP + ".json", 'utf8').split( CRLF ).filter(Boolean)
 
+    logger.debug(" linhas.length: " + linhas.length)
+    if ( linhas.length == 0) {
+        logger.info("There is no lines in SAP file to process " + arqSAP)
+        logger.info("Setting TRUE to the Skip Steps - It will terminate normally")
+        saptb_config.changeValueInExecutionData("globalSkipSteps", true)
+    }
+
     var objetoSAP = []
 
     for (var i = 0; i < linhas.length; i++) {
         objetoSAP[i] = JSON.parse(linhas[i])
         logger.debug(objetoSAP[i])
         if ( objetoSAP[i].contrato != undefined ) {
-            var contratoSCC = objetoSAP[i].contrato  //.substr(0,7)
+            var contratoSCC = objetoSAP[i].contrato.substr(0,8) //os primeiros digitos do contrato SCC
 
             logger.debug(objetoSAP[i].empresa)
             logger.debug(objetoSAP[i].faturaSAP)
@@ -32,6 +39,8 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
             var empresa       = objetoSAP[i].empresa
             var numdoc        = objetoSAP[i].faturaSAP
             var dataExercicio = objetoSAP[i].exercicio
+
+            logger.debug("empresa + numdoc + dataExercicio = " + empresa + numdoc + dataExercicio )
 
             //Eh suficiente testar o primeiro item, por isso cria com "1"
             var pkInfoSap = CreatorDisbursement.Disbursement(empresa, numdoc, dataExercicio, "1").getPkInfo(); 
@@ -46,7 +55,6 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
             if ( checkIfNotIncluded(pkInfoSap) ) {
 
                 if (checkPilotFilter(contratoSCC)) {
-
                     createOneWorkflowItemOnLocalStorage( contratoSCC, 
                         objetoSAP[i].referencia, 
                         objetoSAP[i].valor, 
@@ -55,11 +63,15 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
                         numdoc,
                         dataExercicio )
     
-                    logger.debug ("contratoSCC: " + contratoSCC)
-    
+                    logger.debug ("contratoSCC: " + contratoSCC)    
+                } else {
+                    logger.info("Contract not found " + contratoSCC)
                 }
-
+            } else {
+                logger.info("pkInfoSAP not found " + pkInfoSap)
             }
+        } else {
+            logger.info("There is nothing to create the file " + arqTBitem)
         }
     }
 }
@@ -97,22 +109,8 @@ function createOneWorkflowItemOnLocalStorage(contratoSCC, referencia, valor, pay
                     logger.debug(objeto[i].data.additionalData)
                     logger.debug(objeto[i].data.additionalData['contract'])
                     
-                    //TODO: REVER QUANDO TIVER OS NOVOS CAMPOS  
-                    /*                  
-                    var jsonCamposAdicionais
-                    try {
-                        jsonCamposAdicionais = JSON.parse(objeto[i].data.additionalData)
-                    } catch (error) {
-                        logger.error("The Sub-project comment is not a JSON object (" + contratoSCC + ")");
-                        logger.error(error)
-                        process.exitCode = 1
-                        return
-                    }
-                    */
                     var approvalGroup   = objeto[i].data.additionalData["approvers-groupid"];
                     var chaveIntegracao = objeto[i].data.additionalData['contract']
-                    //FIM TODO
-
 
                     if ( chaveIntegracao != undefined && chaveIntegracao.includes( contratoSCC ) ) {
 						logger.debug(objeto[i])
