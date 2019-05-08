@@ -139,7 +139,7 @@ function createOneWorkflowItemOnLocalStorage(contratoSCC, referencia, valor, pay
                             "subprojectId": subProjectID,
                             "subprojectName": subProjectName,
                             "status": "open",
-                            "displayName": "Desembolso registrado em " + datahora,
+                            "displayName": "Desembolso realizado em " + paymentDate,
                             "description": "Criado automaticamente (" + referencia + ")",
                             "currency": "BRL",
                             "amount": valor,
@@ -159,6 +159,7 @@ function createOneWorkflowItemOnLocalStorage(contratoSCC, referencia, valor, pay
 
                         type = 2;
 
+                        let valorFormatado = numeral(parseFloat(valor)).format('0,0.00')
 
                         var entradaJSONTwo  =     {
                           "apiVersion": "1.0",
@@ -169,8 +170,8 @@ function createOneWorkflowItemOnLocalStorage(contratoSCC, referencia, valor, pay
                             "subprojectId": subProjectID,
                             "subprojectName": subProjectName,
                             "status": "open",
-                            "displayName": "Recebimento do desembolso de R$ " + valor,
-                            "description": "Atestamos o recebimento de R$ " + valor + " em " + dataUser + " (" + datahoraseg + ")",
+                            "displayName": "Recebimento do desembolso de R$ " + valorFormatado,
+                            "description": "Atestamos o recebimento de R$ " + valorFormatado + " em " + paymentDate + ".",
                             "currency-INFO": "BRL",
                             "amount-INFO": valor,
                             "amountType": "N/A",

@@ -5,6 +5,7 @@ module.exports = {
     moment    = require('moment');
     request   = require('request');
     moment    = require('moment');
+    numeral   = require('numeral');    
     path      = require('path');
     fs        = require('fs');
     Str       = require('string');
@@ -35,6 +36,29 @@ module.exports = {
 
     mailHost        = config.mailHost
     mailPort        = config.mailPort
+
+    //creates the brazilian locale format
+    numeral.register('locale', 'br', {
+        delimiters: {
+            thousands: '.',
+            decimal: ','
+        },
+        abbreviations: {
+            thousand: 'k',
+            million: 'm',
+            billion: 'b',
+            trillion: 't'
+        },
+        ordinal : function (number) {
+            return number === 1 ? 'o' : 'a';
+        },
+        currency: {
+            symbol: 'R$ '
+        }
+    });
+
+    //sets the brazilian format
+    numeral.locale('br');
 
     log4js.configure({
       appenders: { executionOutput: { type: 'file', filename: fsExecutionOutput } },
@@ -165,6 +189,8 @@ module.exports = {
       module.exports.changeValueInExecutionData("globalError",true)
     }
   }
+
+  
 
 
 };

@@ -10,6 +10,7 @@
     "log4js": "^4.0.2",
     "moment": "^2.24.0",
     "nodemailer": "^5.1.1",
+    "numeral": "^2.0.6",
     "request": "^2.88.0",
     "string": "^3.3.3"
   },
