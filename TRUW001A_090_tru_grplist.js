@@ -26,10 +26,10 @@ function saveUserGroupsInFile(){
             headers: opcoesHeader,
             json: true
         },
-        function (error, response, body) {
-            logger.debug ("status = " + response.statusCode )
+        function (error, response, body) {            
 
 			if (!error && response.statusCode == 200) {
+                logger.debug ("status = " + response.statusCode )
 				var userGroups = body.data.groups
 
                 fs.writeFileSync( arqUsers, JSON.stringify(userGroups) );

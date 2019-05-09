@@ -95,17 +95,29 @@ function notifyUsers() {
 		var amount = parseFloat(strAmount);
 		amount = amount.toFixed(2);
 
-        var templateDoEMailTXT  = "Prezado cliente,\n\n" +
-								"Esta é uma notificação automática do sistema TruBudget.\r\n" +
-								"Um novo item de workflow foi gerado a partir de uma liberação de crédito realizada pelo BNDES.\n\n" +
-								"AÇÃO NECESSÁRIA: Acesse o site https://trubudget.bndes.gov.br com suas credenciais e confirme o recebimento deste desembolso na conta bancária do projeto.\n"+
-								"Sua ação é fundamental para aprimorar a transparência na utilização destes recursos.\n\n" +
-								"A liberação de crédito se refere aos dados abaixo:\n" +
-								"Programa: <project-name>\n" +
-								"Nome do Projeto: <subproject-name>\n" +
-								"Valor: <currency> <amount>\n" +
-								"Data do depósito: <payment-date>\n" +
-								"Fim da mensagem";
+		var templateDoEMailTXT  = 
+		"Prezado cliente,\n" +
+		"\n" +
+		"Esta é uma notificação automática do sistema TruBudget.\r\n" +
+		"Um novo item de workflow foi gerado a partir de uma liberação de crédito realizada pelo BNDES.\n" +
+		"\n" +
+		"AÇÕES NECESSÁRIAS:\n" +
+		"1. Acesse o site https://trubudget.bndes.gov.br com as credenciais da sua organização.\n" +
+		"2. Clique no ícone 'Lupa - Visualizar' do Fundo Amazônia para visualizar seus detalhes.\n" +
+		"3. Clique no ícone 'Lupa - Visualizar' associado ao Projeto <project-name> para visualizar seus detalhes.\n" +
+		"4. Clique no ícone 'i - Informações' associado ao item de workflow em aberto 'Recebimento do desembolso...' e confira as informações nele contidas. Se necessário, clique no ícone 'Lápis - Editar' associado a este item de workflow para corrigir as informações.\n" +
+		"5. Clique no ícone 'Check - Aprovar' associado a este item de workflow para confirmar o recebimento deste desembolso na conta bancária do projeto e fechar o item de workflow.\n" +
+		"\n" +
+		"PRONTO! Muito obrigado! Sua ação é fundamental para aprimorar a transparência na utilização destes recursos.\n" +
+		"\n" +
+		"A liberação de crédito se refere aos dados abaixo:\n" +
+		"Programa: <project-name>\n" +
+		"Nome do Projeto: <subproject-name>\n" +
+		"Valor: <currency> <amount>\n" +
+		"Data do depósito: <payment-date>\n" +
+		"\n" +
+		"FIM DA MENSAGEM\n" ;
+
 
 		templateDoEMailTXT = templateDoEMailTXT.replace(/<approvers-groupid>/g, approversGroup);
 		templateDoEMailTXT = templateDoEMailTXT.replace(/<project-name>/g, projectName);

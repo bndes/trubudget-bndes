@@ -7,14 +7,14 @@ var CreatorDisbursement = require('./Disbursement');
 
 saptb_config.inicioLibVar(__filename)
 
-var uploadTrubudgetJSON = saptb_config.loadArqTBUploadDate();
+var arqTBUploadDateJSONlist = saptb_config.loadArqTBUploadDate();
 
-leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON)
+leCadaDadoSAPparaGravarRespectivaLiberacao(arqTBUploadDateJSONlist)
 
 process.exitCode = 0
 
 
-function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
+function leCadaDadoSAPparaGravarRespectivaLiberacao(arqTBUploadDateJSONlist) {
     var linhas = fs.readFileSync(arqSAP + ".json", 'utf8').split( CRLF ).filter(Boolean)
 
     logger.debug(" linhas.length: " + linhas.length)
@@ -46,13 +46,13 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(uploadTrubudgetJSON) {
             var pkInfoSap = CreatorDisbursement.Disbursement(empresa, numdoc, dataExercicio, "1").getPkInfo(); 
             
             logger.debug(pkInfoSap)
-            logger.debug(uploadTrubudgetJSON[pkInfoSap])
+            logger.debug(arqTBUploadDateJSONlist)
             
             //Cria arquivo novo para gravar os workflowitems do trubudget
             fs.writeFileSync( arqTBitem, "");
 
             /* se a chave do sap nao subiu (upload) para o trubudget, significa que a chave precisa ser gravada agora */
-            if ( checkIfNotIncluded(pkInfoSap) ) {
+            if ( !findPK(pkInfoSap) ) {
 
                 if (checkPilotFilter(contratoSCC)) {
                     createOneWorkflowItemOnLocalStorage( contratoSCC, 
@@ -229,9 +229,23 @@ function checkPilotFilter(projectNumber) {
 }
 
 
-function checkIfNotIncluded(pkInfoSap) {
+function findPK(pkInfoSap) {
+    var pkFound = false
 
-    return (uploadTrubudgetJSON[pkInfoSap] === undefined || uploadTrubudgetJSON[pkInfoSap] == "");
+    //Look for pk
+    for (i=0;arqTBUploadDateJSONlist.length;i++) {
+        let elemento = arqTBUploadDateJSONlist[i][pkInfoSap]
+        if ( elemento === undefined || elemento == "")
+            continue;
+        else {
+            pkFound = true;
+            break;
+        }
+    }
+
+    logger.debug("findPK result: " + pkFound)
+    
+    return pkFound;
 }
 
 

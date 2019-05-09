@@ -37,6 +37,8 @@ module.exports = {
     mailHost        = config.mailHost
     mailPort        = config.mailPort
 
+    identity_all_users = "BNDES-TODOS"
+
     //creates the brazilian locale format
     numeral.register('locale', 'br', {
         delimiters: {

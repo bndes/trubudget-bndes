@@ -12,6 +12,9 @@ arqTBUploadDateJSONlist = saptb_config.loadArqTBUploadDate()
 arqTBitemJSONlist       = saptb_config.loadArqTBitem(dataTypeInfoTwo)
 iterateTheItemToGrant()
 
+arqTBitemJSONlistAll    = saptb_config.loadArqTBitem()
+iterateTheItemToGrantAll()
+
 function iterateTheItemToGrant() {
     logger.debug( " arqTBitemJSONlist.length: " + arqTBitemJSONlist.length )
     if ( MOCK == true ) {
@@ -31,10 +34,28 @@ function iterateTheItemToGrant() {
     }    
 }
 
+function iterateTheItemToGrantAll() {
+    logger.debug( " arqTBitemJSONlistAll.length: " + arqTBitemJSONlistAll.length )
+    if ( MOCK == true ) {
+        changeItems("MOCK", MOCKJSON.identity, MOCKJSON.projectId, 
+                     MOCKJSON.subprojectId, MOCKJSON.workflowitemId)
+    } else {
+        for (var i = 0; i < arqTBitemJSONlistAll.length; i++) {       
+            if ( arqTBitemJSONlistAll[i] != undefined )       {
+                var pkinfo         = arqTBitemJSONlistAll[i].data['PK-INFO']
+                var projectId      = arqTBitemJSONlistAll[i].data.projectId
+                var subprojectId   = arqTBitemJSONlistAll[i].data.subprojectId
+                var workflowitemId = saptb_config.findTheValueOfKey(arqTBUploadDateJSONlist, pkinfo)  //arqTBUploadDateJSONlist[pkinfo]
+                acessaTrubudgetAtribuiPermissoesViewWorkflowItem(identity_all_users, projectId, subprojectId, workflowitemId)
+            }        
+        }
+    }    
+}
+
 function changeItems(pkinfo, identity, projectId, subprojectId, workflowitemId) {
     acessaTrubudgetAtribuiPermissoesProjeto     (identity, projectId)
     acessaTrubudgetAtribuiPermissoesSubProjeto  (identity, projectId, subprojectId)
-    acessaTrubudgetAtribuiPermissoesWorkflowItem(identity, projectId, subprojectId, workflowitemId)
+    acessaTrubudgetAtribuiPermissoesAllWorkflowItem(identity, projectId, subprojectId, workflowitemId)    
     acessaTrubudgetAtribuiAprovadorWorkflowItem (identity, projectId, subprojectId, workflowitemId)
     logger.info(pkinfo, identity, projectId, subprojectId, workflowitemId)
 }
@@ -116,10 +137,18 @@ function acessaTrubudgetAtribuiPermissoesSubProjeto(identity, projectId, subproj
     } )
 }
 
-function acessaTrubudgetAtribuiPermissoesWorkflowItem(identity, projectId, subprojectId, workflowitemId) {
-    var urltb      = urlbasetb + '/workflowitem.intent.grantPermission'
+function acessaTrubudgetAtribuiPermissoesAllWorkflowItem(identity, projectId, subprojectId, workflowitemId) {
     var actionList = [ "workflowitem.update" , "workflowitem.close" , "workflowitem.view" ]
+    acessaTrubudgetAtribuiPermissoesWorkflowItem(identity, projectId, subprojectId, workflowitemId, actionList)
+}
 
+function acessaTrubudgetAtribuiPermissoesViewWorkflowItem(identity, projectId, subprojectId, workflowitemId) {
+    var actionList = [ "workflowitem.view" ]
+    acessaTrubudgetAtribuiPermissoesWorkflowItem(identity, projectId, subprojectId, workflowitemId, actionList)
+}
+
+function acessaTrubudgetAtribuiPermissoesWorkflowItem(identity, projectId, subprojectId, workflowitemId, actionList) {
+    var urltb      = urlbasetb + '/workflowitem.intent.grantPermission'    
 
     actionList.forEach( function(actionElement) {
 
