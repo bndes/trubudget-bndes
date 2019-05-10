@@ -3,7 +3,7 @@
     "MOCK"              : false,
     "logLevel"          : "info", 
     "intervaloDias"     : "60",
-    "urlbasetb"         : "https://trubudget.bndes.gov.br/prod/api",
+    "urlbasetb"         : "https://trubudget-h.bndes.gov.br/prod/api",
     "urlbasesap"        : "https://api-sap-h.bndes.net//sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV",
     "arqToken"          : "data/arqToken.txt",
     "arqProjectID"      : "data/arqProjectID.txt",
