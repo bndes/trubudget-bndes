@@ -30,8 +30,38 @@ function acessasSAP() {
 	fs.writeFileSync(copiaDoArquivo, ""); //Cria arquivo novo (apaga se existir)
 
     if ( MOCK == true ) {
-        objeto = MOCKJSON.sapdata
-        gravaEmArquivo(objeto, nomeDoArquivo, copiaDoArquivo)
+        logger.debug("MOCK is true")
+        logger.debug("MOCKurl : " + MOCKurl)
+        if ( MOCKurl.length > 0 ) {   
+             logger.debug("MOCK is not empty")         
+             request(
+                {
+                    url : MOCKurl
+                },
+                function (error, response, body) {
+                    if (!error && response.statusCode == 200) {
+                        objeto = JSON.parse(body)       
+                        logger.debug(body)
+                        objeto = objeto["sapdata"]                        
+                        logger.info("Mock loaded from the url : " + MOCKurl)                 
+                        logger.debug(objeto) 
+                        if ( objeto != undefined)
+                            gravaEmArquivo(objeto, nomeDoArquivo, copiaDoArquivo)
+                        else
+                           saptb_config.logWithErrorConnection(MOCKurl, response, error, true) 
+                    }
+                    else {
+                        saptb_config.logWithErrorConnection(urltb, response, error, true)
+                    }
+                }
+            )
+        }            
+        else {
+            objeto = MOCKJSON.sapdata
+            gravaEmArquivo(objeto, nomeDoArquivo, copiaDoArquivo)
+        }
+            
+        
     }
     else {
         request(

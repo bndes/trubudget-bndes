@@ -16,4 +16,4 @@ teste.js
 /control/executionData.json
 /data/*.json
 /data/*.txt
-/config/config.json
+# /config/config.json

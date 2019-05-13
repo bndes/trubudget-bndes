@@ -15,6 +15,7 @@ module.exports = {
     CRLF              = "\r\n"
     MOCK              = config.MOCK
     MOCKJSON          = require('./config/mock.json');
+    MOCKurl           = config.MOCKurl
     intervaloDias     = config.intervaloDias
     urlbasetb         = config.urlbasetb
     arqToken          = config.arqToken
