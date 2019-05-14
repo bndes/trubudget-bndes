@@ -1,6 +1,7 @@
 {
     "tb_nome_projeto"   : "Amazon Fund TB2",
     "MOCK"              : false,
+    "MOCKurl"           : "",
     "logLevel"          : "info", 
     "intervaloDias"     : "122",
     "urlbasetb"         : "https://trubudget-h.bndes.gov.br/test/api",
