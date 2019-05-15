@@ -51,7 +51,7 @@ function acessasSAP() {
                            saptb_config.logWithErrorConnection(MOCKurl, response, error, true) 
                     }
                     else {
-                        saptb_config.logWithErrorConnection(urltb, response, error, true)
+                        saptb_config.logWithErrorConnection(urlsap, response, error, true)
                     }
                 }
             )

@@ -172,20 +172,23 @@ module.exports = {
     if ( response != null && response != undefined ) {
       logger.error( "response.statusCode: " + response.statusCode );
       logger.error( "body: "             + response.body );
-    }
+    }    
     
-    process.exitCode = 1;
     if (exitScript) {
+      process.exitCode = 1;
       process.exit();
+    }
+    else {
+      module.exports.changeValueInExecutionData("globalError",true)
     }
   },
 
   logWithError: function (msg, error, exitScript) {
     logger.error( "message: "            + msg );    
-    logger.error( "error: "            + error );    
-    process.exitCode = 1;
+    logger.error( "error: "            + error );        
 
     if (exitScript) {
+      process.exitCode = 1;
       process.exit();
     }
     else {
