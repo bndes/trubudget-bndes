@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "GPL3",
   "scripts": {
-    "start": "node TRUW001A.js"
+    "start": "node TRUW001A.js "
   },
   "private": true,
   "dependencies": {

@@ -14,11 +14,10 @@ var saptb_config = require('./TRUW001A_000_config.js');
 
 saptb_config.inicioLibVar(__filename)
 
-var argParamStep = process.argv[2];
 var step = 0;
 
-if (argParamStep) {
-    step = parseInt(argParamStep);  
+if (argStep) {
+    step = parseInt(argStep);  
 }
 
 saveReceivedOrDefaultDates();
@@ -104,14 +103,12 @@ function runNow(scriptName) {
     saptb_config.changeValueInExecutionData("lastCommandExecutedOK", scriptName)
 }
 
-
 function saveReceivedOrDefaultDates() {
-
-    var argParamInicialDate = process.argv[3];
+    
     var initialDate = moment().subtract(intervaloDias, 'days'); //default value
 
-    if (argParamInicialDate)  {
-        initialDate = moment(argParamInicialDate, "YYYYMMDD");
+    if (argInitial_date)  {
+        initialDate = moment(argInitial_date, "YYYYMMDD");
 
         if (!initialDate.isValid()) {
             var msg = "initialDate was present but is invalid. The expect format is YYYYMMDD. The received was=" + argParamInicialDate; 
@@ -119,11 +116,10 @@ function saveReceivedOrDefaultDates() {
         }
     }
 
-    var argParamFinalDate = process.argv[4];
     var finalDate = moment().add(1, 'days') //default value
 
-    if (argParamFinalDate)  {
-        finalDate = moment(argParamFinalDate, "YYYYMMDD");
+    if (argFinal_date)  {
+        finalDate = moment(argFinal_date, "YYYYMMDD");
 
         if (!finalDate.isValid()) { 
             var msg = "finalDate was present but is invalid. The expect format is YYYYMMDD. The received was=" + argParamFinalDate;
