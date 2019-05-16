@@ -20,16 +20,18 @@ if (argStep) {
     step = parseInt(argStep);  
 }
 
+logger.debug ("step: " + step)
 saveReceivedOrDefaultDates();
+runNow("TRUW001A_000_init.js")
 
 switch (step) {
 
-    case 0:
- 
+    case 0:                
+
     case 10:
         globalSkipSteps = saptb_config.getValueInExecutionData("globalSkipSteps");           
-        if ( !globalSkipSteps ) 
-            runNow("TRUW001A_010_init.js")
+        if ( !globalSkipSteps )     
+            runNow("TRUW001A_010_erase.js")
 
     case 20:    
         globalSkipSteps = saptb_config.getValueInExecutionData("globalSkipSteps");           
@@ -84,7 +86,7 @@ switch (step) {
     case 110:    
         globalSkipSteps = saptb_config.getValueInExecutionData("globalSkipSteps");           
         if ( !globalSkipSteps ) 
-            runNow("TRUW001A_110_tru_checkerror.js")        
+            runNow("TRUW001A_110_tru_checkerror.js")       
         
 }
 

@@ -69,7 +69,8 @@ module.exports = {
     }) //trace, debug, info, warn, error, fatal
 
     logger    = log4js.getLogger('executionOutput');
-
+    
+    logger.info("")    
     logger.info("Starting " + nomeScript )
     logger.info("---------------------------------------------------------------------------------")
     logger.info("")    
@@ -82,35 +83,9 @@ module.exports = {
     urlSapPass      = process.env.TRUW001A_SAP_PASS
     urlTbUser       = process.env.TRUW001A_TRU_USER
     urlTbPass       = process.env.TRUW001A_TRU_PASS
-
-    console.log( "Last command executed OK : "    + this.getValueInExecutionData("lastCommandExecutedOK") )
-    this.logEnv();    
    
   },
 
-  logEnv: function() {
-        logger.info("")
-        logger.info("Configuration:")
-        logger.info("---------------------------------------------------------------------------------")
-        logger.info("arqProjectID     = " + config.arqProjectID)
-        logger.info("arqTBitem        = " + config.arqTBitem)
-        logger.info("arqToken         = " + config.arqToken)
-        logger.info("arqSAP           = " + config.arqSAP)
-        logger.info("arqTBUploadDate  = " + config.arqTBUploadDate)
-        logger.info("MOCK             = " + config.MOCK)
-        logger.info("MOCKurl          = " + config.MOCKurl)
-        logger.info("intervaloDias    = " + config.intervaloDias)
-        logger.info("tbNomeProjeto    = " + config.tb_nome_projeto)
-        logger.info("urlbasesap       = " + config.urlbasesap)
-        logger.info("urlbasetb        = " + config.urlbasetb)
-        logger.info("urlSapUser       = " + urlSapUser)
-        logger.info("urlTbUser        = " + urlTbUser)
-        logger.info("---------------------------------------------------------------------------------")    
-        logger.info("step             = " +  argStep)
-        logger.info("initialDate      = " +  argInitial_date)
-        logger.info("finalDate        = " +  argFinal_date)    
-        logger.info("---------------------------------------------------------------------------------")
-  },
 
   loadArqToken: function() {
       var tokenAuth       = fs.readFileSync(arqToken, 'utf8'); 
