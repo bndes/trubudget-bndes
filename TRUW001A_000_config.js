@@ -63,18 +63,19 @@ module.exports = {
     //sets the brazilian format
     numeral.locale('br');
 
+    let executionOutputStr = 'executionOutput'  
     log4js.configure({
-      appenders: { executionOutput: { type: 'file', filename: fsExecutionOutput } },
-      categories: { default: { appenders: ['executionOutput'], level: config.logLevel } }
+      appenders: { executionOutput: { type: 'file', filename: fsExecutionOutput + ".log" } },
+      categories: { default: { appenders: [ executionOutputStr ], level: config.logLevel } }
     }) //trace, debug, info, warn, error, fatal
-
-    logger    = log4js.getLogger('executionOutput');
     
+    logger    = log4js.getLogger( executionOutputStr );
+
     logger.info("")    
     logger.info("Starting " + nomeScript )
     logger.info("---------------------------------------------------------------------------------")
-    logger.info("")    
-
+    logger.info("")   
+    
     argStep         = process.env.TRUW001A_STEP
     argInitial_date = process.env.TRUW001A_INITIAL_DATE
     argFinal_date   = process.env.TRUW001A_FINAL_DATE

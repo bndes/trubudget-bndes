@@ -13,7 +13,7 @@
     "arqTBitem"         : "data/arqTBitem.json",
     "arqUsers"          : "data/arqUsers.json",
     "fsExecutionData"   : "control/executionData.json", 
-    "fsExecutionOutput" : "log/executionOutput.log",    
+    "fsExecutionOutput" : "log/executionOutput",    
     "fsPilotProjectsFilter"   : "control/pilotProjectsFilter.txt",
     "mailHost"          : "mail.bndes.net",
     "mailPort"          : "25",

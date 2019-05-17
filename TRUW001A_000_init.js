@@ -6,9 +6,32 @@ var saptb_config = require( './TRUW001A_000_config.js' );
 
 saptb_config.inicioLibVar(__filename)
 
-logEnv()
+logRotate()
 
 process.exitCode = 0
+
+function logRotate() {
+    
+    var agora    = moment().format("YYYYMMDDHHmm")
+    var nomeDaCopiaDoLogAnterior   = fsExecutionOutput + "_" +  agora 
+
+    fs.copyFile( fsExecutionOutput + ".log", nomeDaCopiaDoLogAnterior + ".log", 
+        (err) => {
+
+            if (err) 
+                logger.info("It was not possible to copy the previous log file: " + executionOutputStr + ".log")             
+            else
+                fs.writeFileSync(  fsExecutionOutput + ".log" , ""); //erases the new log
+            
+            logger.info("")    
+            logger.info("Starting " + __filename )
+            logger.info("---------------------------------------------------------------------------------")
+            logger.info("")                            
+            logger.info("Log copied: " + nomeDaCopiaDoLogAnterior)
+            logEnv()
+        }
+    );
+}
 
 function logEnv() {
     logger.info("")
