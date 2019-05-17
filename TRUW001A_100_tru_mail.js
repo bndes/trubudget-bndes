@@ -67,7 +67,7 @@ function findEmailsInGroup(groupId) {
 
 function notifyUsers() {
 
-    var emailFrom      = "trubudget@bndes.gov.br"
+    var emailFrom      = "BNDES - TruBudget <trubudget@bndes.gov.br>"
     var emailTitle     = "[TruBudget] BNDES - Ateste de recebimento de desembolso"
     var mailTransporter = nodemailer.createTransport({
         host: mailHost,
@@ -78,22 +78,25 @@ function notifyUsers() {
     for (var i = 0; i < tbJSONitems.length; i++) {
         var approversGroup = tbJSONitems[i].data["approvers-groupid"]
         
-        var emailTo        = findEmailsInGroup(approversGroup)
+        var emailTo        =  "josej@bndes.gov.br" //TODO!!! //findEmailsInGroup(approversGroup)
         var emailCc        = config.emailCc 
         var projectNumber  = tbJSONitems[i].data["project-number"]
 		var projectName    = tbNomeProjeto
 		var subprojectName = tbJSONitems[i].data["subprojectName"]
 		var paymentDate    = tbJSONitems[i].data["payment-date"]
         var currency       = tbJSONitems[i].data["currency-INFO"]
-        var strAmount      = tbJSONitems[i].data["amount-INFO"]
+		var strAmount      = tbJSONitems[i].data["amount-INFO"]
+		var displayNameItem= tbJSONitems[i].data["displayName"]
 
 		logger.debug("approversGroup = " + approversGroup);		
 		logger.debug("emailTo= " + emailTo);
 		logger.debug("emailCc= " + emailCc);
 		logger.debug("Amount = " + strAmount);
+		logger.debug("displayNameItem = " + displayNameItem);
 
 		var amount = parseFloat(strAmount);
 		amount = amount.toFixed(2);
+		let tbsite = urlbasetb.substring(0, urlbasetb.indexOf("br/")+2);
 
 		var templateDoEMailTXT  = 
 		"Prezado cliente,\n" +
@@ -102,10 +105,10 @@ function notifyUsers() {
 		"Um novo item de workflow foi gerado a partir de uma liberação de crédito realizada pelo BNDES.\n" +
 		"\n" +
 		"AÇÕES NECESSÁRIAS:\n" +
-		"1. Acesse o site https://trubudget.bndes.gov.br com as credenciais da sua organização.\n" +
-		"2. Clique no ícone 'Lupa - Visualizar' do Fundo Amazônia para visualizar seus detalhes.\n" +
-		"3. Clique no ícone 'Lupa - Visualizar' associado ao Projeto <project-name> para visualizar seus detalhes.\n" +
-		"4. Clique no ícone 'i - Informações' associado ao item de workflow em aberto 'Recebimento do desembolso...' e confira as informações nele contidas. Se necessário, clique no ícone 'Lápis - Editar' associado a este item de workflow para corrigir as informações.\n" +
+		"1. Utilizando o Google Chrome ou Firefox, acesse o site <trubudget-site> com as credenciais da sua organização.\n" +		
+		"2. Clique no ícone 'Lupa - Visualizar' do '<project-name>' para visualizar seus detalhes.\n" +
+		"3. Clique no ícone 'Lupa - Visualizar' associado ao '<subproject-name>' para visualizar seus detalhes.\n" +
+		"4. Clique no ícone 'i - Informações' associado ao item de workflow em aberto '<display-name-item>' e confira as informações nele contidas. Se necessário, clique no ícone 'Lápis - Editar' associado a este item de workflow para corrigir as informações.\n" +
 		"5. Clique no ícone 'Check - Aprovar' associado a este item de workflow para confirmar o recebimento deste desembolso na conta bancária do projeto e fechar o item de workflow.\n" +
 		"\n" +
 		"PRONTO! Muito obrigado! Sua ação é fundamental para aprimorar a transparência na utilização destes recursos.\n" +
@@ -118,7 +121,8 @@ function notifyUsers() {
 		"\n" +
 		"FIM DA MENSAGEM\n" ;
 
-
+		templateDoEMailTXT = templateDoEMailTXT.replace(/<display-name-item>/g, displayNameItem);
+		templateDoEMailTXT = templateDoEMailTXT.replace(/<trubudget-site>/g, tbsite);
 		templateDoEMailTXT = templateDoEMailTXT.replace(/<approvers-groupid>/g, approversGroup);
 		templateDoEMailTXT = templateDoEMailTXT.replace(/<project-name>/g, projectName);
 		templateDoEMailTXT = templateDoEMailTXT.replace(/<subproject-name>/g, subprojectName);

@@ -233,8 +233,12 @@ function findPK(pkInfoSap) {
     var pkFound = false
 
     //Look for pk
-    for (i=0;arqTBUploadDateJSONlist.length;i++) {
-        let elemento = arqTBUploadDateJSONlist[i][pkInfoSap]
+    for (i=0; i<arqTBUploadDateJSONlist.length;i++) {        
+        let objeto = arqTBUploadDateJSONlist[i]
+        logger.debug(objeto)        
+        if ( objeto === undefined || objeto == "")
+            continue;
+        let elemento = objeto[pkInfoSap]
         if ( elemento === undefined || elemento == "")
             continue;
         else {
