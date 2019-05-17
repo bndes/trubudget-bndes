@@ -78,7 +78,7 @@ function notifyUsers() {
     for (var i = 0; i < tbJSONitems.length; i++) {
         var approversGroup = tbJSONitems[i].data["approvers-groupid"]
         
-        var emailTo        =  "josej@bndes.gov.br" //TODO!!! //findEmailsInGroup(approversGroup)
+        var emailTo        = findEmailsInGroup(approversGroup)
         var emailCc        = config.emailCc 
         var projectNumber  = tbJSONitems[i].data["project-number"]
 		var projectName    = tbNomeProjeto
