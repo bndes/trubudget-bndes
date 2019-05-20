@@ -9,7 +9,7 @@ var tbItem_upload = require('./TRUW001A_000_uploadTbItem.js');
 saptb_config.inicioLibVar(__filename)
 
 tbJSONitems = leCadaDadoTBparaGravarWorkflowItem()
-tbItem_upload.uploadTBItem(tbJSONitems);
+tbItem_upload.uploadTBItem(tbJSONitems, saptb_config);
 
 function leCadaDadoTBparaGravarWorkflowItem() {
     

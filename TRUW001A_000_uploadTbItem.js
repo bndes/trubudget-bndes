@@ -4,7 +4,7 @@
 
 module.exports = {
 
-    uploadTBItem: function uploadTBItem(tbJSONitems) {
+    uploadTBItem: function uploadTBItem(tbJSONitems, saptb_config) {
 
         logger.debug("uploadTBItem")
 

@@ -185,6 +185,7 @@ function createOneWorkflowItemOnLocalStorage(contratoSCC, referencia, valor, pay
 
                         var linhaDeDado =  JSON.stringify(entradaJSONTwo) + CRLF
                         fs.appendFileSync( arqTBitem, linhaDeDado, 'utf8');
+                        logger.info("Part TWO - is now ready to be submitted to Trubudget");                                               
 
                         projectMatched = true;
                         break;
