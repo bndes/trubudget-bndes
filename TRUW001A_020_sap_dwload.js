@@ -74,7 +74,7 @@ function acessasSAP() {
                     gravaEmArquivo(objeto, nomeDoArquivo, copiaDoArquivo)
                 }
                 else {
-                    saptb_config.logWithErrorConnection(urltb, response, error, true)
+                    saptb_config.logWithErrorConnection(urlsap, response, error, true)
                 }
             }
         )
