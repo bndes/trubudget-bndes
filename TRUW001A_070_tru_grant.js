@@ -10,13 +10,29 @@ var dataTypeInfoTwo = 2
 opcoesHeader            = saptb_config.loadArqToken()
 arqTBUploadDateJSONlist = saptb_config.loadArqTBUploadDate() 
 arqTBitemJSONlist       = saptb_config.loadArqTBitem(dataTypeInfoTwo)
-iterateTheItemToGrant()
+
+logger.debug( " arqTBitemJSONlist.length: " + arqTBitemJSONlist.length )
+if ( arqTBitemJSONlist.length > 0) {
+    logger.info ("Proccess grant [list]")
+    iterateTheItemToGrant()
+}
+else
+    logger.info ("Nothing to grant [list]")
 
 arqTBitemJSONlistAll    = saptb_config.loadArqTBitem()
-iterateTheItemToGrantAll()
+logger.debug( " arqTBitemJSONlistAll.length: " + arqTBitemJSONlistAll.length )
+if ( arqTBitemJSONlistAll.length > 0) {
+    logger.info ("Proccess grant [list all]")
+    iterateTheItemToGrantAll()
+}
+    
+else
+    logger.info ("Nothing to grant [list all]")
+
+process.exitCode = 0
 
 function iterateTheItemToGrant() {
-    logger.debug( " arqTBitemJSONlist.length: " + arqTBitemJSONlist.length )
+    
     if ( MOCK == true ) {
         changeItems("MOCK", MOCKJSON.identity, MOCKJSON.projectId, 
                      MOCKJSON.subprojectId, MOCKJSON.workflowitemId)
@@ -35,7 +51,7 @@ function iterateTheItemToGrant() {
 }
 
 function iterateTheItemToGrantAll() {
-    logger.debug( " arqTBitemJSONlistAll.length: " + arqTBitemJSONlistAll.length )
+    
     if ( MOCK == true ) {
         changeItems("MOCK", MOCKJSON.identity, MOCKJSON.projectId, 
                      MOCKJSON.subprojectId, MOCKJSON.workflowitemId)
