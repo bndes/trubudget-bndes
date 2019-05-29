@@ -14,21 +14,19 @@ iterateTheItemToGrant()
 
 function iterateTheItemToGrant() {
     logger.debug( " arqTBitemJSONlist.length: " + arqTBitemJSONlist.length )
-    if ( MOCK == true ) {
-        acessaTrubudgetFechaPrimeiroWorkflowItem(MOCKJSON.projectId,MOCKJSON.subprojectId,MOCKJSON.workflowitemId)
-    } else {
-        for (var i = 0; i < arqTBitemJSONlist.length; i++) {       
-            if ( arqTBitemJSONlist[i] != undefined )       {
-                var pkinfo         = arqTBitemJSONlist[i].data['PK-INFO']
-                var projectId      = arqTBitemJSONlist[i].data.projectId
-                var subprojectId   = arqTBitemJSONlist[i].data.subprojectId
-                var workflowitemId = saptb_config.findTheValueOfKey(arqTBUploadDateJSONlist, pkinfo)  //arqTBUploadDateJSONlist[pkinfo]
 
-                acessaTrubudgetFechaPrimeiroWorkflowItem(projectId, subprojectId, workflowitemId)
-                logger.debug(pkinfo, projectId, subprojectId, workflowitemId)
-            }        
-        }
+    for (var i = 0; i < arqTBitemJSONlist.length; i++) {       
+        if ( arqTBitemJSONlist[i] != undefined )       {
+            var pkinfo         = arqTBitemJSONlist[i].data['PK-INFO']
+            var projectId      = arqTBitemJSONlist[i].data.projectId
+            var subprojectId   = arqTBitemJSONlist[i].data.subprojectId
+            var workflowitemId = saptb_config.findTheValueOfKey(arqTBUploadDateJSONlist, pkinfo)  //arqTBUploadDateJSONlist[pkinfo]
+
+            acessaTrubudgetFechaPrimeiroWorkflowItem(projectId, subprojectId, workflowitemId)
+            logger.debug(pkinfo, projectId, subprojectId, workflowitemId)
+        }        
     }
+    
 }
 
 function acessaTrubudgetFechaPrimeiroWorkflowItem(projectId, subprojectId, workflowitemId) {

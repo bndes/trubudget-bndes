@@ -31,41 +31,31 @@ else
 
 process.exitCode = 0
 
-function iterateTheItemToGrant() {
-    
-    if ( MOCK == true ) {
-        changeItems("MOCK", MOCKJSON.identity, MOCKJSON.projectId, 
-                     MOCKJSON.subprojectId, MOCKJSON.workflowitemId)
-    } else {
-        for (var i = 0; i < arqTBitemJSONlist.length; i++) {       
-            if ( arqTBitemJSONlist[i] != undefined )       {
-                var pkinfo         = arqTBitemJSONlist[i].data['PK-INFO']
-                var projectId      = arqTBitemJSONlist[i].data.projectId
-                var subprojectId   = arqTBitemJSONlist[i].data.subprojectId
-                var identity       = arqTBitemJSONlist[i].data['approvers-groupid'] //urlSapUser
-                var workflowitemId = saptb_config.findTheValueOfKey(arqTBUploadDateJSONlist, pkinfo)  //arqTBUploadDateJSONlist[pkinfo]
-                changeItems(pkinfo, identity, projectId, subprojectId, workflowitemId)
-            }        
-        }
-    }    
+function iterateTheItemToGrant() {    
+    for (var i = 0; i < arqTBitemJSONlist.length; i++) {       
+        if ( arqTBitemJSONlist[i] != undefined )       {
+            var pkinfo         = arqTBitemJSONlist[i].data['PK-INFO']
+            var projectId      = arqTBitemJSONlist[i].data.projectId
+            var subprojectId   = arqTBitemJSONlist[i].data.subprojectId
+            var identity       = arqTBitemJSONlist[i].data['approvers-groupid'] //urlSapUser
+            var workflowitemId = saptb_config.findTheValueOfKey(arqTBUploadDateJSONlist, pkinfo)  //arqTBUploadDateJSONlist[pkinfo]
+            changeItems(pkinfo, identity, projectId, subprojectId, workflowitemId)
+        }        
+    }       
 }
 
 function iterateTheItemToGrantAll() {
     
-    if ( MOCK == true ) {
-        changeItems("MOCK", MOCKJSON.identity, MOCKJSON.projectId, 
-                     MOCKJSON.subprojectId, MOCKJSON.workflowitemId)
-    } else {
-        for (var i = 0; i < arqTBitemJSONlistAll.length; i++) {       
-            if ( arqTBitemJSONlistAll[i] != undefined )       {
-                var pkinfo         = arqTBitemJSONlistAll[i].data['PK-INFO']
-                var projectId      = arqTBitemJSONlistAll[i].data.projectId
-                var subprojectId   = arqTBitemJSONlistAll[i].data.subprojectId
-                var workflowitemId = saptb_config.findTheValueOfKey(arqTBUploadDateJSONlist, pkinfo)  //arqTBUploadDateJSONlist[pkinfo]
-                acessaTrubudgetAtribuiPermissoesViewWorkflowItem(identity_all_users, projectId, subprojectId, workflowitemId)
-            }        
-        }
-    }    
+    for (var i = 0; i < arqTBitemJSONlistAll.length; i++) {       
+        if ( arqTBitemJSONlistAll[i] != undefined )       {
+            var pkinfo         = arqTBitemJSONlistAll[i].data['PK-INFO']
+            var projectId      = arqTBitemJSONlistAll[i].data.projectId
+            var subprojectId   = arqTBitemJSONlistAll[i].data.subprojectId
+            var workflowitemId = saptb_config.findTheValueOfKey(arqTBUploadDateJSONlist, pkinfo)  //arqTBUploadDateJSONlist[pkinfo]
+            acessaTrubudgetAtribuiPermissoesViewWorkflowItem(identity_all_users, projectId, subprojectId, workflowitemId)
+        }        
+    }
+        
 }
 
 function changeItems(pkinfo, identity, projectId, subprojectId, workflowitemId) {
