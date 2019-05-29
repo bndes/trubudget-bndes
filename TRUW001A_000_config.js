@@ -22,6 +22,7 @@ module.exports = {
     arqProjectID      = config.arqProjectID 
     arqTBUploadDate   = config.arqTBUploadDate
     arqSAP            = config.arqSAP
+    protocolSAP       = config.protocolSAP
     arqTBitem         = config.arqTBitem
     arqUsers          = config.arqUsers
     fsExecutionData   = config.fsExecutionData
