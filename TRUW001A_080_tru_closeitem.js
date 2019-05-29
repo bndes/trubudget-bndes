@@ -12,7 +12,7 @@ arqTBUploadDateJSONlist = saptb_config.loadArqTBUploadDate()
 arqTBitemJSONlist       = saptb_config.loadArqTBitem(dataTypeInfoOne)
 iterateTheItemToGrant()
 
-function iterateTheItemToGrant() {
+async function iterateTheItemToGrant() {
     logger.debug( " arqTBitemJSONlist.length: " + arqTBitemJSONlist.length )
 
     for (var i = 0; i < arqTBitemJSONlist.length; i++) {       
@@ -23,6 +23,7 @@ function iterateTheItemToGrant() {
             var workflowitemId = saptb_config.findTheValueOfKey(arqTBUploadDateJSONlist, pkinfo)  //arqTBUploadDateJSONlist[pkinfo]
 
             acessaTrubudgetFechaPrimeiroWorkflowItem(projectId, subprojectId, workflowitemId)
+            await saptb_config.sleep(150)
             logger.debug(pkinfo, projectId, subprojectId, workflowitemId)
         }        
     }

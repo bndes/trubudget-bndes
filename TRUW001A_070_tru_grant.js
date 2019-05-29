@@ -16,22 +16,23 @@ if ( arqTBitemJSONlist.length > 0) {
     logger.info ("Proccess grant [list]")
     iterateTheItemToGrant()
 }
-else
+else {
     logger.info ("Nothing to grant [list]")
+}
 
 arqTBitemJSONlistAll    = saptb_config.loadArqTBitem()
 logger.debug( " arqTBitemJSONlistAll.length: " + arqTBitemJSONlistAll.length )
 if ( arqTBitemJSONlistAll.length > 0) {
     logger.info ("Proccess grant [list all]")
     iterateTheItemToGrantAll()
-}
-    
-else
+}    
+else {
     logger.info ("Nothing to grant [list all]")
+}
 
 process.exitCode = 0
 
-function iterateTheItemToGrant() {    
+async function iterateTheItemToGrant() {    
     for (var i = 0; i < arqTBitemJSONlist.length; i++) {       
         if ( arqTBitemJSONlist[i] != undefined )       {
             var pkinfo         = arqTBitemJSONlist[i].data['PK-INFO']
@@ -40,12 +41,12 @@ function iterateTheItemToGrant() {
             var identity       = arqTBitemJSONlist[i].data['approvers-groupid'] //urlSapUser
             var workflowitemId = saptb_config.findTheValueOfKey(arqTBUploadDateJSONlist, pkinfo)  //arqTBUploadDateJSONlist[pkinfo]
             changeItems(pkinfo, identity, projectId, subprojectId, workflowitemId)
+            await saptb_config.sleep(150)
         }        
     }       
 }
 
-function iterateTheItemToGrantAll() {
-    
+async function iterateTheItemToGrantAll() {    
     for (var i = 0; i < arqTBitemJSONlistAll.length; i++) {       
         if ( arqTBitemJSONlistAll[i] != undefined )       {
             var pkinfo         = arqTBitemJSONlistAll[i].data['PK-INFO']
@@ -53,12 +54,12 @@ function iterateTheItemToGrantAll() {
             var subprojectId   = arqTBitemJSONlistAll[i].data.subprojectId
             var workflowitemId = saptb_config.findTheValueOfKey(arqTBUploadDateJSONlist, pkinfo)  //arqTBUploadDateJSONlist[pkinfo]
             acessaTrubudgetAtribuiPermissoesViewWorkflowItem(identity_all_users, projectId, subprojectId, workflowitemId)
+            await saptb_config.sleep(50)
         }        
     }
-        
 }
 
-function changeItems(pkinfo, identity, projectId, subprojectId, workflowitemId) {
+async function changeItems(pkinfo, identity, projectId, subprojectId, workflowitemId) {
     acessaTrubudgetAtribuiPermissoesProjeto     (identity, projectId)
     acessaTrubudgetAtribuiPermissoesSubProjeto  (identity, projectId, subprojectId)
     acessaTrubudgetAtribuiPermissoesAllWorkflowItem(identity, projectId, subprojectId, workflowitemId)    

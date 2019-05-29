@@ -209,6 +209,13 @@ module.exports = {
     else {
       module.exports.changeValueInExecutionData("globalError",true)
     }
+  },
+
+  sleep: function (ms){
+    return new Promise(resolve=>{
+        logger.info("Sleeping (miliseconds) : " + ms)
+        setTimeout(resolve,ms)
+    })
   }
 
   
