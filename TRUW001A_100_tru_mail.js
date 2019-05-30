@@ -67,7 +67,7 @@ function findEmailsInGroup(groupId) {
 
 function notifyUsers() {
 
-    var emailFrom      = "BNDES - TruBudget <trubudget@bndes.gov.br>"
+    var emailFrom      = "BNDES - TruBudget <bndes.trubudget@bndes.gov.br>"
     var emailTitle     = "[TruBudget] BNDES - Ateste de recebimento de desembolso"
     var mailTransporter = nodemailer.createTransport({
         host: mailHost,
