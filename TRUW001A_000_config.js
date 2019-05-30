@@ -111,13 +111,17 @@ module.exports = {
 
   loadArqTBUploadDate: function()  {
       var arqTBUploadDateJSONlist = []
-      var linhas = fs.readFileSync(arqTBUploadDate, 'utf8')
-                      .split( CRLF )
-                      .filter(Boolean)
+      if (fs.existsSync(arqTBUploadDate)) {
+        var linhas = fs.readFileSync(arqTBUploadDate, 'utf8')
+                        .split( CRLF )
+                        .filter(Boolean)
 
-      for (var i = 0; i < linhas.length; i++) {
-          arqTBUploadDateJSONlist[i] = JSON.parse(linhas[i])        
-          logger.debug(arqTBUploadDateJSONlist[i])        
+        for (var i = 0; i < linhas.length; i++) {
+            arqTBUploadDateJSONlist[i] = JSON.parse(linhas[i])        
+            logger.debug(arqTBUploadDateJSONlist[i])        
+        }
+      } else {
+            logger.info("There is no file: " + arqTBUploadDate)        
       }
 
       return arqTBUploadDateJSONlist
