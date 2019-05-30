@@ -105,7 +105,7 @@ function notifyUsers() {
 		"Um novo item de workflow foi gerado a partir de uma liberação de crédito realizada pelo BNDES.\n" +
 		"\n" +
 		"AÇÕES NECESSÁRIAS:\n" +
-		"1. Utilizando o Google Chrome ou Firefox, acesse o site <trubudget-site> com as credenciais da sua organização.\n" +		
+		"1. Utilizando o Google Chrome ou Firefox, acesse o site <trubudget-site>, escolha o ambiente 'Produção' e entre com as credenciais da sua organização.\n" +		
 		"2. Clique no ícone 'Lupa - Visualizar' do '<project-name>' para visualizar seus detalhes.\n" +
 		"3. Clique no ícone 'Lupa - Visualizar' associado ao '<subproject-name>' para visualizar seus detalhes.\n" +
 		"4. Clique no ícone 'i - Informações' associado ao item de workflow em aberto '<display-name-item>' e confira as informações nele contidas. Se necessário, clique no ícone 'Lápis - Editar' associado a este item de workflow para corrigir as informações.\n" +
