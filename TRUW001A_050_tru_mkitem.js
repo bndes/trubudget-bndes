@@ -65,7 +65,7 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(arqTBUploadDateJSONlist) {
     
                     logger.debug ("contratoSCC: " + contratoSCC)    
                 } else {
-                    logger.info("Contract not found " + contratoSCC)
+                    logger.info("Contract was ignored/filtered: " + contratoSCC)
                 }
             } else {
                 logger.info("pkInfoSAP not found " + pkInfoSap)
