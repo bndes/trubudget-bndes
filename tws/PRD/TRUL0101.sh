@@ -25,7 +25,7 @@ echo '*------------------------------------------------------------------*'
 echo '*           PARAMETROS PARA SOLICITACAO ONLINE - T999H5'
 echo '* $$SCP-SOLICITACAO ONLINE'
 echo '* $$SOLICITANTE'
-echo '* $$APLICACAO A#TRU#001P'
+echo '* $$APLICACAO A#TRU#001'
 echo '*------------------------------------------------------------------*'
 # ====================== Termino da Aplicacao com Erro =====================
 function ERRO() {
