@@ -55,8 +55,12 @@ whoami;RC=$?
 if [ $RC -ne 0 ]; then ERRO $RC; fi
 #
 MSG='Executando rundeck blockchain ETL SAP-TRUBUDGET HOM 345115be-edf0-4023-9dd8-7dd5e26ae3e6'
-rundeckUtils.sh execute --jobId 345115be-edf0-4023-9dd8-7dd5e26ae3e6 --token XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+numeroJob=`./rundeckUtils.sh execute --jobId 345115be-edf0-4023-9dd8-7dd5e26ae3e6 --token XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX`
+echo $numeroJob
+sleep 300
+./rundeckUtils.sh output --executionId $numeroJob --token XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX | grep "ALL SCRIPTS SUBMITED"
 RC=$?
+echo $RC
 if [ $RC -ne 0 ]; then ERRO $RC; fi
 #
 # ====================== Termino da Aplicacao com Sucesso ==================

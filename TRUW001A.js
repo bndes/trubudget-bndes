@@ -95,7 +95,7 @@ saptb_config.changeValueInExecutionData("globalSkipSteps", false)
 
 
 setTimeout(function() {
-    logger.info('ALL SCRIPTS SUBMITED!');
+    logger.info('ALL SCRIPTS SUBMITED!');//CAREFUL: this fixed string is esssencial to rundeck error check
 }, 1);
 
 function runNow(scriptName) {
