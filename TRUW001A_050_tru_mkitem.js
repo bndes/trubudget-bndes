@@ -213,8 +213,10 @@ function checkPilotFilter(projectNumber) {
     
     var fileExists = fs.existsSync(fsPilotProjectsFilter);
     if(fileExists)  {
+        logger.info("Filter file : " + fsPilotProjectsFilter)
         var originalFsLines = fs.readFileSync(fsPilotProjectsFilter, 'utf8').split( CRLF ).filter(Boolean)
-        
+        logger.info("Filter list : " + originalFsLines)
+
         if (originalFsLines.length==0) {
             return true; //empty file -> no filter to do
         }
