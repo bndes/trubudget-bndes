@@ -54,6 +54,8 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(arqTBUploadDateJSONlist) {
             /* se a chave do sap nao subiu (upload) para o trubudget, significa que a chave precisa ser gravada agora */
             if ( !findPK(pkInfoSap) ) {
 
+                logger.info("Contract - check if should process: " + contratoSCC)
+
                 if (checkPilotFilter(contratoSCC)) {
                     createOneWorkflowItemOnLocalStorage( contratoSCC, 
                         objetoSAP[i].referencia, 
@@ -61,9 +63,8 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(arqTBUploadDateJSONlist) {
                         objetoSAP[i].dataPagamento,
                         empresa, 
                         numdoc,
-                        dataExercicio )
-    
-                    logger.debug ("contratoSCC: " + contratoSCC)    
+                        dataExercicio )    
+                    
                 } else {
                     logger.info("Contract was ignored/filtered: " + contratoSCC)
                 }
