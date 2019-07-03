@@ -44,7 +44,7 @@ echo $(date '+%d/%m/%Y %H:%M:%S') $0 - $MSG ...
 echo $*;RC=$?
 if [ $RC -ne 0 ]; then ERRO $RC; fi
 #
-MSG='Listar as vari▒veis de ambiente'
+MSG='Listar as variaveis de ambiente'
 echo $(date '+%d/%m/%Y %H:%M:%S') $0 - $MSG ...
 set;RC=$?
 if [ $RC -ne 0 ]; then ERRO $RC; fi
@@ -55,10 +55,10 @@ whoami;RC=$?
 if [ $RC -ne 0 ]; then ERRO $RC; fi
 #
 MSG='Executando rundeck blockchain ETL SAP-TRUBUDGET PRD a02e2112-1b0d-4908-9f90-f9a2aecf4a58'
-numeroJob=`./rundeckUtils.sh execute --jobId a02e2112-1b0d-4908-9f90-f9a2aecf4a58 --token XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX`
+numeroJob=`$TWSScr/rundeckUtils.sh execute --jobId a02e2112-1b0d-4908-9f90-f9a2aecf4a58 --token zzzzzzzzzzzzzzzzzzzzzzzz`
 echo $numeroJob
 sleep 300
-./rundeckUtils.sh output --executionId $numeroJob --token XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX | grep "ALL SCRIPTS SUBMITED"
+$TWSScr/rundeckUtils.sh output --executionId $numeroJob --token zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz | grep "ALL SCRIPTS SUBMITED"
 RC=$?
 echo $RC
 if [ $RC -ne 0 ]; then ERRO $RC; fi
