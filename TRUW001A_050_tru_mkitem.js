@@ -31,6 +31,8 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(arqTBUploadDateJSONlist) {
         logger.debug(objetoSAP[i])
         if ( objetoSAP[i].contrato != undefined ) {
             var contratoSCC = objetoSAP[i].contrato.substr(0,8) //os primeiros digitos do contrato SCC
+            
+            contratoSCC = contratoSCC.trim()
 
             logger.debug(objetoSAP[i].empresa)
             logger.debug(objetoSAP[i].faturaSAP)
@@ -222,7 +224,7 @@ function checkPilotFilter(projectNumber) {
         }
 
         var filteredLines = originalFsLines.filter(function (projectFsLine) {
-            return projectFsLine==projectNumber;
+            return projectFsLine.trim()==projectNumber;
         });
 
         return filteredLines.length > 0;
