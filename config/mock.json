@@ -5971,7 +5971,22 @@
         "valor": "674861.24000",
         "faturaSAP": "9010000011",
         "exercicio": "2019"
-      }
+      },
+      {
+        "__metadata": {
+          "id": "https://api-sap-h.bndes.net:443/sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV/LiberacaoOperacaoSet(empresa='FA',faturaSAP='9010000001',exercicio='2019')",
+          "uri": "https://api-sap-h.bndes.net:443/sap/opu/odata/SAP/ZFI_GW_LIB_SAP_TBG_SRV/LiberacaoOperacaoSet(empresa='FA',faturaSAP='9010000001',exercicio='2019')",
+          "type": "ZFI_GW_LIB_SAP_TBG_SRV.LiberacaoOperacao"
+        },
+        "empresa": "FA",
+        "referencia": "DEFAM   000026/19",
+        "tipoDocumento": "LC",
+        "dataPagamento": "14/06/2019",
+        "contrato": "18206941016",
+        "valor": "2226482.79",
+        "faturaSAP": "9010000001",
+        "exercicio": "2019"
+      }      
     ]
   }
 

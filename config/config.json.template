@@ -1,0 +1,23 @@
+{
+    "tb_nome_projeto"   : "Fundo Amazônia",
+    "MOCK"              : false,
+    "MOCKurl"           : "",
+    "logLevel"          : "30", 
+    "intervaloDias"     : "122",
+    "urlbasetb"         : "https://trubudget.yoursite.com",
+    "protocolSAP"       : "http",
+    "urlbasesap"        : "sap.yoursite.com/api",
+    "arqToken"          : "data/arqToken.txt",
+    "arqProjectID"      : "data/arqProjectID.txt",
+    "arqSAP"            : "data/arqSAP",
+    "arqTBUploadDate"   : "control/arqTBUploadDate.json",
+    "arqTBitem"         : "data/arqTBitem.json",
+    "arqUsers"          : "data/arqUsers.json",
+    "fsExecutionData"   : "control/executionData.json", 
+    "fsExecutionOutput" : "log/executionOutput",    
+    "fsPilotProjectsFilter"   : "control/pilotProjectsFilter.txt",
+    "mailHost"          : "mail.yoursite.com",
+    "mailPort"          : "25",
+    "emailCc"           : "trubudget@yoursite.com"
+
+}
