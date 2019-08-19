@@ -38,7 +38,7 @@ function acessasSAP() {
                     url : MOCKurl
                 },
                 function (error, response, body) {
-                    if (!error && response.statusCode == 200) {
+                    if (!error && response != undefined && response.statusCode == 200) {
                         objeto = JSON.parse(body)       
                         logger.debug(body)
                         objeto = objeto["sapdata"]                        
@@ -73,7 +73,7 @@ function acessasSAP() {
                 }
             },
             function (error, response, body) {
-                if (!error && response.statusCode == 200) {
+                if (!error && response != undefined && response.statusCode == 200) {
                     var objeto = JSON.parse(body)
                     gravaEmArquivo(objeto, nomeDoArquivo, copiaDoArquivo)
                 }

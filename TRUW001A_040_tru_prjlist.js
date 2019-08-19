@@ -26,8 +26,8 @@ function acessaTrubudgetListaProjetos(projectNameDefinedInconfigFile) {
             json: true
         },
         function (error, response, body) {
-            logger.debug ("status = " + response.statusCode )
-            if (!error && response.statusCode == 200) {
+            logger.debug ("response = " + response )
+            if (!error && response != undefined && response.statusCode == 200) {
                 var objeto = body.data.items
                 for (i in objeto) {
                     for (j in objeto[i].log) {

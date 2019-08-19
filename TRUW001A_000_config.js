@@ -186,7 +186,7 @@ module.exports = {
   },
 
   logWithErrorConnection: function (urltb, response, error, exitScript) {
-    logger.error( "Could not access: " + urltb + error);
+    logger.error( "Could not access: " + urltb + " " + error);
 
     if ( response != null && response != undefined ) {
       logger.error( "response.statusCode: " + response.statusCode );

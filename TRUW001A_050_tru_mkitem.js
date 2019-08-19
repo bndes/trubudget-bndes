@@ -34,12 +34,12 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(arqTBUploadDateJSONlist) {
             
             contratoSCC = contratoSCC.trim()
 
-            logger.debug(objetoSAP[i].empresa)
-            logger.debug(objetoSAP[i].faturaSAP)
+            logger.debug(objetoSAP[i].empresa)            
+            logger.debug(objetoSAP[i].referencia) //SAP Rest has changed var name from faturaSAP to referencia
             logger.debug(objetoSAP[i].exercicio)
 
-            var empresa       = objetoSAP[i].empresa
-            var numdoc        = objetoSAP[i].faturaSAP
+            var empresa       = objetoSAP[i].empresa            
+            var numdoc        = objetoSAP[i].referencia
             var dataExercicio = objetoSAP[i].exercicio
 
             logger.debug("empresa + numdoc + dataExercicio = " + empresa + numdoc + dataExercicio )
@@ -53,8 +53,12 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(arqTBUploadDateJSONlist) {
             //Cria arquivo novo para gravar os workflowitems do trubudget
             fs.writeFileSync( arqTBitem, "");
 
-            /* se a chave do sap nao subiu (upload) para o trubudget, significa que a chave precisa ser gravada agora */
-            if ( !findPK(pkInfoSap) ) {
+            /**
+             * TBUploadFile contains the data already uploaded to TruBudget
+             * If the current SAP data key is not in TBUploadFile, then it must be processed
+             * If the current SAP data key is in TBUploadFile, it was previously uploaded
+             */
+            if ( !findPKinTBUploadFile(pkInfoSap) ) {
 
                 logger.info("Contract - check if should process: " + contratoSCC)
 
@@ -71,7 +75,7 @@ function leCadaDadoSAPparaGravarRespectivaLiberacao(arqTBUploadDateJSONlist) {
                     logger.info("Contract was ignored/filtered: " + contratoSCC)
                 }
             } else {
-                logger.info("pkInfoSAP not found " + pkInfoSap)
+                logger.info("The following SAP data key was previously processed: " + pkInfoSap)
             }
         } else {
             logger.info("There is nothing to create the file " + arqTBitem)
@@ -101,8 +105,8 @@ function createOneWorkflowItemOnLocalStorage(contratoSCC, referencia, valor, pay
             json: true
         },
         function (error, response, body) {
-            logger.debug ("status = " + response.statusCode )
-            if (!error && response.statusCode == 200) {
+            logger.debug ("response = " + response )
+            if (!error && response != undefined && response.statusCode == 200) {
                 var objeto = body.data.items
                 
                 var projectMatched = false;
@@ -235,7 +239,7 @@ function checkPilotFilter(projectNumber) {
 }
 
 
-function findPK(pkInfoSap) {
+function findPKinTBUploadFile(pkInfoSap) {
     var pkFound = false
 
     //Look for pk
@@ -253,7 +257,7 @@ function findPK(pkInfoSap) {
         }
     }
 
-    logger.debug("findPK result: " + pkFound)
+    logger.debug("findPKinTBUploadFile result: " + pkFound)
     
     return pkFound;
 }
