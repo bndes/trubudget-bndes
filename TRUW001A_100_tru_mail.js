@@ -27,7 +27,7 @@ function readItensToSendEmail() {
     var tbJSONitems = []
 
     var linhas = fs.readFileSync(arqTBitem, 'utf8')
-                    .split( CRLF )
+                    .split( newLineSeparator )
                     .filter(Boolean)
 
     for (var i = 0; i < linhas.length; i++) {

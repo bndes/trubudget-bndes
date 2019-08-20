@@ -97,7 +97,7 @@ function gravaEmArquivo(objeto, nomeDoArquivo, copiaDoArquivo) {
         logger.debug(objeto.d.results[i].valor)
         logger.debug(objeto.d.results[i].referencia)
 
-        var linhaDeDado = JSON.stringify(objeto.d.results[i]) + CRLF
+        var linhaDeDado = JSON.stringify(objeto.d.results[i]) + newLineSeparator
         fs.appendFile( nomeDoArquivo, linhaDeDado, function(err) {
             if(err) {
                 saptb_config.logWithError ("Could not save " + nomeDoArquivo, err, true);

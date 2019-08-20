@@ -15,7 +15,7 @@ process.exitCode = 0
 
 
 function leCadaDadoSAPparaGravarRespectivaLiberacao(arqTBUploadDateJSONlist) {
-    var linhas = fs.readFileSync(arqSAP + ".json", 'utf8').split( CRLF ).filter(Boolean)
+    var linhas = fs.readFileSync(arqSAP + ".json", 'utf8').split( newLineSeparator ).filter(Boolean)
 
     logger.debug(" linhas.length: " + linhas.length)
     if ( linhas.length == 0) {
@@ -160,7 +160,7 @@ function createOneWorkflowItemOnLocalStorage(contratoSCC, referencia, valor, pay
                         logger.debug("entradaJSONOne")
                         logger.debug(entradaJSONOne)
 
-                        var linhaDeDado =  JSON.stringify(entradaJSONOne) + CRLF
+                        var linhaDeDado =  JSON.stringify(entradaJSONOne) + newLineSeparator
                         fs.appendFileSync( arqTBitem, linhaDeDado, 'utf8');
                         logger.info("Part ONE - is now ready to be submitted to Trubudget");                        
 
@@ -190,7 +190,7 @@ function createOneWorkflowItemOnLocalStorage(contratoSCC, referencia, valor, pay
                         logger.debug("entradaJSONTwo")
                         logger.debug(entradaJSONTwo)
 
-                        var linhaDeDado =  JSON.stringify(entradaJSONTwo) + CRLF
+                        var linhaDeDado =  JSON.stringify(entradaJSONTwo) + newLineSeparator
                         fs.appendFileSync( arqTBitem, linhaDeDado, 'utf8');
                         logger.info("Part TWO - is now ready to be submitted to Trubudget");                                               
 
@@ -220,7 +220,7 @@ function checkPilotFilter(projectNumber) {
     var fileExists = fs.existsSync(fsPilotProjectsFilter);
     if(fileExists)  {
         logger.info("Filter file : " + fsPilotProjectsFilter)
-        var originalFsLines = fs.readFileSync(fsPilotProjectsFilter, 'utf8').split( CRLF ).filter(Boolean)
+        var originalFsLines = fs.readFileSync(fsPilotProjectsFilter, 'utf8').split( newLineSeparator ).filter(Boolean)
         logger.info("Filter list : " + originalFsLines)
 
         if (originalFsLines.length==0) {

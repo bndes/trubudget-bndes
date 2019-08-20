@@ -16,7 +16,7 @@ function leCadaDadoTBparaGravarWorkflowItem() {
     var tbJSONitems = []
 
     var linhas = fs.readFileSync(arqTBitem, 'utf8')
-                    .split( CRLF )
+                    .split( newLineSeparator )
                     .filter(Boolean)
 
     var filteredLines = linhas.filter(function (strTbItem) {

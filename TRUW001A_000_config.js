@@ -12,7 +12,7 @@ module.exports = {
     var log4js= require('log4js');
    
     config            = require('./config/config.json');
-    CRLF              = "\r\n"
+    newLineSeparator  =  ( process.platform === "win32" ? "\r\n" : "\n" )    
     MOCK              = config.MOCK
     MOCKJSON          = require('./config/mock.json');
     MOCKurl           = config.MOCKurl
@@ -113,7 +113,7 @@ module.exports = {
       var arqTBUploadDateJSONlist = []
       if (fs.existsSync(arqTBUploadDate)) {
         var linhas = fs.readFileSync(arqTBUploadDate, 'utf8')
-                        .split( CRLF )
+                        .split( newLineSeparator )
                         .filter(Boolean)
 
         for (var i = 0; i < linhas.length; i++) {
@@ -130,7 +130,7 @@ module.exports = {
   loadArqTBitem: function(datatype) {    
       var arqTBitemJSONlist = []
       var linhas = fs.readFileSync(arqTBitem, 'utf8')
-                      .split( CRLF )  
+                      .split( newLineSeparator )  
                       .filter(Boolean)
 
       for (var i = 0; i < linhas.length; i++) {

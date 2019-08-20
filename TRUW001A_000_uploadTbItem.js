@@ -60,7 +60,7 @@ module.exports = {
         jSONlinha[PKInfo] = trItemId;
         logger.debug( jSONlinha )                    
     
-        fs.appendFile( arqTBUploadDate, JSON.stringify(jSONlinha) + CRLF , function(err, result) {
+        fs.appendFile( arqTBUploadDate, JSON.stringify(jSONlinha) + newLineSeparator , function(err, result) {
             if(err) {
                 var msg = "It was not possible to write on arqTBUploadDate\nIt is necessary to sync file in order to avoid duplication in Trubudget\n";
                 msg += JSON.stringify(jSONlinha);
