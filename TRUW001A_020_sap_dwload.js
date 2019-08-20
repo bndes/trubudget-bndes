@@ -78,6 +78,7 @@ function acessasSAP() {
                     gravaEmArquivo(objeto, nomeDoArquivo, copiaDoArquivo)
                 }
                 else {
+                    logger.error( "Error! Have you checked the SAP credentials?");
                     saptb_config.logWithErrorConnection(urlsap, response, error, true)
                 }
             }

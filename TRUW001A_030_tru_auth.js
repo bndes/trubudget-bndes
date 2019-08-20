@@ -42,6 +42,7 @@ function acessaTrubudgetAutenticacao() {
 
             }
             else {
+                logger.error( "Error! Have you checked the TRUBUDGET credentials?");
                 saptb_config.logWithErrorConnection(urltb, response, error, true)
 
             }
